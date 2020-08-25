@@ -5,17 +5,15 @@ using UnityEngine;
 public class CameraSwitch : MonoBehaviour
 {
 
-    public GameObject CameraOne;
-    public GameObject CameraTwo;
+    public GameObject CameraTURN_ON;
+    public GameObject CameraTURN_OFF;
 
-    // Update is called once per frame
-    
     void OnTriggerEnter (Collider other)
     {
         if (other.tag == "Player")
         {
-            CameraOne.SetActive(true);
-            CameraTwo.SetActive(false);
+            CameraTURN_ON.SetActive(true);
+            CameraTURN_OFF.SetActive(false);
         }
     }
 
