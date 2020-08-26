@@ -17,7 +17,16 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical")) 
         {
             IsMoving = true;
-            ThePlayer.GetComponent<Animator>().Play("Walk");
+
+            if (Input.GetButton("SKey"))
+            {
+                ThePlayer.GetComponent<Animator>().Play("WalkBack");
+            }
+            else
+            {
+                ThePlayer.GetComponent<Animator>().Play("Walk");
+            }
+
             HorizontalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 150f;
             VerticalMovement = Input.GetAxis("Vertical") * Time.deltaTime * 4f;
             ThePlayer.transform.Rotate(0, HorizontalMovement, 0);
