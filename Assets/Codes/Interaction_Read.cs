@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interaction : MonoBehaviour
+/*public class Interaction_Read : MonoBehaviour
 {
-
-    public GameObject Object;
+    public GameObject Canvas;
+    public bool CanvasDesligadoPo = true;
 
     // Update is called once per frame
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (Input.GetButton("EKey"))
         {
             Time.timeScale = 0;
-            //Object.GetComponent
+            Canvas.SetActive(true);
         }
     }
-}
+
+    public void OnMouseUp()
+    {
+        if (CanvasDesligadoPo == false)
+        {
+            Canvas.SetActive(true);
+            CanvasDesligadoPo = false;
+        }
+    }
+
+}*/
