@@ -8,23 +8,49 @@ public class PlayerMovement : MonoBehaviour
     public GameObject ThePlayer;
     public bool IsMoving;
     public bool IsRunning;
+    public bool IsWalkingBack = false;
     public float HorizontalMovement;
     public float VerticalMovement;
 
     // Update is called once per frame
     void Update()
     {
+        //Just so you know, the basic difference between 'GetButton' and 'GetKey' is that
+        //GetKey can tell when you're holding down a button. Or so says Jimmy... 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            IsRunning = true;
+        }
+        else
+        {
+            IsRunning = false;
+        }
+
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical")) 
         {
             IsMoving = true;
 
             if (Input.GetButton("SKey"))
             {
+                IsWalkingBack = true; 
                 ThePlayer.GetComponent<Animator>().Play("WalkBack");
             }
             else
             {
-                ThePlayer.GetComponent<Animator>().Play("Walk");
+                IsWalkingBack = false;
+                if (IsRunning == false)
+                {
+                    ThePlayer.GetComponent<Animator>().Play("Walk");
+                }
+                if (IsRunning == true && IsWalkingBack == false)
+                {
+                    ThePlayer.GetComponent<Animator>().Play("Run");
+                    HorizontalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 145f;
+                    VerticalMovement = Input.GetAxis("Vertical") * Time.deltaTime * 8f;
+                    ThePlayer.transform.Rotate(0, HorizontalMovement, 0);
+                    ThePlayer.transform.Translate(0, 0, VerticalMovement);
+                }
+                
             }
 
             HorizontalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 150f;
@@ -37,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
             IsMoving = false;
             ThePlayer.GetComponent<Animator>().Play("Idle");
         }
-
-        
+                       
     }
 }
