@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DoorControl : MonoBehaviour
 {
-    public bool IsOpen;
+    public bool IsOpen = false; // The door will start closed, so this needs to be false. 
     public Animator animator;
-    public GameObject TheDoors;
+    public GameObject Door;
 
     public void OpenDoor()
     {
@@ -16,7 +16,7 @@ public class DoorControl : MonoBehaviour
             Debug.Log("The door is now open!");
             // animator.SetBool("IsOpen", IsOpen);
 
-            TheDoors.GetComponent<Animator>().Play("OpenDoubleDoor");
+            Door.GetComponent<Animator>().Play("OpenDoubleDoor");
         }
     }
 

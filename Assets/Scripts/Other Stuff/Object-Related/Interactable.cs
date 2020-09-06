@@ -36,7 +36,7 @@ public class Interactable : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             IsInRange = false;
-            Debug.Log("The player is not in range anymore.");
+            Debug.Log("The player isn't in range anymore.");
         }
     }
 }
