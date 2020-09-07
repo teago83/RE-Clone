@@ -16,13 +16,13 @@ public class ReadInteraction : MonoBehaviour
             Time.timeScale = 0;
             Text.SetActive(true);
         }
-        /*else
+        else
         {
             IsReading = false;
             Debug.Log("The player isn't reading anymore.");
             Time.timeScale = 1;
             Text.SetActive(false);
-        }*/
+        }
 
     }
 

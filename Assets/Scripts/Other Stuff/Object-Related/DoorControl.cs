@@ -15,6 +15,7 @@ public class DoorControl : MonoBehaviour
             IsOpen = true;
             Debug.Log("The door is now open!");
             // animator.SetBool("IsOpen", IsOpen);
+            
 
             Door.GetComponent<Animator>().Play("OpenDoubleDoor");
         }
