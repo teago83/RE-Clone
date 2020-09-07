@@ -7,14 +7,30 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject ThePlayer;
     public bool IsMoving;
+    public bool isAbleToControl;
     public bool IsRunning;
     public bool IsWalkingBack = false;
     public float HorizontalMovement;
     public float VerticalMovement;
 
-    // Update is called once per frame
+    Rigidbody rB;
+
+    private Animator anims;
+
+    private void Start()
+    {
+
+        anims = GetComponent<Animator>();
+
+        rB = GetComponent<Rigidbody>();
+
+    }
+
+    // Update is called once per frame 
     void Update()
     {
+
+        
         //Just so you know, the basic difference between 'GetButton' and 'GetKey' is that
         //GetKey can tell when you're holding down a button. Or so says Jimmy... 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -33,18 +49,18 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButton("SKey"))
             {
                 IsWalkingBack = true; 
-                ThePlayer.GetComponent<Animator>().Play("WalkBack");
+                anims.Play("WalkBack");
             }
             else
             {
                 IsWalkingBack = false;
                 if (IsRunning == false)
                 {
-                    ThePlayer.GetComponent<Animator>().Play("Walk");
+                    anims.Play("Walk");
                 }
                 if (IsRunning == true && IsWalkingBack == false)
                 {
-                    ThePlayer.GetComponent<Animator>().Play("Run");
+                    anims.Play("Run");
                     HorizontalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 145f;
                     VerticalMovement = Input.GetAxis("Vertical") * Time.deltaTime * 8f;
                     ThePlayer.transform.Rotate(0, HorizontalMovement, 0);
@@ -61,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             IsMoving = false;
-            ThePlayer.GetComponent<Animator>().Play("Idle");
+            anims.Play("Idle");
         }
                        
     }
