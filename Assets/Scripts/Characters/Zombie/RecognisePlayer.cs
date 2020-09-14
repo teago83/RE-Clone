@@ -5,11 +5,14 @@ using UnityEngine;
 public class RecognisePlayer : MonoBehaviour
 {
     public GameObject Zombie;
-    //Enemy scriptBrabo;
+    Enemy scriptBrabo;
+
 
     void Start()
     {
-      //  scriptBrabo.GetComponent<Enemy>();    
+
+      scriptBrabo.GetComponent<Enemy>();    
+
     }
 
 

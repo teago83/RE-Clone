@@ -15,16 +15,19 @@ public class Enemy : MonoBehaviour
     public GameObject Zombie;
     public bool Walking = false;
 
+
     //public Light Spotlight;
     public GameObject View;
     public float ViewDistance;
-    public LayerMask ViewMask;
+    //public LayerMask ViewMask;
     //float ViewAngle;
 
     Transform Player;
 
     void Start()
     {
+
+         
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         // The spolight's angle shall be used as the angle of vision of the enemy, but the
         // light itself won't be used, because that would be really dumb. 
