@@ -8,26 +8,38 @@ public class ZombieIdleState : ZombieBaseState
     public override void EnterState(ZombieBehaviour_FSM Zombie)
     {
         Zombie.GetComponent<Animator>().Play("Idle");
-
-
-
-        /*      Zombie.GetComponent<Animator>().Play("Idle");
-                yield return new WaitForSeconds (WaitingTime);
-                yield return StartCoroutine (TurnToFace (TargetWaypoint));*/
     }
 
     public override void OnCollisionEnter(ZombieBehaviour_FSM Zombie)
     {
-        
+
     }
 
     public override void Update(ZombieBehaviour_FSM Zombie)
     {
-        new WaitForSeconds(Zombie.WaitingTime);
+       
 
-//        Zombie.StartCoroutine(TurnToFace(TargetWaypoints);
+        //if (Vector3.Distance(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .2f)
+        //{
+        //    Zombie.WaitingTime -= Time.deltaTime;
+        //}
 
+        if (Zombie.WaitingTime > 0)
+        {
 
-        //Zombie.TransitionToState(Zombie.PatrolState);
+            Zombie.WaitingTime -= Time.deltaTime;
+
+        }
+        else { Zombie.TransitionToState(Zombie.PatrolState); }
+
+        // if (Vector3.Distance (Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .2f);
     }
+
+    /* O zumbi espere
+     * waiting time = 0
+     * ir pra patrol
+     */
+
+
+
 }

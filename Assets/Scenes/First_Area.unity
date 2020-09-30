@@ -6976,15 +6976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06dd53ecca027242b96045949ad1155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2.5
-  WaitingTime: 5
-  TurnSpeed: 180
-  PathHolder: {fileID: 0}
-  Zombie: {fileID: 1474810654}
-  Walking: 0
-  View: {fileID: 0}
-  ViewDistance: 0
-  Player: {fileID: 0}
 --- !u!1 &1494958731 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 143842, guid: 3bc099817d25fea43b3ad813c0cf68cc, type: 3}
@@ -7621,8 +7612,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dbefb90ad936384aab4683b72a45a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie: {fileID: 0}
-  scriptBrabo: {fileID: 0}
 --- !u!135 &1655702477
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8670,16 +8659,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2040846169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1bfb1d1c33c18d44b103e7f17b4b738, type: 3}
+  m_Script: {fileID: 11500000, guid: 903f71ffd3f88d34ca5028976cbc558d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  waitTime: 0
-  startWaitTime: 10
-  moveSpots:
+  WaitingTime: 5
+  MoveSpots:
   - {fileID: 1715184065}
   - {fileID: 457171374}
   - {fileID: 770422274}
+  RandomSpot: 0
 --- !u!195 &2040846172
 NavMeshAgent:
   m_ObjectHideFlags: 0
