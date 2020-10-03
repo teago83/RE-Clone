@@ -49,4 +49,8 @@ public class ZombieBehaviour_FSM : MonoBehaviour
     {
         HaveISeenThePlayer = true;        
     }
+    public void NotSeenThePlayer()
+    {
+        HaveISeenThePlayer = false;
+    }
 }

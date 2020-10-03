@@ -7925,6 +7925,7 @@ GameObject:
   - component: {fileID: 1774218745}
   - component: {fileID: 1774218747}
   - component: {fileID: 1774218746}
+  - component: {fileID: 1774218748}
   m_Layer: 0
   m_Name: FieldOfView
   m_TagString: Untagged
@@ -7968,6 +7969,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774218744}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1774218748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774218744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c873ea904c79ad1468d04aa3867c8016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsSeeing: 0
+  NotSeeing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2040846171}
+        m_TargetAssemblyTypeName: ZombieBehaviour_FSM, Assembly-CSharp
+        m_MethodName: NotSeenThePlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1798699511 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2154962184132650219, guid: e2f1fe9d91ba7e54fafd7445e2df65f3, type: 3}
