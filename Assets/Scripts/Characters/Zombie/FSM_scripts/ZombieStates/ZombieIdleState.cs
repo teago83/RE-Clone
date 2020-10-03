@@ -24,13 +24,18 @@ public class ZombieIdleState : ZombieBaseState
         //    Zombie.WaitingTime -= Time.deltaTime;
         //}
 
-        if (Zombie.WaitingTime > 0)
+        if (Zombie.WaitingTime > 0 && Zombie.HaveISeenThePlayer == false)
         {
-
             Zombie.WaitingTime -= Time.deltaTime;
-
         }
-        else { Zombie.TransitionToState(Zombie.PatrolState); }
+        else if (Zombie.HaveISeenThePlayer == false) 
+        { 
+            Zombie.TransitionToState(Zombie.PatrolState); 
+        }
+        else
+        {
+            Zombie.TransitionToState(Zombie.CombatState);
+        }
 
         // if (Vector3.Distance (Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .2f);
     }
