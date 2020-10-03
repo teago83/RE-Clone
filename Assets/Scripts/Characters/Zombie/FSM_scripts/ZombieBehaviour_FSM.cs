@@ -10,31 +10,18 @@ public class ZombieBehaviour_FSM : MonoBehaviour
     public readonly ZombiePatrolState PatrolState = new ZombiePatrolState();
     public readonly ZombieCombatState CombatState = new ZombieCombatState();
 
-    public readonly float StartWaitingTime = 5f;
+    public float StartWaitingTime;
     public float WaitingTime;
-    public readonly float Speed = 2f;
-    //public readonly float TurnSpeed = 180;
+    public float Speed;
 
     public Transform[] MoveSpots;
     public int RandomSpot;
 
     private Rigidbody Rigidbody;
 
-    //any states that require the usage of the zombie's rigidbody or currentstate can just reference these getters
-    public Rigidbody Rb
-    {
-        get { return Rigidbody; }
-    }
-
-    //public ZombieBaseState CurrentState
-    //{
-    //    get { return CurrentState; }
-    //}
-
-    private void Awake()
-    {
-
-    }
+    // stuff related to detecting the player 
+    public bool HaveISeenThePlayer;
+    public GameObject ThePlayer;
 
     private void Start()
     {
@@ -58,4 +45,8 @@ public class ZombieBehaviour_FSM : MonoBehaviour
         CurrentZombieState.EnterState(this);
     }
 
+    public void SeenThePlayer()
+    {
+        HaveISeenThePlayer = true;        
+    }
 }

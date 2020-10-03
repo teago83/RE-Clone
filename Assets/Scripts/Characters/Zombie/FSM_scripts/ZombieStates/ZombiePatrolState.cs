@@ -17,13 +17,20 @@ public class ZombiePatrolState : ZombieBaseState
 
     public override void Update(ZombieBehaviour_FSM Zombie)
     {
-        if (Vector3.Distance(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .2f)
+        if (Vector3.Distance(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .2f && Zombie.HaveISeenThePlayer == false)
         {
 
             Zombie.WaitingTime = Zombie.StartWaitingTime;
             Zombie.TransitionToState(Zombie.IdleState);
 
         }
-        else { Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.Speed * Time.deltaTime); }
+        else if (Zombie.HaveISeenThePlayer == false) 
+        { 
+            Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.Speed * Time.deltaTime); 
+        }
+        else
+        {
+            Zombie.TransitionToState(Zombie.CombatState);
+        }
     }
 }
