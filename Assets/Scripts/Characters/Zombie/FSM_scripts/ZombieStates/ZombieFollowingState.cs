@@ -17,7 +17,7 @@ public class ZombieFollowingState : ZombieBaseState
     public override void Update(ZombieBehaviourFSM Zombie)
     {
         // Zombie starts attacking the player
-        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 2.3f && Zombie.HaveISeenThePlayer == true)
+        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 2.75f && Zombie.HaveISeenThePlayer == true)
         {
             // Implement zombie attacking the player and decreasing their health
             Zombie.TransitionToState(Zombie.CombatState);
