@@ -18,8 +18,9 @@ public class PlayerControlsFSM : MonoBehaviour
     public bool isAbleToControl;
     // I believe that this "IsRunning" can be discarded.
     public bool IsRunning;
-    public bool WalkingBack = false;
     public bool WalkingForward = false;
+    public bool WalkingBack = false;
+    public bool Rotating = false;
     public bool IsAiming = false;
     public float RotationalMovement;
     public float ForwardMovement;

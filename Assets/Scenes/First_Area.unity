@@ -382,7 +382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fa7d9115d56dace4990ce187774d6c06, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1974243983493711947, guid: fa7d9115d56dace4990ce187774d6c06, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -928,6 +928,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 100096, guid: de63ee434fe39914b8d2f5680c62d05f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: de63ee434fe39914b8d2f5680c62d05f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.05
@@ -1052,6 +1056,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &191496464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191496460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 059782d80a898b94797799ac35e9bd03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsWalking: 0
+  isAbleToControl: 0
+  IsRunning: 0
+  WalkingForward: 0
+  WalkingBack: 0
+  Rotating: 0
+  IsAiming: 0
+  RotationalMovement: 0
+  ForwardMovement: 0
+  Anime: {fileID: 191496461}
 --- !u!1 &245866620
 GameObject:
   m_ObjectHideFlags: 0
@@ -8554,6 +8580,7 @@ MonoBehaviour:
   RandomSpot: 0
   HaveISeenThePlayer: 0
   ThePlayer: {fileID: 468593457}
+  Anime: {fileID: 0}
 --- !u!195 &2040846172
 NavMeshAgent:
   m_ObjectHideFlags: 0

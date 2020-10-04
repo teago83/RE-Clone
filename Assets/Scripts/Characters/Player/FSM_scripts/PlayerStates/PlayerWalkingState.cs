@@ -16,42 +16,40 @@ public class PlayerWalkingState : PlayerBaseState
 
     public override void Update(PlayerControlsFSM Player)
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
-            Player.TransitionToState(Player.RunningState);
-        }
-        else if (Input.GetKey(KeyCode.W))
-        {
-            Player.WalkingForward = true;
-            Player.WalkingBack = false;
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) 
+            {
+                Player.WalkingForward = true;
+                Player.Anime.Play("Walk"); 
 
-        }
-        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            Player.WalkingForward = true;
-            Player.WalkingBack = false;
+                if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+                {
+                    Player.TransitionToState(Player.RunningState);
+                }
 
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            Player.WalkingForward = false;
-            Player.WalkingBack = true;
+            }
 
+            else if (Input.GetKey(KeyCode.S)) 
+            {
+                Player.WalkingForward = false;
+                Player.Anime.Play("WalkBack"); 
+            }
+
+            Player.ForwardMovement = Input.GetAxis("Vertical") * Time.deltaTime * 6f;
+            Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 120f;
+            Player.transform.Translate(0, 0, Player.ForwardMovement);
+            Player.transform.Rotate(0, Player.RotationalMovement, 0);
         }
-        else if (Input.GetMouseButton(1)) // Right mouse button being held
+
+        else if (Input.GetMouseButton(1))
         {
             Player.TransitionToState(Player.AimingState);
         }
 
-        // Animation-related ifs
-        if (Player.WalkingForward == true)
+        else
         {
-            Player.Anime.Play("Walk");
+            Player.TransitionToState(Player.IdleState);
         }
-        else if (Player.WalkingBack == true)
-        {
-            Player.Anime.Play("WalkBack");
-        }
-
     }
 }

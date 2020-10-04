@@ -19,5 +19,10 @@ public class PlayerIdleState : PlayerBaseState
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
             Player.TransitionToState(Player.WalkingState);
         }
+
+        else if (Input.GetMouseButton(1))
+        {
+            Player.TransitionToState(Player.AimingState);
+        }
     }
 }
