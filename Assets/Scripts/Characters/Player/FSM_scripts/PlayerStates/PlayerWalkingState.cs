@@ -36,8 +36,8 @@ public class PlayerWalkingState : PlayerBaseState
                 Player.Anime.Play("WalkBack"); 
             }
 
-            Player.ForwardMovement = Input.GetAxis("Vertical") * Time.deltaTime * 6f;
-            Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 120f;
+            Player.ForwardMovement = Input.GetAxis("Vertical") * Time.deltaTime * 7f;
+            Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 130f;
             Player.transform.Translate(0, 0, Player.ForwardMovement);
             Player.transform.Rotate(0, Player.RotationalMovement, 0);
         }

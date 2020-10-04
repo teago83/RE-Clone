@@ -38,7 +38,7 @@ public class ZombiePatrolState : ZombieBaseState
         }
         else
         {
-            Zombie.TransitionToState(Zombie.CombatState);
+            Zombie.TransitionToState(Zombie.FollowingState);
         }
     }
 }

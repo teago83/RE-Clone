@@ -21,8 +21,8 @@ public class PlayerRunningState : PlayerBaseState
             if (Input.GetKey(KeyCode.W))
             {
                 Player.Anime.Play("Run");
-                Player.ForwardMovement = Input.GetAxis("Vertical") * Time.deltaTime * 10f;
-                Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 165f;
+                Player.ForwardMovement = Input.GetAxis("Vertical") * Time.deltaTime * 12f;
+                Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 175f;
 
                 if (Input.GetKey(KeyCode.S))
                 {
