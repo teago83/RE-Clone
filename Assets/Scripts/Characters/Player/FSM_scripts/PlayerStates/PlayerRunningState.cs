@@ -18,18 +18,25 @@ public class PlayerRunningState : PlayerBaseState
     {
         if (Player.WalkingForward == true && Input.GetKey(KeyCode.LeftShift))
         {
-            Player.Anime.Play("Run");
-            Player.ForwardMovement = Input.GetAxis("Vertical") * Time.deltaTime * 10f;
-            Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 165f;
-            
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.W))
             {
-                Player.WalkingForward = false;
-                Player.TransitionToState(Player.WalkingState);
+                Player.Anime.Play("Run");
+                Player.ForwardMovement = Input.GetAxis("Vertical") * Time.deltaTime * 10f;
+                Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 165f;
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    Player.WalkingForward = false;
+                    Player.TransitionToState(Player.WalkingState);
+                }
+
+                Player.transform.Translate(0, 0, Player.ForwardMovement);
+                Player.transform.Rotate(0, Player.RotationalMovement, 0);
             }
-            
-            Player.transform.Translate(0, 0, Player.ForwardMovement);
-            Player.transform.Rotate(0, Player.RotationalMovement, 0);
+            else
+            {
+                Player.TransitionToState(Player.IdleState); 
+            }
         }
         else if (Input.GetMouseButton(1))
         {
