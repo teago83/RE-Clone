@@ -6,7 +6,7 @@ public class PlayerAimingState : PlayerBaseState
 {
     public override void EnterState(PlayerControlsFSM Player)
     {
-        Player.Anime.Play("Aiming SniperRifle");
+        
     }
 
     public override void OnCollisionEnter(PlayerControlsFSM Player)
@@ -19,14 +19,21 @@ public class PlayerAimingState : PlayerBaseState
         if (Input.GetMouseButton(1))
         {
             Player.Anime.Play("Aiming SniperRifle");
-        }
-        else if (Input.GetKey(KeyCode.LeftShift))
-        {
-            Player.TransitionToState(Player.RunningState);
-        }
-        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            Player.TransitionToState(Player.WalkingState);
+
+            if (Input.GetButton("Horizontal"))
+            {
+                Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 120f;
+                Player.transform.Rotate(0, Player.RotationalMovement, 0);
+            }
+
+            // The player will only be able to shoot if they're aiming, duh
+            if (Input.GetMouseButtonDown(0))
+            {
+                Player.Anime.Play(null);
+                Player.Anime.Play("Fire SniperRifle");
+                Debug.Log("Hey man, nice shot");
+            }
+
         }
         else
         {

@@ -6,7 +6,7 @@ public class ZombieCombatState : ZombieBaseState
 {
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
-        Zombie.GetComponent<Animator>().Play("Walking");
+        Zombie.Anime.Play("Walking");
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)

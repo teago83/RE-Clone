@@ -23,8 +23,11 @@ public class ZombieBehaviourFSM : MonoBehaviour
     public bool HaveISeenThePlayer;
     public GameObject ThePlayer;
 
+    public Animator Anime;
+
     private void Start()
     {
+        Anime = GetComponent<Animator>();
         TransitionToState(IdleState);
     }
 
