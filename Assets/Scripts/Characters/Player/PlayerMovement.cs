@@ -10,8 +10,11 @@ public class PlayerMovement : MonoBehaviour
     public bool isAbleToControl;
     public bool IsRunning;
     public bool IsWalkingBack = false;
+    public bool IsAiming = false;
     public float HorizontalMovement;
     public float VerticalMovement;
+
+    public KeyCode AimingKey;
 
     Rigidbody rB;
 
@@ -42,7 +45,12 @@ public class PlayerMovement : MonoBehaviour
             IsRunning = false;
         }
 
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical")) 
+        if (Input.GetKeyDown(AimingKey))
+        {
+            IsAiming = true;
+        }
+
+        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical") && IsAiming == false) 
         {
             IsMoving = true;
 
@@ -74,10 +82,16 @@ public class PlayerMovement : MonoBehaviour
             ThePlayer.transform.Rotate(0, HorizontalMovement, 0);
             ThePlayer.transform.Translate(0, 0, VerticalMovement);
         }
-        else
+        else if (IsAiming == false)
         {
             IsMoving = false;
             anims.Play("Idle");
+        }
+
+        else
+        {
+            IsMoving = false;
+            anims.Play("Aiming SniperRifle");
         }
                        
     }

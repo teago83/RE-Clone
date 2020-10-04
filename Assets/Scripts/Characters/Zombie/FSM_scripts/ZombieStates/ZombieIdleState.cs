@@ -5,17 +5,17 @@ using UnityEngine;
 public class ZombieIdleState : ZombieBaseState
 {
 
-    public override void EnterState(ZombieBehaviour_FSM Zombie)
+    public override void EnterState(ZombieBehaviourFSM Zombie)
     {
         Zombie.GetComponent<Animator>().Play("Idle");
     }
 
-    public override void OnCollisionEnter(ZombieBehaviour_FSM Zombie)
+    public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)
     {
 
     }
 
-    public override void Update(ZombieBehaviour_FSM Zombie)
+    public override void Update(ZombieBehaviourFSM Zombie)
     {
        
 

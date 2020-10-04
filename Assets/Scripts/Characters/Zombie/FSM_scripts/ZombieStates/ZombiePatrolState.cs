@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ZombiePatrolState : ZombieBaseState
 {
-    public override void EnterState(ZombieBehaviour_FSM Zombie)
+    public override void EnterState(ZombieBehaviourFSM Zombie)
     {
         Zombie.RandomSpot = Random.Range(0, Zombie.MoveSpots.Length);
         Zombie.GetComponent<Animator>().Play("Walking");
     }
 
-    public override void OnCollisionEnter(ZombieBehaviour_FSM Zombie)
+    public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)
     {
 
     }
 
-    public override void Update(ZombieBehaviour_FSM Zombie)
+    public override void Update(ZombieBehaviourFSM Zombie)
     {
         if (Vector3.Distance(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .2f && Zombie.HaveISeenThePlayer == false)
         {
@@ -25,7 +25,15 @@ public class ZombiePatrolState : ZombieBaseState
 
         }
         else if (Zombie.HaveISeenThePlayer == false) 
-        { 
+        {
+            // Below lies some code to make the zombie look at the target that it should be facing
+            // and said target shall be the next RandomSpot.
+            // Source: https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
+
+            Vector3 TargetDirection = Zombie.MoveSpots[Zombie.RandomSpot].transform.position - Zombie.transform.position;
+            Vector3 NewDirection = Vector3.RotateTowards(Zombie.transform.forward, TargetDirection, Zombie.Speed * Time.deltaTime, 0.0f);
+            Zombie.transform.rotation = Quaternion.LookRotation(NewDirection);
+
             Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.Speed * Time.deltaTime); 
         }
         else

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieBehaviour_FSM : MonoBehaviour
+public class ZombieBehaviourFSM : MonoBehaviour
 {
     public ZombieBaseState CurrentZombieState;
 
