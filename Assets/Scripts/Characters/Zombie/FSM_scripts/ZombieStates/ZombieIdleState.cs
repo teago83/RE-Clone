@@ -16,14 +16,7 @@ public class ZombieIdleState : ZombieBaseState
     }
 
     public override void Update(ZombieBehaviourFSM Zombie)
-    {
-       
-
-        //if (Vector3.Distance(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .2f)
-        //{
-        //    Zombie.WaitingTime -= Time.deltaTime;
-        //}
-
+    { 
         if (Zombie.WaitingTime > 0 && Zombie.HaveISeenThePlayer == false)
         {
             Zombie.WaitingTime -= Time.deltaTime;
@@ -34,17 +27,7 @@ public class ZombieIdleState : ZombieBaseState
         }
         else
         {
-            Zombie.TransitionToState(Zombie.CombatState);
+            Zombie.TransitionToState(Zombie.FollowingState);
         }
-
-        // if (Vector3.Distance (Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .2f);
     }
-
-    /* O zumbi espere
-     * waiting time = 0
-     * ir pra patrol
-     */
-
-
-
 }
