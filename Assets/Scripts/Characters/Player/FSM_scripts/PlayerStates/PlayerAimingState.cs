@@ -6,8 +6,8 @@ public class PlayerAimingState : PlayerBaseState
 {
     public override void EnterState(PlayerFSM Player)
     {
-        // Activates the shotgun
-        Player.Weapons[0].SetActive(true);
+        // Activates the current weapon
+        Player.Weapons[Player.CurrentWeapon].SetActive(true);
     }
 
     public override void OnCollisionEnter(PlayerFSM Player)
@@ -19,8 +19,6 @@ public class PlayerAimingState : PlayerBaseState
     {
         if (Input.GetMouseButton(1))
         {
-            Player.Anime.Play("Aiming SniperRifle");
-
             if (Input.GetButton("Horizontal"))
             {
                 Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 120f;
@@ -34,11 +32,19 @@ public class PlayerAimingState : PlayerBaseState
                 Debug.Log("Hey man, nice shot");
             }
 
+            if (Player.CurrentWeapon == 0)
+            {
+                Player.Anime.Play("Aiming SniperRifle");
+            }
+            if (Player.CurrentWeapon == 1)
+            {
+                Player.Anime.Play("Aiming Pistol");
+            }
         }
         else
         {
-            //Deactivates the shotgun
-            Player.Weapons[0].SetActive(false);
+            //Deactivates the current weapon
+            Player.Weapons[Player.CurrentWeapon].SetActive(false);
             Player.TransitionToState(Player.IdleState);
         }
     }

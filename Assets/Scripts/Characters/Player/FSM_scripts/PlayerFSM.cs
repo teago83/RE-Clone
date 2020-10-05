@@ -33,7 +33,7 @@ public class PlayerFSM : MonoBehaviour
 
     // The player's weapons, duhhh
     public GameObject[] Weapons;
-
+    public int CurrentWeapon = 0;
 
     void Start()
     {
@@ -52,6 +52,14 @@ public class PlayerFSM : MonoBehaviour
         if (Health <= 0)
         {
             TransitionToState(DeadState);
+        }
+        if (Input.GetKey(KeyCode.Keypad1))
+        {
+            CurrentWeapon = 0;
+        }
+        else if (Input.GetKey(KeyCode.Keypad0))
+        {
+            CurrentWeapon = 1;
         }
     }
 
