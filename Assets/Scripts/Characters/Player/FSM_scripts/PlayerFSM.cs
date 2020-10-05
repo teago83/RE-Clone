@@ -8,6 +8,7 @@ public class PlayerFSM : MonoBehaviour
 
     public readonly PlayerIdleState IdleState = new PlayerIdleState();
     public readonly PlayerAimingState AimingState = new PlayerAimingState();
+    public readonly PlayerShootingState ShootingState = new PlayerShootingState();
     public readonly PlayerRunningState RunningState = new PlayerRunningState();
     public readonly PlayerWalkingState WalkingState = new PlayerWalkingState();
     public readonly PlayerTakingDamageState TakingDamageState = new PlayerTakingDamageState();
@@ -31,10 +32,11 @@ public class PlayerFSM : MonoBehaviour
     public bool AttackFromTheBack;
     public float TakingDamageWaitTime;
 
-    // The player's weapons, duhhh
+    // The player's weapons and stuff related to them, duhhh
     public GameObject[] Weapons;
     public int CurrentWeapon;
-
+    // Gunshot to be active when the player fires their gun
+    public ParticleSystem Gunshot;
 
     void Start()
     {

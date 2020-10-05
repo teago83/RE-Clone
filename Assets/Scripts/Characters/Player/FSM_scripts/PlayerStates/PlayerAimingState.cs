@@ -28,7 +28,7 @@ public class PlayerAimingState : PlayerBaseState
             // The player will only be able to shoot if they're aiming, duh
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Hey man, nice shot");
+                Player.TransitionToState(Player.ShootingState);
             }
 
             if (Player.CurrentWeapon == 0)
