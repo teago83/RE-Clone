@@ -16,16 +16,14 @@ public class ZombieFollowingState : ZombieBaseState
 
     public override void Update(ZombieBehaviourFSM Zombie)
     {
-        // Zombie starts attacking the player
-        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 2.75f && Zombie.HaveISeenThePlayer == true)
+        // Zombie goes into its combat state in order to attack the player.
+        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 4.5f && Zombie.HaveISeenThePlayer == true && Zombie.InFrontOfPlayer == true)
         {
-            // Implement zombie attacking the player and decreasing their health
             Zombie.TransitionToState(Zombie.CombatState);
-            
         }
         else if (Zombie.HaveISeenThePlayer == true)
         {
-            // Code for the zombie to rotate towards the player
+            // Code for the zombie to rotate and move towards the player.
 
             Vector3 TargetDirection = Zombie.ThePlayer.transform.position - Zombie.transform.position;
             Vector3 NewDirection = Vector3.RotateTowards(Zombie.transform.forward, TargetDirection, Zombie.Speed * Time.deltaTime, 0.0f);
