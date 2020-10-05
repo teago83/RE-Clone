@@ -5,14 +5,14 @@ using UnityEngine.Events;
 
 public class Detector : MonoBehaviour
 {
-    public bool IsInRange;
+    public bool IsSeeing;
     public UnityEvent Detection;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            IsInRange = true;
+            IsSeeing = true;
             Debug.Log("The zombie is seeing the player.");
             Detection.Invoke();
         }

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PlayerRunningState : PlayerBaseState
 {
-    public override void EnterState(PlayerControlsFSM Player)
+    public override void EnterState(PlayerFSM Player)
     {
         
     }
 
-    public override void OnCollisionEnter(PlayerControlsFSM Player)
+    public override void OnCollisionEnter(PlayerFSM Player)
     {
         
     }
 
-    public override void Update(PlayerControlsFSM Player)
+    public override void Update(PlayerFSM Player)
     {
         if (Player.WalkingForward == true && Input.GetKey(KeyCode.LeftShift))
         {

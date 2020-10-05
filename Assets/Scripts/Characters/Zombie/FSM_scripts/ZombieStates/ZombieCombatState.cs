@@ -16,12 +16,20 @@ public class ZombieCombatState : ZombieBaseState
 
     public override void Update(ZombieBehaviourFSM Zombie)
     {
-        // If the distance between the player and the zombie is smaller than or
-        // equal to 2.3f, the zombie will attack the player.
+        // If the distance between the player and the zombie is quite small, the zombie will attack the player.
 
-        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 2.75f)
+        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 4.5f && Zombie.InFrontOfPlayer == true)
         {
             Zombie.Anime.Play("Attacking");
+
+            /* these "WaitForSeconds" and the multiple calls for the Attacking 
+            * animation were meant to be used as a pause in between the zombie's
+            * attacks, but they didn't work. Keep them here for now. */
+
+            //new WaitForSeconds(40);
+            //Zombie.Anime.Play("Attacking");
+            //new WaitForSeconds(4);
+            //Zombie.Anime.Play("Attacking");
         }
 
         // If the player is out of the zombie's reach, the zombie will start to

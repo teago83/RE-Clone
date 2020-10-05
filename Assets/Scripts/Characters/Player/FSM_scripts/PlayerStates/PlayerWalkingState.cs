@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PlayerWalkingState : PlayerBaseState
 {
-    public override void EnterState(PlayerControlsFSM Player)
+    public override void EnterState(PlayerFSM Player)
     {
         
     }
 
-    public override void OnCollisionEnter(PlayerControlsFSM Player)
+    public override void OnCollisionEnter(PlayerFSM Player)
     {
         
     }
 
-    public override void Update(PlayerControlsFSM Player)
+    public override void Update(PlayerFSM Player)
     {
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {

@@ -20,8 +20,9 @@ public class ZombieBehaviourFSM : MonoBehaviour
 
     private Rigidbody Rigidbody;
 
-    // stuff related to detecting the player 
+    // stuff related to detecting and attacking the player 
     public bool HaveISeenThePlayer;
+    public bool InFrontOfPlayer;
     public GameObject ThePlayer;
 
     public Animator Anime;
@@ -49,6 +50,7 @@ public class ZombieBehaviourFSM : MonoBehaviour
         CurrentZombieState.EnterState(this);
     }
 
+    // Used to enable the zombie to follow the player around
     public void SeenThePlayer()
     {
         HaveISeenThePlayer = true;        
@@ -56,5 +58,15 @@ public class ZombieBehaviourFSM : MonoBehaviour
     public void NotSeenThePlayer()
     {
         HaveISeenThePlayer = false;
+    }
+
+    // Used to enable the zombie to attack the player
+    public void ReallyInFrontOfPlayer()
+    {
+        InFrontOfPlayer = true;
+    }
+    public void NotInFrontOfPlayer()
+    {
+        InFrontOfPlayer = false;
     }
 }
