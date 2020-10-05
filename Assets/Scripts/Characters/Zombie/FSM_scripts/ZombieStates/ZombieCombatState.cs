@@ -21,15 +21,6 @@ public class ZombieCombatState : ZombieBaseState
         if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 4.5f && Zombie.InFrontOfPlayer == true)
         {
             Zombie.Anime.Play("Attacking");
-
-            /* these "WaitForSeconds" and the multiple calls for the Attacking 
-            * animation were meant to be used as a pause in between the zombie's
-            * attacks, but they didn't work. Keep them here for now. */
-
-            //new WaitForSeconds(40);
-            //Zombie.Anime.Play("Attacking");
-            //new WaitForSeconds(4);
-            //Zombie.Anime.Play("Attacking");
         }
 
         // If the player is out of the zombie's reach, the zombie will start to
@@ -38,6 +29,13 @@ public class ZombieCombatState : ZombieBaseState
         else
         {
             Zombie.TransitionToState(Zombie.FollowingState);
+        }
+
+        // If the player dies, the zombie shall remain still and stop trying
+        // to follow the player.
+        if (Zombie.ThePlayer.GetComponent<PlayerFSM>().Health <= 0)
+        {
+            Zombie.TransitionToState(Zombie.NoPointState);
         }
     }
 }

@@ -6,6 +6,13 @@ public class PlayerIdleState : PlayerBaseState
 {
     public override void EnterState(PlayerFSM Player)
     {
+        // These two bools are used to know if the player is being hit by
+        // an attack or not. If they are, they'll transition to the 
+        // "PlayerTakingDamageState".
+
+        Player.AttackFromTheFront = false;
+        Player.AttackFromTheBack = false;
+
         Player.Anime.Play("Idle");
     }
 
@@ -23,6 +30,11 @@ public class PlayerIdleState : PlayerBaseState
         else if (Input.GetMouseButton(1))
         {
             Player.TransitionToState(Player.AimingState);
+        }
+
+        if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
+        {
+            Player.TransitionToState(Player.TakingDamageState);
         }
     }
 }

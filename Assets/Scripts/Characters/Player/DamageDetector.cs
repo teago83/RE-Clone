@@ -13,6 +13,7 @@ public class DamageDetector : MonoBehaviour
     {
         if (other.gameObject.CompareTag("ZombieHand"))
         {
+            Debug.Log("The zombie has successfully hit the player!");
             WhereTheAttackCameFrom.Invoke();
         }
     }

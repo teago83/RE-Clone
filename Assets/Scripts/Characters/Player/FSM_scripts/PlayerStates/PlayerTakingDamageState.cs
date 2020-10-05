@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTakingDamage : PlayerBaseState
+public class PlayerTakingDamageState : PlayerBaseState
 {
     public override void EnterState(PlayerFSM Player)
     {
-        
+        Player.TakingDamageWaitTime = .3f;
     }
     public override void OnCollisionEnter(PlayerFSM Player)
     {
@@ -23,6 +23,14 @@ public class PlayerTakingDamage : PlayerBaseState
         else if (Player.AttackFromTheBack == true)
         {
             Player.Anime.Play("Damage2");
+        }
+        if (Player.TakingDamageWaitTime <= 0)
+        {
+            Player.TransitionToState(Player.IdleState);
+        }
+        else
+        {
+            Player.TakingDamageWaitTime -= Time.deltaTime;
         }
     }
 }

@@ -10,6 +10,7 @@ public class ZombieBehaviourFSM : MonoBehaviour
     public readonly ZombiePatrolState PatrolState = new ZombiePatrolState();
     public readonly ZombieFollowingState FollowingState = new ZombieFollowingState();
     public readonly ZombieCombatState CombatState = new ZombieCombatState();
+    public readonly ZombieNoPointState NoPointState = new ZombieNoPointState();
 
     public float StartWaitingTime;
     public float WaitingTime;

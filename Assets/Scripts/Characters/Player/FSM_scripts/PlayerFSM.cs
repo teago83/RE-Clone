@@ -10,6 +10,7 @@ public class PlayerFSM : MonoBehaviour
     public readonly PlayerAimingState AimingState = new PlayerAimingState();
     public readonly PlayerRunningState RunningState = new PlayerRunningState();
     public readonly PlayerWalkingState WalkingState = new PlayerWalkingState();
+    public readonly PlayerTakingDamageState TakingDamageState = new PlayerTakingDamageState();
     public readonly PlayerDeadState DeadState = new PlayerDeadState();
    
     // Movement-related variables
@@ -28,11 +29,11 @@ public class PlayerFSM : MonoBehaviour
     public int Health;
     public bool AttackFromTheFront;
     public bool AttackFromTheBack;
-    public int TakingDamageWaitTime;
+    public float TakingDamageWaitTime;
 
     void Start()
     {
-        MaxHealth = 5;
+        MaxHealth = 152;
         Health = MaxHealth;
         Anime = GetComponent<Animator>();
         TransitionToState(IdleState);
