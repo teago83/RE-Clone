@@ -33,11 +33,11 @@ public class PlayerFSM : MonoBehaviour
 
     // The player's weapons, duhhh
     public GameObject[] Weapons;
+    public int CurrentWeapon;
 
 
     void Start()
     {
-        //Weapons[0] = GameObject.Find("/-- Characters --/Soldier_FSM01/Shotgun");
         MaxHealth = 152;
         Health = MaxHealth;
         Anime = GetComponent<Animator>();
@@ -52,6 +52,17 @@ public class PlayerFSM : MonoBehaviour
         if (Health <= 0)
         {
             TransitionToState(DeadState);
+        }
+
+        // Equips the pistol
+        if (Input.GetKey(KeyCode.Keypad1))
+        {
+            CurrentWeapon = 0;
+        }
+        //Equips the shotgun
+        else if (Input.GetKey(KeyCode.Keypad2))
+        {
+            CurrentWeapon = 1;
         }
     }
 
