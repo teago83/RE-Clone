@@ -31,8 +31,13 @@ public class PlayerFSM : MonoBehaviour
     public bool AttackFromTheBack;
     public float TakingDamageWaitTime;
 
+    // The player's weapons, duhhh
+    public GameObject[] Weapons;
+
+
     void Start()
     {
+        //Weapons[0] = GameObject.Find("/-- Characters --/Soldier_FSM01/Shotgun");
         MaxHealth = 152;
         Health = MaxHealth;
         Anime = GetComponent<Animator>();

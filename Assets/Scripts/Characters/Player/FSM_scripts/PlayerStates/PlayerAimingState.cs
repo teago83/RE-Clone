@@ -6,7 +6,8 @@ public class PlayerAimingState : PlayerBaseState
 {
     public override void EnterState(PlayerFSM Player)
     {
-        
+        // Activates the shotgun
+        Player.Weapons[0].SetActive(true);
     }
 
     public override void OnCollisionEnter(PlayerFSM Player)
@@ -29,14 +30,15 @@ public class PlayerAimingState : PlayerBaseState
             // The player will only be able to shoot if they're aiming, duh
             if (Input.GetMouseButtonDown(0))
             {
-                Player.Anime.Play(null);
-                Player.Anime.Play("Fire SniperRifle");
+                
                 Debug.Log("Hey man, nice shot");
             }
 
         }
         else
         {
+            //Deactivates the shotgun
+            Player.Weapons[0].SetActive(false);
             Player.TransitionToState(Player.IdleState);
         }
     }
