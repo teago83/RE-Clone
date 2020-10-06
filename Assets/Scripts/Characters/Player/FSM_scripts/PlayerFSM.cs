@@ -35,13 +35,17 @@ public class PlayerFSM : MonoBehaviour
     // The player's weapons and stuff related to them, duhhh
     public GameObject[] Weapons;
     public int CurrentWeapon;
-    // Gunshot to be active when the player fires their gun
-    public ParticleSystem Gunshot;
+    // Gunshot to be activated when the player fires their gun
+    // public ParticleSystem Gunshot;
+
+    public GameObject[] PistolBullets;
+    public int CurrentPistolAmmo;
 
     void Start()
     {
-        MaxHealth = 152;
+        MaxHealth = 125;
         Health = MaxHealth;
+        CurrentPistolAmmo = PistolBullets.Length;
         Anime = GetComponent<Animator>();
         TransitionToState(IdleState);
     }
@@ -78,9 +82,6 @@ public class PlayerFSM : MonoBehaviour
         CurrentPlayerState = State;
         CurrentPlayerState.EnterState(this);
     }
-
-    /* If the zombie's hand comes in contact with the player, 
-     * the player's health will be decreased. */
 
     public void AttackCameFromTheFront()
     {
