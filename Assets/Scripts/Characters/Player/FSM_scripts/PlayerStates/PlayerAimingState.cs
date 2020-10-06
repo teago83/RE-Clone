@@ -26,9 +26,14 @@ public class PlayerAimingState : PlayerBaseState
             }
 
             // The player will only be able to shoot if they're aiming, duh
-            if (Input.GetMouseButtonDown(0))
+            for (int i=0; i<Player.CurrentPistolAmmo; i++)
             {
-                Player.TransitionToState(Player.ShootingState);
+                if (Input.GetMouseButtonDown(0) && Player.CurrentPistolAmmo > 0)
+                {
+                    Player.PistolBullets[i].transform.Translate(0, 0, 15);
+                    Player.CurrentPistolAmmo -= 1;
+                    //Player.TransitionToState(Player.ShootingState);
+                }
             }
 
             if (Player.CurrentWeapon == 0)
@@ -46,6 +51,12 @@ public class PlayerAimingState : PlayerBaseState
             //Deactivates the current weapon
             Player.Weapons[Player.CurrentWeapon].SetActive(false);
             Player.TransitionToState(Player.IdleState);
+        }
+
+        if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
+        {
+            Player.Weapons[Player.CurrentWeapon].SetActive(false);
+            Player.TransitionToState(Player.TakingDamageState);
         }
     }
 }

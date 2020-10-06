@@ -51,5 +51,10 @@ public class PlayerWalkingState : PlayerBaseState
         {
             Player.TransitionToState(Player.IdleState);
         }
+
+        if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
+        {
+            Player.TransitionToState(Player.TakingDamageState);
+        }
     }
 }

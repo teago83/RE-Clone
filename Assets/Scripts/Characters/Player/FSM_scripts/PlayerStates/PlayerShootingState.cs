@@ -16,6 +16,8 @@ public class PlayerShootingState : PlayerBaseState
 
     public override void Update(PlayerFSM Player)
     {
+        
+
         if (Input.GetMouseButtonDown(0)) {
             //if (Player.CurrentWeapon == 0)
             //{
@@ -26,12 +28,18 @@ public class PlayerShootingState : PlayerBaseState
             //    Player.Anime.Play("Firing Shotgun");
             //}
             // Implement these conditions when you actually have the required animations.
+            //Player.Gunshot.Play();
 
-            
-            
+            // Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.Speed * Time.deltaTime); 
+
+            // Player.PistolBullet.transform.Translate(10, 10, 10);
+            Debug.Log("Hey, stop shooting, punk");
+
         }
         else
         {
+
+            //Player.Gunshot.Pause();
             Player.TransitionToState(Player.AimingState);
         }
     }
