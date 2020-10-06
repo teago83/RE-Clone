@@ -18,12 +18,16 @@ public class ZombieBehaviourFSM : MonoBehaviour
     public readonly ZombieTakingDamageState TakingDamageState = new ZombieTakingDamageState();
     public readonly ZombieDeadState DeadState = new ZombieDeadState();
 
-    public float StartWaitingTime;
+    public float StartWaitingTime = 5;
     public float WaitingTime;
-    public float Speed;
+    public float Speed = 2.6f;
 
     // Health
-    public int Health;
+    public int Health = 150;
+    public bool HitByPlayer = false;
+    // it begins as false, and becomes true if the player
+    // has hit the zombie. when leaving the 'takingdamagestate',
+    // this variable shall become false again
     public float TakingDamageWaitTime;
 
     public Transform[] MoveSpots;
@@ -48,6 +52,11 @@ public class ZombieBehaviourFSM : MonoBehaviour
     {
         CurrentZombieState.Update(this);
         Debug.Log(CurrentZombieState);
+
+        if (Health <= 0)
+        {
+            TransitionToState(DeadState);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -79,5 +88,9 @@ public class ZombieBehaviourFSM : MonoBehaviour
     public void NotInFrontOfPlayer()
     {
         InFrontOfPlayer = false;
+    }
+    public void ReallyHitByPlayer()
+    {
+        HitByPlayer = true;
     }
 }

@@ -37,5 +37,9 @@ public class ZombieCombatState : ZombieBaseState
         {
             Zombie.TransitionToState(Zombie.NoPointState);
         }
+        if (Zombie.HitByPlayer == true)
+        {
+            Zombie.TransitionToState(Zombie.TakingDamageState);
+        }
     }
 }

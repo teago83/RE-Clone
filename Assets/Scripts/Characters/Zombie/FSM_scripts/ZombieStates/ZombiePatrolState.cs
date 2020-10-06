@@ -35,6 +35,11 @@ public class ZombiePatrolState : ZombieBaseState
             Zombie.transform.rotation = Quaternion.LookRotation(NewDirection);
 
             Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.Speed * Time.deltaTime); 
+
+            if (Zombie.HitByPlayer == true)
+            {
+                Zombie.TransitionToState(Zombie.TakingDamageState);
+            }
         }
         else
         {

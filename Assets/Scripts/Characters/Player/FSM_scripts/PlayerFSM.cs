@@ -30,27 +30,37 @@ public class PlayerFSM : MonoBehaviour
 
     // The player's weaponry
 
-    public static int PistolDamage;
     // Quick note on static variables:
     // A static variable can be referenced by another script
-    public int MaxPistolAmmo;
+    
+    // Pistol
+    public static int PistolDamage = 30;
+    public int MaxPistolAmmo = 15;
     public int CurrentPistolAmmo;
     public float PistolFiringRate;
+    public float PistolShootingRange = 100f;
     public ParticleSystem Gunshot;
+    // Shotgun
+    public static int ShotgunDamage = 50;
+    public int MaxShotgunAmmo = 8;
+    public int CurrentShotgunAmmo;
+    public float ShotgunFiringRate;
+    public float ShotgunShootingRange = 50f;
     
     public GameObject[] Weapons;
-    public static int CurrentWeapon;
+    public int CurrentWeapon;
     // WeaponBullets = used as reference for the Raycast to know where the shots will be fired from
     public GameObject[] WeaponBullets;
     // HitInfo displays some info on what the weapon's bullet has shot
     public RaycastHit HitInfo;
-    public float ShootingRange = 100f;
 
     void Start()
     {
         MaxHealth = 125;
         Health = MaxHealth;
         Anime = GetComponent<Animator>();
+        CurrentPistolAmmo = MaxPistolAmmo;
+        CurrentShotgunAmmo = MaxShotgunAmmo;
         TransitionToState(IdleState);
     }
 
