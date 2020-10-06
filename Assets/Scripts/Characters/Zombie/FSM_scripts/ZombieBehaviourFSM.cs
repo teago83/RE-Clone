@@ -25,10 +25,12 @@ public class ZombieBehaviourFSM : MonoBehaviour
     // Health
     public int Health = 150;
     public bool HitByPlayer = false;
+    public bool CanBeHit;
     // it begins as false, and becomes true if the player
     // has hit the zombie. when leaving the 'takingdamagestate',
     // this variable shall become false again
     public float TakingDamageWaitTime;
+    public float StartTakingDmgWaitTime;
 
     public Transform[] MoveSpots;
     public int RandomSpot;
@@ -51,7 +53,10 @@ public class ZombieBehaviourFSM : MonoBehaviour
     void Update()
     {
         CurrentZombieState.Update(this);
+        /// CanBeHit = makes it possible for the player to hit the zombie
+        CanBeHit = true;
         Debug.Log(CurrentZombieState);
+        Debug.Log(Health);
 
         if (Health <= 0)
         {
