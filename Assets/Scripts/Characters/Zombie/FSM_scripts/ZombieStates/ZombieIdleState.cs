@@ -29,5 +29,9 @@ public class ZombieIdleState : ZombieBaseState
         {
             Zombie.TransitionToState(Zombie.FollowingState);
         }
+        if (Zombie.HitByPlayer == true)
+        {
+            Zombie.TransitionToState(Zombie.TakingDamageState);
+        }
     }
 }

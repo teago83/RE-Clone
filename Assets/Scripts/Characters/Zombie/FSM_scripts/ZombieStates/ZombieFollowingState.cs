@@ -36,5 +36,9 @@ public class ZombieFollowingState : ZombieBaseState
             Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.Speed * Time.deltaTime);
             Zombie.TransitionToState(Zombie.PatrolState);
         }
+        if (Zombie.HitByPlayer == true)
+        {
+            Zombie.TransitionToState(Zombie.TakingDamageState);
+        }
     }
 }

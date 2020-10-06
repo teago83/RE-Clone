@@ -16,10 +16,25 @@ public class ZombieTakingDamageState : ZombieBaseState
 
     public override void Update(ZombieBehaviourFSM Zombie)
     {
-        if (PlayerFSM.CurrentWeapon == 0)
+        Zombie.Anime.Play("Hit");
+
+        if (Zombie.ThePlayer.GetComponent<PlayerFSM>().CurrentWeapon == 0)
         {
             Zombie.Health -= PlayerFSM.PistolDamage;
         }
-        
+        else if (Zombie.ThePlayer.GetComponent<PlayerFSM>().CurrentWeapon == 1)
+        {
+            Zombie.Health -= PlayerFSM.ShotgunDamage;
+        }
+
+        if (Zombie.TakingDamageWaitTime <= 0)
+        {
+            Zombie.HitByPlayer = false;
+            Zombie.TransitionToState(Zombie.IdleState);
+        }
+        else
+        {
+            Zombie.TakingDamageWaitTime -= Time.deltaTime;
+        }
     }
 }

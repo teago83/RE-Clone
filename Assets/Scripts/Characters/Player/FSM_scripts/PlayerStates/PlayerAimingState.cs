@@ -39,11 +39,20 @@ public class PlayerAimingState : PlayerBaseState
             // or, the player shoots (if they have ammo)
             else if (Input.GetMouseButtonDown(0))
             {
-                if (Player.CurrentWeapon == 0)
+                if (Player.CurrentWeapon == 0 && Player.CurrentPistolAmmo > 0)
                 {
-                    if (Physics.Raycast(Player.WeaponBullets[0].transform.position, Player.WeaponBullets[0].transform.forward, out Player.HitInfo, Player.ShootingRange)){
+                    if (Physics.Raycast(Player.WeaponBullets[0].transform.position, Player.WeaponBullets[0].transform.forward, out Player.HitInfo, Player.PistolShootingRange)){
+                        Debug.Log(Player.HitInfo.transform.name);
+                        Target target = Player.HitInfo.transform.GetComponent<ZombieBehaviourFSM>
+                    }
+                    Player.CurrentPistolAmmo -= 1;
+                }
+                else if (Player.CurrentWeapon == 1 && Player.CurrentShotgunAmmo > 0)
+                {
+                    if (Physics.Raycast(Player.WeaponBullets[1].transform.position, Player.WeaponBullets[1].transform.forward, out Player.HitInfo, Player.ShotgunShootingRange)){
                         Debug.Log(Player.HitInfo.transform.name);
                     }
+                    Player.CurrentShotgunAmmo -= 1;
                 }
             }
 
