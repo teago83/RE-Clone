@@ -41,20 +41,31 @@ public class PlayerWalkingState : PlayerBaseState
             Player.transform.Translate(0, 0, Player.ForwardMovement);
             Player.transform.Rotate(0, Player.RotationalMovement, 0);
         }
-
-        else if (Input.GetMouseButton(1))
-        {
-            Player.TransitionToState(Player.AimingState);
-        }
-
+        
         else
         {
             Player.TransitionToState(Player.IdleState);
         }
 
+        if (Input.GetMouseButton(1))
+        {
+            Player.TransitionToState(Player.AimingState);
+        }
+
         if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
         {
             Player.TransitionToState(Player.TakingDamageState);
+        }
+
+        // Equips the pistol
+        if (Input.GetKey(KeyCode.Keypad1))
+        {
+            Player.CurrentWeapon = 0;
+        }
+        //Equips the shotgun
+        else if (Input.GetKey(KeyCode.Keypad2))
+        {
+            Player.CurrentWeapon = 1;
         }
     }
 }

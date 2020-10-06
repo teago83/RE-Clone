@@ -36,5 +36,16 @@ public class PlayerIdleState : PlayerBaseState
         {
             Player.TransitionToState(Player.TakingDamageState);
         }
+
+        // Equips the pistol
+        if (Input.GetKey(KeyCode.Keypad1))
+        {
+            Player.CurrentWeapon = 0;
+        }
+        //Equips the shotgun
+        else if (Input.GetKey(KeyCode.Keypad2))
+        {
+            Player.CurrentWeapon = 1;
+        }
     }
 }
