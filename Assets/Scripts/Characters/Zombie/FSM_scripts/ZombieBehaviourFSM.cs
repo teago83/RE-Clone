@@ -10,11 +10,21 @@ public class ZombieBehaviourFSM : MonoBehaviour
     public readonly ZombiePatrolState PatrolState = new ZombiePatrolState();
     public readonly ZombieFollowingState FollowingState = new ZombieFollowingState();
     public readonly ZombieCombatState CombatState = new ZombieCombatState();
+    /* NoPoint = When the player is dead and the zombie has nothing to do.
+       I didn't just use the IdleState because the zombie would be able to
+       transit to other states and this would cause some issues due to the
+       dead player object on the ground.*/
     public readonly ZombieNoPointState NoPointState = new ZombieNoPointState();
+    public readonly ZombieTakingDamageState TakingDamageState = new ZombieTakingDamageState();
+    public readonly ZombieDeadState DeadState = new ZombieDeadState();
 
     public float StartWaitingTime;
     public float WaitingTime;
     public float Speed;
+
+    // Health
+    public int Health;
+    public float TakingDamageWaitTime;
 
     public Transform[] MoveSpots;
     public int RandomSpot;
