@@ -23,14 +23,14 @@ public class ZombieBehaviourFSM : MonoBehaviour
     public float Speed = 2.6f;
 
     // Health
-    public int Health = 150;
+    public int Health = 125;
     public bool HitByPlayer = false;
     public bool CanBeHit;
     // it begins as false, and becomes true if the player
     // has hit the zombie. when leaving the 'takingdamagestate',
     // this variable shall become false again
-    public float TakingDamageWaitTime;
-    public float StartTakingDmgWaitTime;
+    public float TakingDamageCooldown;
+    public float StartTakingDmgCooldown;
 
     public Transform[] MoveSpots;
     public int RandomSpot;
@@ -61,6 +61,10 @@ public class ZombieBehaviourFSM : MonoBehaviour
         if (Health <= 0)
         {
             TransitionToState(DeadState);
+        }
+        if (TakingDamageCooldown > 0)
+        {
+            TakingDamageCooldown -= Time.deltaTime;
         }
     }
 

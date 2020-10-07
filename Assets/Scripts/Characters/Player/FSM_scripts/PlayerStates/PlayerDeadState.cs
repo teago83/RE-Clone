@@ -10,7 +10,7 @@ public class PlayerDeadState : PlayerBaseState
     }
     public override void OnCollisionEnter(PlayerFSM Player)
     {
-
+        
     }
     public override void Update(PlayerFSM Player)
     {

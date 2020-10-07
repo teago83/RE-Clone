@@ -27,6 +27,7 @@ public class PlayerFSM : MonoBehaviour
     public bool AttackFromTheFront;
     public bool AttackFromTheBack;
     public float TakingDamageWaitTime;
+    public float DamageCooldown;
 
     // The player's weaponry
 
@@ -34,18 +35,18 @@ public class PlayerFSM : MonoBehaviour
     // A static variable can be referenced by another script
     
     // Pistol
-    public static int PistolDamage = 30;
+    public static int PistolDamage = 20;
     public int MaxPistolAmmo = 15;
     public int CurrentPistolAmmo;
     public float PistolFiringRate;
-    public float PistolShootingRange = 100f;
+    public float PistolShootingRange = 40f;
     public ParticleSystem Gunshot;
     // Shotgun
-    public static int ShotgunDamage = 50;
+    public static int ShotgunDamage = 60;
     public int MaxShotgunAmmo = 8;
     public int CurrentShotgunAmmo;
     public float ShotgunFiringRate;
-    public float ShotgunShootingRange = 50f;
+    public float ShotgunShootingRange = 15f;
     
     public GameObject[] Weapons;
     public int CurrentWeapon;
@@ -53,6 +54,12 @@ public class PlayerFSM : MonoBehaviour
     public GameObject[] WeaponBullets;
     // HitInfo displays some info on what the weapon's bullet has shot
     public RaycastHit HitInfo;
+    public float ShootingCooldown;
+
+    // Sound Effects
+    public AudioSource FiringPistol;
+    public AudioSource FiringShotgun;
+    public AudioSource Dying;
 
     void Start()
     {
@@ -71,7 +78,21 @@ public class PlayerFSM : MonoBehaviour
 
         if (Health <= 0)
         {
+            FiringPistol.Play();
             TransitionToState(DeadState);
+        }
+
+        /* These if statements are here so that their respective cooldown variables
+         * are always being decreased if they're bigger than 0. It didn't work
+         * as intended if they were put into the states themselves. */
+        
+        if (DamageCooldown > 0)
+        {
+            DamageCooldown -= Time.deltaTime;
+        }
+        if (ShootingCooldown > 0)
+        {
+            ShootingCooldown -= Time.deltaTime;
         }
     }
 

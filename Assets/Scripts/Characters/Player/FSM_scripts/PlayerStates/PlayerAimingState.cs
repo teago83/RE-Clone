@@ -37,7 +37,7 @@ public class PlayerAimingState : PlayerBaseState
                 Player.transform.Rotate(0, Player.RotationalMovement, 0);
             }
             // or, the player shoots (if they have ammo)
-            else if (Input.GetMouseButtonDown(0))
+            else if (Input.GetMouseButtonDown(0) && Player.ShootingCooldown <= 0)
             {
                 if (Player.CurrentWeapon == 0 && Player.CurrentPistolAmmo > 0)
                 {
@@ -50,6 +50,8 @@ public class PlayerAimingState : PlayerBaseState
                         }
                     }
                     Player.CurrentPistolAmmo -= 1;
+                    Player.FiringPistol.Play();
+                    Player.ShootingCooldown = 1.8f;
                 }
                 else if (Player.CurrentWeapon == 1 && Player.CurrentShotgunAmmo > 0)
                 {
@@ -63,7 +65,14 @@ public class PlayerAimingState : PlayerBaseState
                         }
                     }
                     Player.CurrentShotgunAmmo -= 1;
+                    Player.FiringShotgun.Play();
+                    Player.ShootingCooldown = 2f;
                 }
+            }
+
+            else if (Player.ShootingCooldown > 0)
+            {
+                Player.ShootingCooldown -= Time.deltaTime;
             }
 
             if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)

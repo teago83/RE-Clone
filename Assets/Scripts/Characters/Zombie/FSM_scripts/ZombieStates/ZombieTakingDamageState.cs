@@ -6,7 +6,7 @@ public class ZombieTakingDamageState : ZombieBaseState
 {
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
-        Zombie.TakingDamageWaitTime = Zombie.StartTakingDmgWaitTime;
+        Zombie.TakingDamageCooldown = Zombie.StartTakingDmgCooldown;
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)
@@ -16,9 +16,9 @@ public class ZombieTakingDamageState : ZombieBaseState
 
     public override void Update(ZombieBehaviourFSM Zombie)
     {
-        while (Zombie.TakingDamageWaitTime > 0)
+        if (Zombie.TakingDamageCooldown > 0)
         {
-            Zombie.Anime.Play("Hit");
+            Zombie.Anime.Play("Walking");
         }
 
         if (Zombie.CanBeHit == true)
@@ -37,9 +37,9 @@ public class ZombieTakingDamageState : ZombieBaseState
             Zombie.CanBeHit = false;
         }
 
-        if (Zombie.TakingDamageWaitTime > 0)
+        if (Zombie.TakingDamageCooldown > 0)
         {
-            Zombie.TakingDamageWaitTime -= Time.deltaTime;
+            Zombie.TakingDamageCooldown -= Time.deltaTime;
         }
 
         else
