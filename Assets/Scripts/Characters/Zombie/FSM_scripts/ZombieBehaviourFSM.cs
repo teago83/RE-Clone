@@ -47,12 +47,13 @@ public class ZombieBehaviourFSM : MonoBehaviour
     // Sound effects
     public AudioSource DyingSFX;
     public AudioSource Idle1SFX;
-    public AudioSource Idle2SFX;
+    public AudioSource FollowingSFX;
     public AudioSource AttackingSFX;
     public AudioSource TakingDamageSFX;
-    public AudioSource WholeLottaNothing;
 
-    public float SFXCooldown = 20f;
+    public float IdleSFXCooldown = 20f;
+    public float AttackingSFXCooldown = 9f;
+    public float FollowingSFXCooldown = 25f;
 
     private void Start()
     {
@@ -66,7 +67,7 @@ public class ZombieBehaviourFSM : MonoBehaviour
         // CanBeHit = makes it possible for the player to hit the zombie
         CanBeHit = true;
         Debug.Log(CurrentZombieState);
-        Debug.Log(Health);
+        Debug.Log("The zombie's current health is: " + Health);
 
         if (Health <= 0 && Health > -9999)
         {
@@ -76,19 +77,40 @@ public class ZombieBehaviourFSM : MonoBehaviour
         {
             TakingDamageCooldown -= Time.deltaTime;
         }
-        if (CurrentZombieState == IdleState && SFXCooldown <= 6f && HaveISeenThePlayer == false)
+        if ((CurrentZombieState == IdleState || CurrentZombieState == PatrolState) && IdleSFXCooldown <= 6f)
         {
             Debug.Log("Ihhh, alá, zumbizão barulhento");
             Idle1SFX.Play();
-            SFXCooldown = 20f;
+            IdleSFXCooldown = 20f;
         }
-        else
+
+        else if (IdleSFXCooldown > 6f)
         {
-            WholeLottaNothing.Play();
+            IdleSFXCooldown -= Time.deltaTime;
         }
-        if (SFXCooldown >= 6f && HaveISeenThePlayer == false)
+
+        if (CurrentZombieState == CombatState && AttackingSFXCooldown <= 6f)
         {
-            SFXCooldown -= Time.deltaTime;
+            Debug.Log("Maluco, o zumbi quer me atacar, que horrorrrrrrr");
+            AttackingSFX.Play();
+            AttackingSFXCooldown = 9f;
+        }
+
+        else if (AttackingSFXCooldown > 6f)
+        {
+            AttackingSFXCooldown -= Time.deltaTime;
+        }
+
+        if (CurrentZombieState == FollowingState && FollowingSFXCooldown <= 6f)
+        {
+            Debug.Log("Esse zumbi não desiste mesmo -q");
+            FollowingSFX.Play();
+            FollowingSFXCooldown = 25f;
+        }
+
+        else if (FollowingSFXCooldown > 6f)
+        {
+            FollowingSFXCooldown -= Time.deltaTime;
         }
     }
 

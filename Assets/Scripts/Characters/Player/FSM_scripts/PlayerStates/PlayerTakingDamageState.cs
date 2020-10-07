@@ -16,6 +16,7 @@ public class PlayerTakingDamageState : PlayerBaseState
     {
         if (Player.DamageCooldown <= 0)
         {
+            Player.PlayerTakingDamageSFX.Play();
             Player.Health -= 50;
 
             if (Player.AttackFromTheFront == true)
