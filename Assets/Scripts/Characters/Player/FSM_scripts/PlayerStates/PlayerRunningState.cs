@@ -20,6 +20,11 @@ public class PlayerRunningState : PlayerBaseState
         {
             if (Input.GetKey(KeyCode.W))
             {
+                if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
+                {
+                    Player.TransitionToState(Player.TakingDamageState);
+                }
+
                 Player.Anime.Play("Run");
                 Player.ForwardMovement = Input.GetAxis("Vertical") * Time.deltaTime * 12f;
                 Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 175f;
@@ -30,10 +35,6 @@ public class PlayerRunningState : PlayerBaseState
                 if (Input.GetMouseButton(1))
                 {
                     Player.TransitionToState(Player.AimingState);
-                }
-                else if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
-                {
-                    Player.TransitionToState(Player.TakingDamageState);
                 }
                 
             }

@@ -28,7 +28,7 @@ public class PlayerTakingDamageState : PlayerBaseState
             }
             
             Debug.Log("Player's current health: " + Player.Health);
-            Player.DamageCooldown = 1f;
+            Player.DamageCooldown = 1.3f;
         }
 
         if (Player.TakingDamageWaitTime <= 0)
