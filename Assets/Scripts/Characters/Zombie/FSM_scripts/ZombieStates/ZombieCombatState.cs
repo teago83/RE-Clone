@@ -18,7 +18,7 @@ public class ZombieCombatState : ZombieBaseState
     {
         // If the distance between the player and the zombie is quite small, the zombie will attack the player.
 
-        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 4.5f && Zombie.InFrontOfPlayer == true)
+        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 5f && Zombie.InFrontOfPlayer == true)
         {
             Zombie.Anime.Play("Attacking");
         }
