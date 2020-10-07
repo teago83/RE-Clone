@@ -28,6 +28,7 @@ public class ZombieCombatState : ZombieBaseState
 
         else
         {
+            Zombie.AttackingSFX.Play();
             Zombie.TransitionToState(Zombie.FollowingState);
         }
 

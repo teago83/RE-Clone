@@ -8,7 +8,6 @@ public class ZombieIdleState : ZombieBaseState
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
         Zombie.Anime.Play("Idle");
-        Zombie.Idle1SFX.Play();
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)

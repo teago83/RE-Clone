@@ -58,6 +58,7 @@ public class PlayerFSM : MonoBehaviour
     public AudioSource FiringPistolSFX;
     public AudioSource FiringShotgunSFX;
     public AudioSource DyingSFX;
+    public AudioSource PlayerTakingDamageSFX;
 
     // Testing variables
 
