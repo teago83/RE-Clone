@@ -37,12 +37,22 @@ public class ZombieBehaviourFSM : MonoBehaviour
 
     private Rigidbody Rigidbody;
 
-    // stuff related to detecting and attacking the player 
+    // Player detection and attacking  
     public bool HaveISeenThePlayer;
     public bool InFrontOfPlayer;
     public GameObject ThePlayer;
 
     public Animator Anime;
+
+    // Sound effects
+    public AudioSource DyingSFX;
+    public AudioSource Idle1SFX;
+    public AudioSource Idle2SFX;
+    public AudioSource AttackingSFX;
+    public AudioSource TakingDamageSFX;
+    public AudioSource WholeLottaNothing;
+
+    public float SFXCooldown = 20f;
 
     private void Start()
     {
@@ -53,18 +63,32 @@ public class ZombieBehaviourFSM : MonoBehaviour
     void Update()
     {
         CurrentZombieState.Update(this);
-        /// CanBeHit = makes it possible for the player to hit the zombie
+        // CanBeHit = makes it possible for the player to hit the zombie
         CanBeHit = true;
         Debug.Log(CurrentZombieState);
         Debug.Log(Health);
 
-        if (Health <= 0)
+        if (Health <= 0 && Health > -9999)
         {
             TransitionToState(DeadState);
         }
         if (TakingDamageCooldown > 0)
         {
             TakingDamageCooldown -= Time.deltaTime;
+        }
+        if (CurrentZombieState == IdleState && SFXCooldown <= 6f && HaveISeenThePlayer == false)
+        {
+            Debug.Log("Ihhh, alá, zumbizão barulhento");
+            Idle1SFX.Play();
+            SFXCooldown = 20f;
+        }
+        else
+        {
+            WholeLottaNothing.Play();
+        }
+        if (SFXCooldown >= 6f && HaveISeenThePlayer == false)
+        {
+            SFXCooldown -= Time.deltaTime;
         }
     }
 

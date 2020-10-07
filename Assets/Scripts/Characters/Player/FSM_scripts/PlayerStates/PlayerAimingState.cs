@@ -50,7 +50,7 @@ public class PlayerAimingState : PlayerBaseState
                         }
                     }
                     Player.CurrentPistolAmmo -= 1;
-                    Player.FiringPistol.Play();
+                    Player.FiringPistolSFX.Play();
                     Player.ShootingCooldown = 1.8f;
                 }
                 else if (Player.CurrentWeapon == 1 && Player.CurrentShotgunAmmo > 0)
@@ -65,7 +65,7 @@ public class PlayerAimingState : PlayerBaseState
                         }
                     }
                     Player.CurrentShotgunAmmo -= 1;
-                    Player.FiringShotgun.Play();
+                    Player.FiringShotgunSFX.Play();
                     Player.ShootingCooldown = 2f;
                 }
             }

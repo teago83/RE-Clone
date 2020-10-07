@@ -38,14 +38,12 @@ public class PlayerFSM : MonoBehaviour
     public static int PistolDamage = 20;
     public int MaxPistolAmmo = 15;
     public int CurrentPistolAmmo;
-    public float PistolFiringRate;
     public float PistolShootingRange = 40f;
     public ParticleSystem Gunshot;
     // Shotgun
     public static int ShotgunDamage = 60;
     public int MaxShotgunAmmo = 8;
     public int CurrentShotgunAmmo;
-    public float ShotgunFiringRate;
     public float ShotgunShootingRange = 15f;
     
     public GameObject[] Weapons;
@@ -57,9 +55,11 @@ public class PlayerFSM : MonoBehaviour
     public float ShootingCooldown;
 
     // Sound Effects
-    public AudioSource FiringPistol;
-    public AudioSource FiringShotgun;
-    public AudioSource Dying;
+    public AudioSource FiringPistolSFX;
+    public AudioSource FiringShotgunSFX;
+    public AudioSource DyingSFX;
+
+    // Testing variables
 
     void Start()
     {
@@ -76,9 +76,8 @@ public class PlayerFSM : MonoBehaviour
         CurrentPlayerState.Update(this);
         Debug.Log(CurrentPlayerState);
 
-        if (Health <= 0)
+        if (Health <= 0 && Health > -9999)
         {
-            FiringPistol.Play();
             TransitionToState(DeadState);
         }
 
