@@ -24,10 +24,11 @@ public class ZombieTakingDamageState : ZombieBaseState
             if (Zombie.ThePlayer.GetComponent<PlayerFSM>().CurrentWeapon == 0)
             {
                 Zombie.Health -= PlayerFSM.PistolDamage;
+                
             }
             else if (Zombie.ThePlayer.GetComponent<PlayerFSM>().CurrentWeapon == 1)
             {
-                Zombie.Health -= PlayerFSM.ShotgunDamage;
+                Zombie.Health -= PlayerFSM.ShotgunDamage;   
             }
 
             Zombie.CanBeHit = false;

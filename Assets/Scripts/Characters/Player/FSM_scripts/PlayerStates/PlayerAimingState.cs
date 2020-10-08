@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class PlayerAimingState : PlayerBaseState
 {
-    Vector3 StartingPistolBulletPosition;
 
     public override void EnterState(PlayerFSM Player)
     {
         // Activates the current weapon
         Player.Weapons[Player.CurrentWeapon].SetActive(true);
-        
     }
 
     public override void OnCollisionEnter(PlayerFSM Player)

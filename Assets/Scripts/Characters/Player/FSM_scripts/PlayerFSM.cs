@@ -12,6 +12,7 @@ public class PlayerFSM : MonoBehaviour
     public readonly PlayerRunningState RunningState = new PlayerRunningState();
     public readonly PlayerWalkingState WalkingState = new PlayerWalkingState();
     public readonly PlayerTakingDamageState TakingDamageState = new PlayerTakingDamageState();
+    public readonly PlayerPausedState PausedState = new PlayerPausedState();
     public readonly PlayerDeadState DeadState = new PlayerDeadState();
    
     // Movement 
@@ -60,7 +61,8 @@ public class PlayerFSM : MonoBehaviour
     public AudioSource DyingSFX;
     public AudioSource PlayerTakingDamageSFX;
 
-    // Testing variables
+    // Interaction 
+    public static bool IsReading;
 
     void Start()
     {
@@ -98,7 +100,11 @@ public class PlayerFSM : MonoBehaviour
         if (Input.GetKey(KeyCode.KeypadEnter))
         {
             // Implement this later
-            //PauseMenu();
+            // PauseMenu();
+        }
+        else if (IsReading == true)
+        {
+            TransitionToState(PausedState);
         }
     }
 
