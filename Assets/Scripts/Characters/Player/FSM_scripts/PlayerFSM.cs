@@ -94,6 +94,12 @@ public class PlayerFSM : MonoBehaviour
         {
             ShootingCooldown -= Time.deltaTime;
         }
+
+        if (Input.GetKey(KeyCode.KeypadEnter))
+        {
+            // Implement this later
+            //PauseMenu();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
