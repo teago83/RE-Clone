@@ -8,6 +8,7 @@ TagManager:
   - Read
   - ZombieHand
   - Bullet
+  - PlayerInteractionFOV
   layers:
   - Default
   - TransparentFX
