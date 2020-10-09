@@ -93,5 +93,6 @@ public class PlayerAimingState : PlayerBaseState
             Player.Weapons[PlayerFSM.CurrentWeapon].SetActive(false);
             Player.TransitionToState(Player.TakingDamageState);
         }
+        
     }
 }

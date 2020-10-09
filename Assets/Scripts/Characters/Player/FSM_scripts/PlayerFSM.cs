@@ -14,6 +14,10 @@ public class PlayerFSM : MonoBehaviour
     public readonly PlayerTakingDamageState TakingDamageState = new PlayerTakingDamageState();
     public readonly PlayerPausedState PausedState = new PlayerPausedState();
     public readonly PlayerDeadState DeadState = new PlayerDeadState();
+    public static PlayerBaseState LastPlayerState; // Used so that the player doesn't go from, for example,
+                                                   // the aiming state, onto the PausedState, and then back
+                                                   // to the IdleState, making the weapon he they were aiming
+                                                   // still visible
    
     // Movement 
     public bool WalkingForward = false;
@@ -104,13 +108,9 @@ public class PlayerFSM : MonoBehaviour
             ShootingCooldown -= Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.KeypadEnter))
+        if (IsReading || PauseMenu.GamePaused)
         {
-            // Implement this later
-            // PauseMenu();
-        }
-        else if (IsReading == true)
-        {
+            LastPlayerState = CurrentPlayerState;
             TransitionToState(PausedState);
         }
     }

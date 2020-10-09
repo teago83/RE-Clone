@@ -16,9 +16,13 @@ public class PlayerPausedState : PlayerBaseState
 
     public override void Update(PlayerFSM Player)
     {
-        if (PlayerFSM.IsReading == false)
+        if (!PlayerFSM.IsReading)
         {
-            Player.TransitionToState(Player.IdleState);
+            Player.TransitionToState(PlayerFSM.LastPlayerState);
+        }
+        if (!PauseMenu.GamePaused)
+        {
+            Player.TransitionToState(PlayerFSM.LastPlayerState);
         }
     }
 }
