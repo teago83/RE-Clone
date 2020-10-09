@@ -14,6 +14,7 @@ public class PlayerFSM : MonoBehaviour
     public readonly PlayerTakingDamageState TakingDamageState = new PlayerTakingDamageState();
     public readonly PlayerPausedState PausedState = new PlayerPausedState();
     public readonly PlayerDeadState DeadState = new PlayerDeadState();
+    public readonly PlayerShootingState ShootingState = new PlayerShootingState();
     public static PlayerBaseState LastPlayerState; // Used so that the player doesn't go from, for example,
                                                    // the aiming state, onto the PausedState, and then back
                                                    // to the IdleState, making the weapon he they were aiming
@@ -73,6 +74,9 @@ public class PlayerFSM : MonoBehaviour
 
     // Item count
     public static int MiniKeyCount;
+
+    // Animation Stuff
+    public float ShootingAnimationCooldown;
 
     void Start()
     {
