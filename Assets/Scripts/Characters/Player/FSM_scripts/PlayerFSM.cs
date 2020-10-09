@@ -14,6 +14,11 @@ public class PlayerFSM : MonoBehaviour
     public readonly PlayerTakingDamageState TakingDamageState = new PlayerTakingDamageState();
     public readonly PlayerPausedState PausedState = new PlayerPausedState();
     public readonly PlayerDeadState DeadState = new PlayerDeadState();
+    public readonly PlayerShootingState ShootingState = new PlayerShootingState();
+    public static PlayerBaseState LastPlayerState; // Used so that the player doesn't go from, for example,
+                                                   // the aiming state, onto the PausedState, and then back
+                                                   // to the IdleState, making the weapon he they were aiming
+                                                   // still visible
    
     // Movement 
     public bool WalkingForward = false;
@@ -21,10 +26,12 @@ public class PlayerFSM : MonoBehaviour
     public float RotationalMovement;
     public float ForwardMovement;
     public Animator Anime;
+    public static Vector3 CurrentPosition; // Made so that other objects can reference the player's current position,
+                                           // mainly the zombie.
 
     // Health and damage
     public int MaxHealth;
-    public int Health;
+    public static int Health;                      
     public bool AttackFromTheFront;
     public bool AttackFromTheBack;
     public float TakingDamageWaitTime;
@@ -40,15 +47,16 @@ public class PlayerFSM : MonoBehaviour
     public int MaxPistolAmmo = 15;
     public int CurrentPistolAmmo;
     public float PistolShootingRange = 40f;
-    public ParticleSystem Gunshot;
+    public ParticleSystem PistolGunshot;
     // Shotgun
     public static int ShotgunDamage = 60;
     public int MaxShotgunAmmo = 8;
     public int CurrentShotgunAmmo;
     public float ShotgunShootingRange = 15f;
+    public ParticleSystem ShotgunGunshot;
     
     public GameObject[] Weapons;
-    public int CurrentWeapon;
+    public static int CurrentWeapon;
     // WeaponBullets = used as reference for the Raycast to know where the shots will be fired from
     public GameObject[] WeaponBullets;
     // HitInfo displays some info on what the weapon's bullet has shot
@@ -64,6 +72,12 @@ public class PlayerFSM : MonoBehaviour
     // Interaction 
     public static bool IsReading;
 
+    // Item count
+    public static int MiniKeyCount;
+
+    // Animation Stuff
+    public float ShootingAnimationCooldown;
+
     void Start()
     {
         MaxHealth = 125;
@@ -78,6 +92,7 @@ public class PlayerFSM : MonoBehaviour
     {
         CurrentPlayerState.Update(this);
         Debug.Log(CurrentPlayerState);
+        CurrentPosition = transform.position;
 
         if (Health <= 0 && Health > -9999)
         {
@@ -97,13 +112,9 @@ public class PlayerFSM : MonoBehaviour
             ShootingCooldown -= Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.KeypadEnter))
+        if (IsReading || PauseMenu.GamePaused)
         {
-            // Implement this later
-            // PauseMenu();
-        }
-        else if (IsReading == true)
-        {
+            LastPlayerState = CurrentPlayerState;
             TransitionToState(PausedState);
         }
     }

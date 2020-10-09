@@ -6,7 +6,7 @@ public class PlayerDeadState : PlayerBaseState
 {
     public override void EnterState(PlayerFSM Player)
     {
-        Player.Health = -999999999;
+        PlayerFSM.Health = -999999999;
 
         /* Such a high (or, in this case, low) number was applied to the
          * player's health to prevent the FSM's update method to keep on calling

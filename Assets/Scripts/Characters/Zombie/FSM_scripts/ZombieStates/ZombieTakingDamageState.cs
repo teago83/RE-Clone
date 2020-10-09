@@ -6,6 +6,7 @@ public class ZombieTakingDamageState : ZombieBaseState
 {
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
+        Zombie.Anime.Play("Walking");
         Zombie.TakingDamageCooldown = Zombie.StartTakingDmgCooldown;
     }
 
@@ -21,12 +22,12 @@ public class ZombieTakingDamageState : ZombieBaseState
             Zombie.TakingDamageSFX.Play();
             Zombie.HitByPlayer = false;
             
-            if (Zombie.ThePlayer.GetComponent<PlayerFSM>().CurrentWeapon == 0)
+            if (PlayerFSM.CurrentWeapon == 0)
             {
                 Zombie.Health -= PlayerFSM.PistolDamage;
                 
             }
-            else if (Zombie.ThePlayer.GetComponent<PlayerFSM>().CurrentWeapon == 1)
+            else if (PlayerFSM.CurrentWeapon == 1)
             {
                 Zombie.Health -= PlayerFSM.ShotgunDamage;   
             }

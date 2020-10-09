@@ -14,10 +14,10 @@ public class PlayerTakingDamageState : PlayerBaseState
     }
     public override void Update(PlayerFSM Player)
     {
-        if (Player.DamageCooldown <= 0)
+        if (Player.DamageCooldown <= 0 && ZombieBehaviourFSM.CurrentZombieState != ZombieBehaviourFSM.DeadState)
         {
             Player.PlayerTakingDamageSFX.Play();
-            Player.Health -= 50;
+            PlayerFSM.Health -= 50;
 
             if (Player.AttackFromTheFront == true)
             {
@@ -28,7 +28,7 @@ public class PlayerTakingDamageState : PlayerBaseState
                 Player.Anime.Play("Damage2");
             }
             
-            Debug.Log("Player's current health: " + Player.Health);
+            Debug.Log("Player's current health: " + PlayerFSM.Health);
             Player.DamageCooldown = 1.3f;
         }
 
