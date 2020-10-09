@@ -8,7 +8,7 @@ public class PlayerAimingState : PlayerBaseState
     public override void EnterState(PlayerFSM Player)
     {
         // Activates the current weapon
-        Player.Weapons[Player.CurrentWeapon].SetActive(true);
+        Player.Weapons[PlayerFSM.CurrentWeapon].SetActive(true);
     }
 
     public override void OnCollisionEnter(PlayerFSM Player)
@@ -20,11 +20,11 @@ public class PlayerAimingState : PlayerBaseState
     {
         if (Input.GetMouseButton(1))
         {
-            if (Player.CurrentWeapon == 0)
+            if (PlayerFSM.CurrentWeapon == 0)
             {
                 Player.Anime.Play("Aiming Pistol");
             }
-            else if (Player.CurrentWeapon == 1)
+            else if (PlayerFSM.CurrentWeapon == 1)
             {
                 Player.Anime.Play("Aiming Shotgun");
             }
@@ -37,7 +37,7 @@ public class PlayerAimingState : PlayerBaseState
             // or, the player shoots (if they have ammo)
             else if (Input.GetMouseButtonDown(0) && Player.ShootingCooldown <= 0)
             {
-                if (Player.CurrentWeapon == 0 && Player.CurrentPistolAmmo > 0)
+                if (PlayerFSM.CurrentWeapon == 0 && Player.CurrentPistolAmmo > 0)
                 {
                     if (Physics.Raycast(Player.WeaponBullets[0].transform.position, Player.WeaponBullets[0].transform.forward, out Player.HitInfo, Player.PistolShootingRange)){
                         Debug.Log(Player.HitInfo.transform.name);
@@ -51,7 +51,7 @@ public class PlayerAimingState : PlayerBaseState
                     Player.FiringPistolSFX.Play();
                     Player.ShootingCooldown = 1.8f;
                 }
-                else if (Player.CurrentWeapon == 1 && Player.CurrentShotgunAmmo > 0)
+                else if (PlayerFSM.CurrentWeapon == 1 && Player.CurrentShotgunAmmo > 0)
                 {
                     if (Physics.Raycast(Player.WeaponBullets[1].transform.position, Player.WeaponBullets[1].transform.forward, out Player.HitInfo, Player.ShotgunShootingRange))
                     {
@@ -75,20 +75,20 @@ public class PlayerAimingState : PlayerBaseState
 
             if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
             {
-                Player.Weapons[Player.CurrentWeapon].SetActive(false);
+                Player.Weapons[PlayerFSM.CurrentWeapon].SetActive(false);
                 Player.TransitionToState(Player.TakingDamageState);
             }
         }
         else
         {
             //Deactivates the current weapon
-            Player.Weapons[Player.CurrentWeapon].SetActive(false);
+            Player.Weapons[PlayerFSM.CurrentWeapon].SetActive(false);
             Player.TransitionToState(Player.IdleState);
         }
 
         if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
         {
-            Player.Weapons[Player.CurrentWeapon].SetActive(false);
+            Player.Weapons[PlayerFSM.CurrentWeapon].SetActive(false);
             Player.TransitionToState(Player.TakingDamageState);
         }
     }

@@ -21,10 +21,12 @@ public class PlayerFSM : MonoBehaviour
     public float RotationalMovement;
     public float ForwardMovement;
     public Animator Anime;
+    public static Vector3 CurrentPosition; // Made so that other objects can reference the player's current position,
+                                           // mainly the zombie.
 
     // Health and damage
     public int MaxHealth;
-    public int Health;
+    public static int Health;                      
     public bool AttackFromTheFront;
     public bool AttackFromTheBack;
     public float TakingDamageWaitTime;
@@ -48,7 +50,7 @@ public class PlayerFSM : MonoBehaviour
     public float ShotgunShootingRange = 15f;
     
     public GameObject[] Weapons;
-    public int CurrentWeapon;
+    public static int CurrentWeapon;
     // WeaponBullets = used as reference for the Raycast to know where the shots will be fired from
     public GameObject[] WeaponBullets;
     // HitInfo displays some info on what the weapon's bullet has shot
@@ -64,6 +66,9 @@ public class PlayerFSM : MonoBehaviour
     // Interaction 
     public static bool IsReading;
 
+    // Item count
+    public static int MiniKeyCount;
+
     void Start()
     {
         MaxHealth = 125;
@@ -78,6 +83,7 @@ public class PlayerFSM : MonoBehaviour
     {
         CurrentPlayerState.Update(this);
         Debug.Log(CurrentPlayerState);
+        CurrentPosition = transform.position;
 
         if (Health <= 0 && Health > -9999)
         {

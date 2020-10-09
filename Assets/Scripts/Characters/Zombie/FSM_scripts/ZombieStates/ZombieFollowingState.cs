@@ -7,6 +7,7 @@ public class ZombieFollowingState : ZombieBaseState
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
         Zombie.Anime.Play("Walking");
+        Zombie.AttackingDistance = 5.5f;
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)
@@ -17,7 +18,7 @@ public class ZombieFollowingState : ZombieBaseState
     public override void Update(ZombieBehaviourFSM Zombie)
     {
         // Zombie goes into its combat state in order to attack the player.
-        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 5.8f && Zombie.HaveISeenThePlayer == true && Zombie.InFrontOfPlayer == true)
+        if (Vector3.Distance(Zombie.transform.position, PlayerFSM.CurrentPosition) <= Zombie.AttackingDistance && Zombie.HaveISeenThePlayer == true && Zombie.InFrontOfPlayer == true)
         {
             Zombie.TransitionToState(Zombie.CombatState);
         }
@@ -25,15 +26,15 @@ public class ZombieFollowingState : ZombieBaseState
         {
             // Code for the zombie to rotate and move towards the player.
 
-            Vector3 TargetDirection = Zombie.ThePlayer.transform.position - Zombie.transform.position;
-            Vector3 NewDirection = Vector3.RotateTowards(Zombie.transform.forward, TargetDirection, Zombie.Speed * Time.deltaTime, 0.0f);
+            Vector3 TargetDirection = PlayerFSM.CurrentPosition - Zombie.transform.position;
+            Vector3 NewDirection = Vector3.RotateTowards(Zombie.transform.forward, TargetDirection, Zombie.FollowingSpeed * Time.deltaTime, 0.0f);
             Zombie.transform.rotation = Quaternion.LookRotation(NewDirection);
 
-            Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.ThePlayer.transform.position, Zombie.Speed * Time.deltaTime);
+            Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, PlayerFSM.CurrentPosition, Zombie.FollowingSpeed * Time.deltaTime);
         }
         else
         {
-            Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.Speed * Time.deltaTime);
+            Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.FollowingSpeed * Time.deltaTime);
             Zombie.TransitionToState(Zombie.PatrolState);
         }
         if (Zombie.HitByPlayer == true)

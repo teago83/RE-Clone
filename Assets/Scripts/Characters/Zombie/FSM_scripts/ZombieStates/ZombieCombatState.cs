@@ -6,7 +6,8 @@ public class ZombieCombatState : ZombieBaseState
 {
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
-        
+        Zombie.AttackingDistance = 12f;
+        Zombie.PlayerCurrentHealth = PlayerFSM.Health;
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)
@@ -18,9 +19,13 @@ public class ZombieCombatState : ZombieBaseState
     {
         // If the distance between the player and the zombie is quite small, the zombie will attack the player.
 
-        if (Vector3.Distance(Zombie.transform.position, Zombie.ThePlayer.transform.position) <= 5.8f && Zombie.InFrontOfPlayer == true)
+        if (Vector3.Distance(Zombie.transform.position, PlayerFSM.CurrentPosition) <= Zombie.AttackingDistance && Zombie.InFrontOfPlayer == true)
         {
             Zombie.Anime.Play("Attacking");
+            if (Zombie.PlayerCurrentHealth == PlayerFSM.Health && Zombie.AttackingSFXCooldown <= 6.1f)
+            {
+                Zombie.TransitionToState(Zombie.FollowingState);
+            }
         }
 
         // If the player is out of the zombie's reach, the zombie will start to
@@ -28,13 +33,12 @@ public class ZombieCombatState : ZombieBaseState
 
         else
         {
-            Zombie.AttackingSFX.Play();
             Zombie.TransitionToState(Zombie.FollowingState);
         }
 
         // If the player dies, the zombie shall remain still and stop trying
         // to follow the player.
-        if (Zombie.ThePlayer.GetComponent<PlayerFSM>().Health <= 0)
+        if (PlayerFSM.Health <= 0)
         {
             Zombie.TransitionToState(Zombie.NoPointState);
         }

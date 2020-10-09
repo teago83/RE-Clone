@@ -31,10 +31,10 @@ public class ZombiePatrolState : ZombieBaseState
             // Source: https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
 
             Vector3 TargetDirection = Zombie.MoveSpots[Zombie.RandomSpot].transform.position - Zombie.transform.position;
-            Vector3 NewDirection = Vector3.RotateTowards(Zombie.transform.forward, TargetDirection, Zombie.Speed * Time.deltaTime, 0.0f);
+            Vector3 NewDirection = Vector3.RotateTowards(Zombie.transform.forward, TargetDirection, Zombie.RegularSpeed * Time.deltaTime, 0.0f);
             Zombie.transform.rotation = Quaternion.LookRotation(NewDirection);
 
-            Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.Speed * Time.deltaTime); 
+            Zombie.transform.position = Vector3.MoveTowards(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position, Zombie.RegularSpeed * Time.deltaTime); 
 
             if (Zombie.HitByPlayer == true)
             {

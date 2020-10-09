@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZombieBehaviourFSM : MonoBehaviour
 {
-    public ZombieBaseState CurrentZombieState;
+    public static ZombieBaseState CurrentZombieState;
 
     public readonly ZombieIdleState IdleState = new ZombieIdleState();
     public readonly ZombiePatrolState PatrolState = new ZombiePatrolState();
@@ -16,11 +16,15 @@ public class ZombieBehaviourFSM : MonoBehaviour
        dead player object on the ground.*/
     public readonly ZombieNoPointState NoPointState = new ZombieNoPointState();
     public readonly ZombieTakingDamageState TakingDamageState = new ZombieTakingDamageState();
-    public readonly ZombieDeadState DeadState = new ZombieDeadState();
+    public static readonly ZombieDeadState DeadState = new ZombieDeadState(); 
+    // It's a static variable because the player needs to reference it in order
+    // for them not to die if the zombie's hand touches them when the zombie is
+    // dead on the ground -qqqqq
 
     public float StartWaitingTime = 5;
     public float WaitingTime;
-    public float Speed = 2.6f;
+    public float RegularSpeed = 2.6f;
+    public float FollowingSpeed = 4.5f;
 
     // Health
     public int Health = 125;
@@ -41,6 +45,14 @@ public class ZombieBehaviourFSM : MonoBehaviour
     public bool HaveISeenThePlayer;
     public bool InFrontOfPlayer;
     public GameObject ThePlayer;
+    public float AttackingDistance;
+    // This variable shall change when the zombie starts its attacking animation, 
+    // making the zombie not end the animation if the player moves just a tiny bit
+    // away from it.
+    public int PlayerCurrentHealth;
+    // Variable used to know if the player has been damaged by the zombie on its
+    // latest attack. If they haven't, then the zombie shall go back to following 
+    // the player, as its AttackingDistance is too high to even hit them in the first place.
 
     public Animator Anime;
 
