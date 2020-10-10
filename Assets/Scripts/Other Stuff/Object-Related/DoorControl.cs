@@ -53,6 +53,7 @@ public class DoorControl : MonoBehaviour
                 if (PlayerFSM.MiniKeyCount > 0)
                 {
                     PlayerFSM.MiniKeyCount--;
+                    Debug.Log("Number of Mini Keys: " + PlayerFSM.MiniKeyCount);
                     IsLockedDoor = false;
                 }
             }

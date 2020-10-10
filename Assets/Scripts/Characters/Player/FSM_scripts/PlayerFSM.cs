@@ -45,13 +45,13 @@ public class PlayerFSM : MonoBehaviour
     // Pistol
     public static int PistolDamage = 20;
     public int MaxPistolAmmo = 15;
-    public int CurrentPistolAmmo;
+    public static int CurrentPistolAmmo;
     public float PistolShootingRange = 40f;
     public ParticleSystem PistolGunshot;
     // Shotgun
     public static int ShotgunDamage = 60;
     public int MaxShotgunAmmo = 8;
-    public int CurrentShotgunAmmo;
+    public static int CurrentShotgunAmmo;
     public float ShotgunShootingRange = 15f;
     public ParticleSystem ShotgunGunshot;
     
