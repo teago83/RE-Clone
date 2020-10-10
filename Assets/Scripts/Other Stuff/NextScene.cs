@@ -8,7 +8,7 @@ public class NextScene : MonoBehaviour
 
     private int CurrentSceneIndex;
 
-    private void OnTriggerEnter (Collider other)
+    void OnTriggerEnter (Collider other)
     {
         if (other.tag == "TransitionCamera")
         {
