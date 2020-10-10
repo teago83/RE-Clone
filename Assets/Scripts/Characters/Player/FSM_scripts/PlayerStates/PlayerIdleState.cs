@@ -23,7 +23,14 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void Update(PlayerFSM Player)
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("Quickturn, son");
+            PlayerFSM.LastPlayerState = Player.IdleState;
+            Player.TransitionToState(Player.QuickturnState);
+        }
+
+        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
             Player.TransitionToState(Player.WalkingState);
         }
 
@@ -47,5 +54,6 @@ public class PlayerIdleState : PlayerBaseState
         {
             PlayerFSM.CurrentWeapon = 1;
         }
+        
     }
 }

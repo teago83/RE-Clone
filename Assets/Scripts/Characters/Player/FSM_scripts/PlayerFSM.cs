@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerFSM : MonoBehaviour
 {
     // States
-    public PlayerBaseState CurrentPlayerState;
     public readonly PlayerIdleState IdleState = new PlayerIdleState();
     public readonly PlayerAimingState AimingState = new PlayerAimingState();
     public readonly PlayerRunningState RunningState = new PlayerRunningState();
@@ -15,9 +14,12 @@ public class PlayerFSM : MonoBehaviour
     public readonly PlayerPausedState PausedState = new PlayerPausedState();
     public readonly PlayerDeadState DeadState = new PlayerDeadState();
     public readonly PlayerShootingState ShootingState = new PlayerShootingState();
+    public readonly PlayerQuickturnState QuickturnState = new PlayerQuickturnState();
+
+    public PlayerBaseState CurrentPlayerState;
     public static PlayerBaseState LastPlayerState; // Used so that the player doesn't go from, for example,
                                                    // the aiming state, onto the PausedState, and then back
-                                                   // to the IdleState, making the weapon he they were aiming
+                                                   // to the IdleState, making the weapon they were aiming
                                                    // still visible
    
     // Movement 
@@ -77,9 +79,14 @@ public class PlayerFSM : MonoBehaviour
 
     // Animation Stuff
     public float ShootingAnimationCooldown;
+    public float QuickturnCooldown;
+    public bool AlreadyQuickturned;
 
     void Start()
+    /*respawns = GameObject.FindGameObjectsWithTag("Respawn");*/
+
     {
+        Debug.Log("PO, O GREG EH UM BUNDAO");
         MaxHealth = 125;
         Health = MaxHealth;
         Anime = GetComponent<Animator>();
