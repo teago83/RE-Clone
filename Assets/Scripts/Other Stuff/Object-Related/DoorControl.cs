@@ -5,72 +5,49 @@ using UnityEngine;
 public class DoorControl : MonoBehaviour
 {
     public bool IsOpen = false; // The door will start closed, so this needs to be false. 
-    public Animator Anime;
     public GameObject Door;
+    public GameObject SceneTransitionDoor;   // Use the whole transition scene object that shall be ins-
+                                             // tantiated, not the door object that's being interacted with.
+    
     public bool IsLockedDoor; // This is determined in the inspector panel, varying from
                               // door to door.
     public bool CanBeOpened;  // For doors that can't be unlocked.
     public bool IsDoubleDoor; // Depending on the kind of door, the animation shall be different
-    private string Open;
+    public bool HaveIMadeTransitionYet = false;
+    // Variable so that the game doesn't instantiate multiple SceneTransition objects
 
     public bool ReadyToOpen = false;
     public float OpeningCooldown = 2f;
-    public AudioSource OpeningDoorSound;
     public AudioSource LockedDoorSound;
-
-    private void Start()
-    {
-        Anime = GetComponent<Animator>();
-    }
-
-    void Update()
-    {
-        if (OpeningCooldown > 0 && ReadyToOpen == true)
-        {
-            OpeningCooldown -= Time.deltaTime;
-        }
-        if (OpeningCooldown <= 0)
-        {
-            OpenDoor();
-        }
-    }
 
     public void OpenDoor()
     {
-        if (IsDoubleDoor)
-        {
-            Open = "OpenDoubleDoor";
-        }
-        else
-        {
-            Open = "OpenDoor";
-        }
-
         if (IsLockedDoor)
         {
-            if (CanBeOpened)
+            if (CanBeOpened && PlayerFSM.MiniKeyCount > 0)
             {
-                if (PlayerFSM.MiniKeyCount > 0)
-                {
-                    PlayerFSM.MiniKeyCount--;
-                    IsLockedDoor = false;
-                }
+                PlayerFSM.MiniKeyCount--;
+                Debug.Log("Number of Mini Keys: " + PlayerFSM.MiniKeyCount);
+                IsLockedDoor = false;
             }
-
-            LockedDoorSound.Play();
+            else
+            {
+                LockedDoorSound.Play();
+            }
         }
 
         if (!IsOpen && !IsLockedDoor)
         {
             IsOpen = true;
             Debug.Log("The door is now open!");
-            OpeningDoorSound.Play();
             ReadyToOpen = true;
         }
 
-        if (OpeningCooldown <= 0f)
+        if (IsOpen && !HaveIMadeTransitionYet)
         {
-            Anime.Play(Open);
+            CameraSwitch.LastActiveCamera.SetActive(false);
+            Instantiate(SceneTransitionDoor, new Vector3(0f, Door.transform.position.y + 50f, 0f), Quaternion.identity);
+            HaveIMadeTransitionYet = true;
         }
     }
 }

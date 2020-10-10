@@ -9,6 +9,7 @@ TagManager:
   - ZombieHand
   - Bullet
   - PlayerInteractionFOV
+  - TransitionCamera
   layers:
   - Default
   - TransparentFX
