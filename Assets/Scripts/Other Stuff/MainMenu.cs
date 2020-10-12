@@ -46,6 +46,9 @@ public class MainMenu : MonoBehaviour
         if (WaitingTime <= 0)
         {
             Debug.Log("First scene has been loaded, bruh.");
+            PauseMenu.LoadingMainMenu = false; 
+            // Turning this bool into false so that the Player doesn't get destroyed
+            // whenever the first area is loaded -qqqqqq
             SceneManager.LoadScene("First_Area");
         }
         
