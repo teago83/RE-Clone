@@ -12549,6 +12549,8 @@ MonoBehaviour:
   DyingSFX: {fileID: 5862486852745314745}
   PlayerTakingDamageSFX: {fileID: 5862486851683209225}
   ShootingAnimationCooldown: 0
+  QuickturnCooldown: 0
+  AlreadyQuickturned: 0
 --- !u!1 &5863233585789896906
 GameObject:
   m_ObjectHideFlags: 0

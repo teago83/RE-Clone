@@ -24,5 +24,9 @@ public class PlayerPausedState : PlayerBaseState
         {
             Player.TransitionToState(PlayerFSM.LastPlayerState);
         }
+        if (!Inventory.InventoryOpen)
+        {
+            Player.TransitionToState(PlayerFSM.LastPlayerState);
+        }
     }
 }
