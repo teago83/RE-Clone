@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
 
     void OpenInventory()
     {
-        Debug.Log("The inventory has been opened, kiddo");
+        Debug.Log("The inventory has been opened, kiddo.");
         Time.timeScale = 0f;
         TheInventory.SetActive(true);
         InventoryOpen = true;
@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
 
     public void CloseInventory()
     {
-        Debug.Log("You don't have any bloody time to check your items.");
+        Debug.Log("You don't have any bloody time to check your items, dude.");
         Time.timeScale = 1f;
         TheInventory.SetActive(false);
         InventoryOpen = false;
