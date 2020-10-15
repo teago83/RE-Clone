@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - PlayerInteractionFOV
   - TransitionCamera
+  - Scene
   layers:
   - Default
   - TransparentFX

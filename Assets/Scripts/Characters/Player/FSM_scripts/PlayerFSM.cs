@@ -86,7 +86,6 @@ public class PlayerFSM : MonoBehaviour
     /*respawns = GameObject.FindGameObjectsWithTag("Respawn");*/
 
     {
-        Debug.Log("PO, O GREG EH UM BUNDAO");
         MaxHealth = 125;
         Health = MaxHealth;
         Anime = GetComponent<Animator>();
@@ -119,7 +118,7 @@ public class PlayerFSM : MonoBehaviour
             ShootingCooldown -= Time.deltaTime;
         }
 
-        if (IsReading || PauseMenu.GamePaused)
+        if (IsReading || PauseMenu.GamePaused || Inventory.InventoryOpen)
         {
             LastPlayerState = CurrentPlayerState;
             TransitionToState(PausedState);
