@@ -6,11 +6,12 @@ using UnityEngine;
 public class PickUpItem : MonoBehaviour
 {
 
-    public HealthRecoveryItem Item;
+    public Item Item;
 
     public void Pickup()
     {
         Debug.Log("Picked up a " + Item.ItemName);
+        Inventory.Instance.Add(Item);
         Destroy(gameObject);
     }
 }

@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e330e111222cff645b359f9c27bef0e2, type: 3}
-  m_Name: Band-Aid
+  m_Script: {fileID: 11500000, guid: 5b06c81bdb7cd9144b5bbbd5922943b7, type: 3}
+  m_Name: Band-aid
   m_EditorClassIdentifier: 
   ItemName: Band-aid
   Icon: {fileID: 0}
   Quantity: 1
+  IsRemovable: 1
   HealthRecovery: 50
+  IsEquippable: 0
