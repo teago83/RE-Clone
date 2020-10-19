@@ -12,7 +12,8 @@ public class Inventory : MonoBehaviour
     public GameObject TheInventory;
     public static bool InventoryOpen = false;
     public List<Item> Items = new List<Item>();
-    public int MaxSpace = 6; 
+    public static int NumberOfItems = 0;
+    public static int MaxSpace = 6;
 
     private void Awake()
     {
@@ -57,19 +58,13 @@ public class Inventory : MonoBehaviour
 
     public void Add(Item item)
     {
-        if (Items.Count >= MaxSpace)
-        {
-            Debug.Log("Not enough space, stranger.");
-            return;
-        }
-        else
-        {
-            Items.Add(item);
-        }
+        Items.Add(item);
+        NumberOfItems = Items.Count;
     }
 
     public void Remove(Item item)
     {
         Items.Remove(item);
+        NumberOfItems = Items.Count;
     }
 }
