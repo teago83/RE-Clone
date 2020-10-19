@@ -14,4 +14,9 @@ public class Item : ScriptableObject
 
     public int HealthRecovery = 0;     // For herbs, potions and what not. 
     public bool IsEquippable = false;  // For weaponry. 
+
+    public virtual void Use()
+    {
+        Debug.Log("Using " + ItemName);
+    }
 }

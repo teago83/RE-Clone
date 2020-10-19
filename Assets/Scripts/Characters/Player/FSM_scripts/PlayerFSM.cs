@@ -32,7 +32,7 @@ public class PlayerFSM : MonoBehaviour
                                            // mainly the zombie.
 
     // Health and damage
-    public int MaxHealth;
+    public static int MaxHealth;
     public static int Health;                      
     public bool AttackFromTheFront;
     public bool AttackFromTheBack;
@@ -123,6 +123,9 @@ public class PlayerFSM : MonoBehaviour
             LastPlayerState = CurrentPlayerState;
             TransitionToState(PausedState);
         }
+
+        if (Health > MaxHealth)
+            Health = MaxHealth;
     }
 
     private void OnCollisionEnter(Collision collision)
