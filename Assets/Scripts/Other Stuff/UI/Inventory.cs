@@ -15,6 +15,12 @@ public class Inventory : MonoBehaviour
     public static int NumberOfItems = 0;
     public static int MaxSpace = 6;
 
+    public delegate void OnItemChanged();
+    public OnItemChanged OnItemChangedCallback;
+    // As says Brackeys, "a delegate is basically an event that you can subscribe different methods to;
+    // when you trigger the event, all of the subscribed methods will be called."
+
+
     private void Awake()
     {
         if (Instance != null)
@@ -60,11 +66,15 @@ public class Inventory : MonoBehaviour
     {
         Items.Add(item);
         NumberOfItems = Items.Count;
+        if (OnItemChangedCallback != null)
+            OnItemChangedCallback.Invoke();
     }
 
     public void Remove(Item item)
     {
         Items.Remove(item);
         NumberOfItems = Items.Count;
+        if (OnItemChangedCallback != null)
+            OnItemChangedCallback.Invoke();
     }
 }
