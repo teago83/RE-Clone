@@ -10,8 +10,16 @@ public class PickUpItem : MonoBehaviour
 
     public void Pickup()
     {
-        Debug.Log("Picked up a " + Item.ItemName);
-        Inventory.Instance.Add(Item);
-        Destroy(gameObject);
+        if (Inventory.NumberOfItems == Inventory.MaxSpace)
+        {
+            Debug.Log("Not enough space, stranger.");
+            return;
+        }
+        else
+        {
+            Debug.Log("Picked up a " + Item.ItemName);
+            Inventory.Instance.Add(Item);
+            Destroy(gameObject);
+        }
     }
 }
