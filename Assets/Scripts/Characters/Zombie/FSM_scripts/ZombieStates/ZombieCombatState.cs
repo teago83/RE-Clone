@@ -22,7 +22,7 @@ public class ZombieCombatState : ZombieBaseState
         if (Vector3.Distance(Zombie.transform.position, PlayerFSM.CurrentPosition) <= Zombie.AttackingDistance && Zombie.InFrontOfPlayer == true)
         {
             Zombie.Anime.Play("Attacking");
-            if (Zombie.PlayerCurrentHealth == PlayerFSM.Health && Zombie.AttackingSFXCooldown <= 6.1f)
+            if (Zombie.PlayerCurrentHealth == PlayerFSM.Health && Zombie.AttackingSFXCooldown <= 7f)
             {
                 Zombie.TransitionToState(Zombie.FollowingState);
             }

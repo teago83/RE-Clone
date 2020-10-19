@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     // Some sort of singleton pattern, as said Brackeys. It's used to make it easier for the inventory 
     // to be accessed by other classes and to check if there's only one inventory object. 
 
+    public Handgun Handgun;
     public GameObject TheInventory;
     public static bool InventoryOpen = false;
     public List<Item> Items = new List<Item>();
@@ -19,7 +20,7 @@ public class Inventory : MonoBehaviour
     public OnItemChanged OnItemChangedCallback;
     // As says Brackeys, "a delegate is basically an event that you can subscribe different methods to;
     // when you trigger the event, all of the subscribed methods will be called."
-
+    
 
     private void Awake()
     {
@@ -29,6 +30,12 @@ public class Inventory : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    private void Start()
+    {
+        Items.Add(Handgun);
+        NumberOfItems = Items.Count;
     }
 
     void Update()

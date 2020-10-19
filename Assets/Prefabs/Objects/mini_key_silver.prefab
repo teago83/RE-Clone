@@ -62,10 +62,10 @@ MonoBehaviour:
   Interaction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1306756438}
-        m_TargetAssemblyTypeName: PickUpItem, Assembly-CSharp
-        m_MethodName: Collect
-        m_Mode: 5
+      - m_Target: {fileID: -3463032762245421229}
+        m_TargetAssemblyTypeName: PickUpMiniKey, Assembly-CSharp
+        m_MethodName: CollectMiniKey
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -105,7 +105,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1306756438
+--- !u!114 &-3463032762245421229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,11 +114,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 981490103356276369}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06eee4b729804e41980dc597472fad6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c4c64fec7532df4ebc93b2d69a5df16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 981490103356276369}
-  ItemType: MiniKey
+  MiniKey: {fileID: 981490103356276369}
 --- !u!1001 &981490103356416001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,15 +131,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 469694, guid: 41d1cac196452694fb10f2476db79e6e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.92
+      value: -23.06765
       objectReference: {fileID: 0}
     - target: {fileID: 469694, guid: 41d1cac196452694fb10f2476db79e6e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.42
+      value: 15.210196
       objectReference: {fileID: 0}
     - target: {fileID: 469694, guid: 41d1cac196452694fb10f2476db79e6e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.4
+      value: 7.933098
       objectReference: {fileID: 0}
     - target: {fileID: 469694, guid: 41d1cac196452694fb10f2476db79e6e, type: 3}
       propertyPath: m_LocalRotation.x

@@ -7,7 +7,7 @@ public class ZombieFollowingState : ZombieBaseState
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
         Zombie.Anime.Play("Walking");
-        Zombie.AttackingDistance = 5.5f;
+        Zombie.AttackingDistance = 5f;
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)
