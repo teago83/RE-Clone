@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-
+    public Transform ItemsParent;
     Inventory Inventory;
+    InventorySlot[] Slots;
 
     void Start()
     {
         Inventory = Inventory.Instance;
-        //Inventory.onItemChangedCallback += UpdateUI;
+        Inventory.OnItemChangedCallback += UpdateUI;
+
+        Slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
     }
 
     // Update is called once per frame
@@ -21,6 +24,16 @@ public class InventoryUI : MonoBehaviour
 
     void UpdateUI()
     {
-        Debug.Log("Updating UI.");
+        for (int i=0; i<Slots.Length; i++)
+        {
+            if (i < Inventory.Items.Count)
+            {
+                Slots[i].AddItem(Inventory.Items[i]);
+            }
+            else
+            {
+                Slots[i].ClearSlot(); 
+            }
+        }
     }
 }

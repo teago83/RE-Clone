@@ -18,6 +18,10 @@ public class PickUpItem : MonoBehaviour
         else
         {
             Debug.Log("Picked up a " + Item.ItemName);
+
+            if (Item.ItemName == "MiniKey")
+                PlayerFSM.MiniKeyCount++;
+
             Inventory.Instance.Add(Item);
             Destroy(gameObject);
         }

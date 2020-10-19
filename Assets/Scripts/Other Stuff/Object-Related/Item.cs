@@ -7,11 +7,16 @@ using UnityEngine.UI;
 public class Item : ScriptableObject
 {
     public string ItemName = "New Name";
-    public Image Icon = null;
+    public Sprite Icon = null;
     public int Quantity = 0;
     public bool IsRemovable = false;   // Bool made so that the player can't discard key items,
                                        // such as literal keys, guns, etc. 
 
     public int HealthRecovery = 0;     // For herbs, potions and what not. 
     public bool IsEquippable = false;  // For weaponry. 
+
+    public virtual void Use()
+    {
+        Debug.Log("Using " + ItemName);
+    }
 }

@@ -28,7 +28,7 @@ public class DoorControl : MonoBehaviour
             IsInteracting = !IsInteracting;
             
             // This is really interesting. If you pick up a variable and set it equal to
-            // itself, but with an exclamation mark in front of it, it will pick its last
+            // itself, but with an exclamation mark in front of its name, it will pick its last
             // value and reverse it. That's why the "LockedDoorSound" doesn't play twice
             // when you interact with a locked door. Thank Dullker for that. 
 

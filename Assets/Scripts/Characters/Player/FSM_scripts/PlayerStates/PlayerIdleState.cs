@@ -42,18 +42,6 @@ public class PlayerIdleState : PlayerBaseState
         if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
         {
             Player.TransitionToState(Player.TakingDamageState);
-        }
-
-        // Equips the pistol
-        if (Input.GetKey(KeyCode.Keypad1))
-        {
-            PlayerFSM.CurrentWeapon = 0;
-        }
-        //Equips the shotgun
-        else if (Input.GetKey(KeyCode.Keypad2))
-        {
-            PlayerFSM.CurrentWeapon = 1;
-        }
-        
+        }        
     }
 }
