@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
+    public GameObject IllHeartBeats;
+    public GameObject StableHeartBeats;
     public Transform ItemsParent;
     Inventory Inventory;
     InventorySlot[] Slots;
@@ -19,7 +21,16 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlayerFSM.Health >= 75)
+        {
+            IllHeartBeats.SetActive(false);
+            StableHeartBeats.SetActive(true);
+        }
+        else
+        {
+            IllHeartBeats.SetActive(true);
+            StableHeartBeats.SetActive(false);
+        }
     }
 
     void UpdateUI()
