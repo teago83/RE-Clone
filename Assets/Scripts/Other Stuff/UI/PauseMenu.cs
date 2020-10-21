@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public PlayerFSM Player;
     public GameObject PauseMenuKiddo;
     public static bool GamePaused = false;      // It's a static variable so that it can be
                                                 // referenced on other scripts
@@ -13,7 +14,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && Inventory.InventoryOpen == false && PlayerFSM.IsReading == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && Inventory.InventoryOpen == false && PlayerFSM.IsReading == false && Player.CurrentPlayerState != Player.DeadState)
         {
             if (GamePaused == true)
             {

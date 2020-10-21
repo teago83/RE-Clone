@@ -9,6 +9,6 @@ public class CurrentAmmo : MonoBehaviour
 
     void Update()
     {
-        Ammo.text = ("aa");
+        Ammo.text = ("" + PlayerFSM.CurrentPistolAmmo);
     }
 }

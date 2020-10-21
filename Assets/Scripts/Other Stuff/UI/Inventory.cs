@@ -5,6 +5,7 @@ using UnityEngine.SocialPlatforms.GameCenter;
 
 public class Inventory : MonoBehaviour
 {
+    public PlayerFSM Player;
     public static Inventory Instance;
     // Some sort of singleton pattern, as said Brackeys. It's used to make it easier for the inventory 
     // to be accessed by other classes and to check if there's only one inventory object. 
@@ -40,7 +41,7 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && PauseMenu.GamePaused == false && PlayerFSM.IsReading == false)
+        if (Input.GetKeyDown(KeyCode.Return) && PauseMenu.GamePaused == false && PlayerFSM.IsReading == false && Player.CurrentPlayerState != Player.DeadState)
         {
             if (InventoryOpen == true)
             {
