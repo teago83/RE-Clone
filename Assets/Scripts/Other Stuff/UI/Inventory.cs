@@ -5,6 +5,7 @@ using UnityEngine.SocialPlatforms.GameCenter;
 
 public class Inventory : MonoBehaviour
 {
+    public PlayerFSM Player;
     public static Inventory Instance;
     // Some sort of singleton pattern, as said Brackeys. It's used to make it easier for the inventory 
     // to be accessed by other classes and to check if there's only one inventory object. 
@@ -20,27 +21,32 @@ public class Inventory : MonoBehaviour
     public OnItemChanged OnItemChangedCallback;
     // As says Brackeys, "a delegate is basically an event that you can subscribe different methods to;
     // when you trigger the event, all of the subscribed methods will be called."
-    
+
 
     private void Awake()
     {
+
         if (Instance != null)
         {
             Debug.Log("Hey, there's more than one instance of the inventory. There's definitely something wrong.");
             return;
         }
         Instance = this;
+
+
     }
 
     private void Start()
     {
+
         Items.Add(Handgun);
         NumberOfItems = Items.Count;
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && PauseMenu.GamePaused == false && PlayerFSM.IsReading == false)
+        if (Input.GetKeyDown(KeyCode.Return) && PauseMenu.GamePaused == false && PlayerFSM.IsReading == false && Player.CurrentPlayerState != Player.DeadState)
         {
             if (InventoryOpen == true)
             {
@@ -55,6 +61,8 @@ public class Inventory : MonoBehaviour
 
     void OpenInventory()
     {
+        if (OnItemChangedCallback != null)
+            OnItemChangedCallback.Invoke();
         Debug.Log("The inventory has been opened, kiddo.");
         Time.timeScale = 0f;
         TheInventory.SetActive(true);
@@ -73,8 +81,6 @@ public class Inventory : MonoBehaviour
     {
         Items.Add(item);
         NumberOfItems = Items.Count;
-        if (OnItemChangedCallback != null)
-            OnItemChangedCallback.Invoke();
     }
 
     public void Remove(Item item)
