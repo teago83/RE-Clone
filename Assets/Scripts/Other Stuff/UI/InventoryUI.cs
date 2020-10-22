@@ -12,6 +12,7 @@ public class InventoryUI : MonoBehaviour
 
     void Start()
     {
+
         Inventory = Inventory.Instance;
         Inventory.OnItemChangedCallback += UpdateUI;
 
@@ -35,7 +36,7 @@ public class InventoryUI : MonoBehaviour
 
     void UpdateUI()
     {
-        for (int i=0; i<Slots.Length; i++)
+        for (int i = 0; i < Slots.Length; i++)
         {
             if (i < Inventory.Items.Count)
             {
@@ -43,7 +44,7 @@ public class InventoryUI : MonoBehaviour
             }
             else
             {
-                Slots[i].ClearSlot(); 
+                Slots[i].ClearSlot();
             }
         }
     }

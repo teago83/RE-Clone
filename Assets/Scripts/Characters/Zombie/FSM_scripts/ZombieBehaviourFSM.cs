@@ -81,6 +81,7 @@ public class ZombieBehaviourFSM : MonoBehaviour
         Debug.Log(CurrentZombieState);
         Debug.Log("The zombie's current health is: " + Health);
 
+
         if (Health <= 0 && Health > -9999)
         {
             TransitionToState(DeadState);
