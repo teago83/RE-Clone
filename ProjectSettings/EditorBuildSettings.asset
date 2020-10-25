@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Second_Area.unity
-    guid: f90085dbe080cc64fa120d4749cfd327
+    guid: e2a93e8b9e1d49249bf137e4d71675d0
   - enabled: 1
     path: Assets/Scenes/Third_Area.unity
     guid: fc2295ee8f8d4ea46a4b190896b7f0aa
