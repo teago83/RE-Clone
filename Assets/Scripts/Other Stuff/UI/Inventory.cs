@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     // Some sort of singleton pattern, as said Brackeys. It's used to make it easier for the inventory 
     // to be accessed by other classes and to check if there's only one inventory object. 
 
-    public Handgun Handgun;
+    public HandgunItem Handgun;
     public GameObject TheInventory;
     public static bool InventoryOpen = false;
     public List<Item> Items = new List<Item>();
@@ -63,6 +63,7 @@ public class Inventory : MonoBehaviour
     {
         if (OnItemChangedCallback != null)
             OnItemChangedCallback.Invoke();
+
         Debug.Log("The inventory has been opened, kiddo.");
         Time.timeScale = 0f;
         TheInventory.SetActive(true);

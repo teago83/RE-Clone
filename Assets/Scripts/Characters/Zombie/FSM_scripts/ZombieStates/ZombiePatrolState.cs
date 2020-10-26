@@ -17,7 +17,7 @@ public class ZombiePatrolState : ZombieBaseState
 
     public override void Update(ZombieBehaviourFSM Zombie)
     {
-        if (Vector3.Distance(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .2f && Zombie.HaveISeenThePlayer == false)
+        if (Vector3.Distance(Zombie.transform.position, Zombie.MoveSpots[Zombie.RandomSpot].position) < .5f && Zombie.HaveISeenThePlayer == false)
         {
 
             Zombie.WaitingTime = Zombie.StartWaitingTime;

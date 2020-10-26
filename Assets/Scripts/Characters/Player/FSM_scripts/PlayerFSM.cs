@@ -43,27 +43,25 @@ public class PlayerFSM : MonoBehaviour
 
     // Quick note on static variables:
     // A static variable can be referenced by another script
-    
-    // Pistol
-    public static int PistolDamage = 20;
-    public int MaxPistolAmmo = 15;
-    public static int CurrentPistolAmmo;
-    public float PistolShootingRange = 40f;
+
+    public Weapon[] Weapons;
+    public GameObject[] EquippedWeapon;
     public ParticleSystem PistolGunshot;
-    // Shotgun
-    public static int ShotgunDamage = 60;
-    public int MaxShotgunAmmo = 8;
-    public static int CurrentShotgunAmmo;
-    public float ShotgunShootingRange = 15f;
     public ParticleSystem ShotgunGunshot;
-    
-    public GameObject[] Weapons;
+
+    // The weapon object is used to get the important values regarding the current weapon,
+    // while the GameObject is used to activate/deactivate the currently equipped weapon's
+    // model while the player is using such weapon. 
+
+    //public GameObject[] Weapons;
     public static int CurrentWeapon;
     // WeaponBullets = used as reference for the Raycast to know where the shots will be fired from
     public GameObject[] WeaponBullets;
     // HitInfo displays some info on what the weapon's bullet has shot
     public RaycastHit HitInfo;
     public float ShootingCooldown;
+    public static int CurrentWeaponDamage; // Used to make it easier to reference the player's
+                                           // current damage to the zombie if the zombie gets hit
 
     // Sound Effects
     public AudioSource FiringPistolSFX;
@@ -78,24 +76,23 @@ public class PlayerFSM : MonoBehaviour
     public static int MiniKeyCount;
 
     // Animation Stuff
-    public float ShootingAnimationCooldown;
+    public float FiringAnimationCooldown;
     public float QuickturnCooldown;
     public bool AlreadyQuickturned;
 
     void Start()
-    /*respawns = GameObject.FindGameObjectsWithTag("Respawn");*/
-
     {
         MaxHealth = 125;
         Health = MaxHealth;
         Anime = GetComponent<Animator>();
-        CurrentPistolAmmo = MaxPistolAmmo;
-        CurrentShotgunAmmo = MaxShotgunAmmo;
         TransitionToState(IdleState);
+        Weapons[0].CurrentAmmo = Weapons[0].MaxAmmo;
+        Weapons[1].CurrentAmmo = Weapons[1].MaxAmmo;
     }
 
     void Update()
     {
+        Debug.Log(Weapons[CurrentWeapon].Damage);
         CurrentPlayerState.Update(this);
         Debug.Log(CurrentPlayerState);
         CurrentPosition = transform.position;
@@ -126,6 +123,7 @@ public class PlayerFSM : MonoBehaviour
 
         if (Health > MaxHealth)
             Health = MaxHealth;
+        
     }
 
     private void OnCollisionEnter(Collision collision)

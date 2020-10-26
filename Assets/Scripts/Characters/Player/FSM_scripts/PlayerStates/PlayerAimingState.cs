@@ -17,16 +17,12 @@ public class PlayerAimingState : PlayerBaseState
 
     public override void Update(PlayerFSM Player)
     {
+        PlayerFSM.CurrentWeaponDamage = Player.Weapons[PlayerFSM.CurrentWeapon].Damage;
         if (Input.GetMouseButton(1))
         {
-            if (PlayerFSM.CurrentWeapon == 0)
-            {
-                Player.Anime.Play("Aiming Pistol");
-            }
-            else if (PlayerFSM.CurrentWeapon == 1)
-            {
-                Player.Anime.Play("Aiming Shotgun");
-            }
+            Player.EquippedWeapon[PlayerFSM.CurrentWeapon].SetActive(true);
+            Player.Anime.Play(Player.Weapons[PlayerFSM.CurrentWeapon].AimingAnimation);
+            
             // the player rotates while they're aiming
             if (Input.GetButton("Horizontal"))
             {
@@ -41,20 +37,20 @@ public class PlayerAimingState : PlayerBaseState
 
             if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
             {
-                Player.Weapons[PlayerFSM.CurrentWeapon].SetActive(false);
+                Player.EquippedWeapon[PlayerFSM.CurrentWeapon].SetActive(false);
                 Player.TransitionToState(Player.TakingDamageState);
             }
         }
         else
         {
             //Deactivates the current weapon
-            Player.Weapons[PlayerFSM.CurrentWeapon].SetActive(false);
+            Player.EquippedWeapon[PlayerFSM.CurrentWeapon].SetActive(false);
             Player.TransitionToState(Player.IdleState);
         }
 
         if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
         {
-            Player.Weapons[PlayerFSM.CurrentWeapon].SetActive(false);
+            Player.EquippedWeapon[PlayerFSM.CurrentWeapon].SetActive(false);
             Player.TransitionToState(Player.TakingDamageState);
         }
         

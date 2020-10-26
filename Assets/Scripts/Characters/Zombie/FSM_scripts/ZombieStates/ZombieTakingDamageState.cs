@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ZombieTakingDamageState : ZombieBaseState
 {
+
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
         Zombie.Anime.Play("Walking");
@@ -21,16 +22,8 @@ public class ZombieTakingDamageState : ZombieBaseState
         {
             Zombie.TakingDamageSFX.Play();
             Zombie.HitByPlayer = false;
-            
-            if (PlayerFSM.CurrentWeapon == 0)
-            {
-                Zombie.Health -= PlayerFSM.PistolDamage;
-                
-            }
-            else if (PlayerFSM.CurrentWeapon == 1)
-            {
-                Zombie.Health -= PlayerFSM.ShotgunDamage;   
-            }
+
+            Zombie.Health -= PlayerFSM.CurrentWeaponDamage;
 
             Zombie.CanBeHit = false;
         }

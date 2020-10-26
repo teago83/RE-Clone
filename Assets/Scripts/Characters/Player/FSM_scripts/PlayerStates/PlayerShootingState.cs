@@ -18,9 +18,9 @@ public class PlayerShootingState : PlayerBaseState
     {
         if (Player.ShootingCooldown <= 0f)
         {
-            if (PlayerFSM.CurrentWeapon == 0 && PlayerFSM.CurrentPistolAmmo > 0)
+            if (Player.Weapons[PlayerFSM.CurrentWeapon].CurrentAmmo > 0)
             {
-                if (Physics.Raycast(Player.WeaponBullets[0].transform.position, Player.WeaponBullets[0].transform.forward, out Player.HitInfo, Player.PistolShootingRange))
+                if (Physics.Raycast(Player.WeaponBullets[PlayerFSM.CurrentWeapon].transform.position, Player.WeaponBullets[PlayerFSM.CurrentWeapon].transform.forward, out Player.HitInfo, Player.Weapons[PlayerFSM.CurrentWeapon].ShootingRange))
                 {
                     Debug.Log(Player.HitInfo.transform.name);
                     ZombieBehaviourFSM Zombie = Player.HitInfo.transform.GetComponent<ZombieBehaviourFSM>();
@@ -29,35 +29,27 @@ public class PlayerShootingState : PlayerBaseState
                         Zombie.ReallyHitByPlayer();
                     }
                 }
-                PlayerFSM.CurrentPistolAmmo -= 1;
-                Player.Anime.Play("Firing Pistol");
-                Player.FiringPistolSFX.Play();
-                Player.PistolGunshot.Play();
-                Player.ShootingCooldown = 1.2f;
-                Player.ShootingAnimationCooldown = .5f;
-            }
-            else if (PlayerFSM.CurrentWeapon == 1 && PlayerFSM.CurrentShotgunAmmo > 0)
-            {
-                if (Physics.Raycast(Player.WeaponBullets[1].transform.position, Player.WeaponBullets[1].transform.forward, out Player.HitInfo, Player.ShotgunShootingRange))
+                Player.Weapons[PlayerFSM.CurrentWeapon].CurrentAmmo -= 1;
+                Player.Anime.Play(Player.Weapons[PlayerFSM.CurrentWeapon].FiringAnimation);
+                Player.ShootingCooldown = Player.Weapons[PlayerFSM.CurrentWeapon].ShootingCooldown;
+                Player.FiringAnimationCooldown = Player.Weapons[PlayerFSM.CurrentWeapon].FiringAnimationCooldown;
+
+                if (PlayerFSM.CurrentWeapon == 0) 
                 {
-                    Debug.Log(Player.HitInfo.transform.name);
-                    ZombieBehaviourFSM Zombie = Player.HitInfo.transform.GetComponent<ZombieBehaviourFSM>();
-                    if (Zombie != null)
-                    {
-                        Zombie.ReallyHitByPlayer();
-                    }
+                    Player.FiringPistolSFX.Play();
+                    Player.PistolGunshot.Play();
                 }
-                PlayerFSM.CurrentShotgunAmmo -= 1;
-                Player.Anime.Play("Firing Shotgun");
-                Player.FiringShotgunSFX.Play();
-                Player.ShotgunGunshot.Play();
-                Player.ShootingCooldown = 1.5f;
-                Player.ShootingAnimationCooldown = .5f;
+                else if (PlayerFSM.CurrentWeapon == 1)
+                {
+                    Player.FiringShotgunSFX.Play();
+                    Player.ShotgunGunshot.Play();
+                }
+                Debug.Log("Current " + Player.Weapons[PlayerFSM.CurrentWeapon].Name + " ammo: " + Player.Weapons[PlayerFSM.CurrentWeapon].CurrentAmmo);
             }
         }
-        if (Player.ShootingAnimationCooldown > 0f)
+        if (Player.FiringAnimationCooldown > 0f)
         {
-            Player.ShootingAnimationCooldown -= Time.deltaTime;
+            Player.FiringAnimationCooldown -= Time.deltaTime;
         }
         else
         {
