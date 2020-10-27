@@ -8,7 +8,6 @@ public class InventorySlot : MonoBehaviour
     Item Item;
     public Image Icon;
     public Button RemoveButton;
-    public GameObject CurrentAmmo;
 
     public void AddItem(Item NewItem)
     {
@@ -20,8 +19,6 @@ public class InventorySlot : MonoBehaviour
             RemoveButton.interactable = true;
         else
             RemoveButton.interactable = false;
-        if (Item.IsEquippable == true)
-            CurrentAmmo.SetActive(true);
     }
     public void ClearSlot()
     {

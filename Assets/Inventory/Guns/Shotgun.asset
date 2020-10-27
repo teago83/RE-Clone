@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d62e5f2662bf2c4fb17141867500cf5, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  Damage: 0
-  MaxAmmo: 0
-  CurrentAmmo: 0
-  ShootingRange: 0
+  Name: Espingarda
+  Damage: 60
+  MaxAmmo: 8
+  CurrentAmmo: 3
+  ShootingRange: 15
+  ShootingCooldown: 1.5
+  FiringAnimation: Firing Shotgun
+  FiringAnimationCooldown: 0.5
+  AimingAnimation: Aiming Shotgun
+  Icon: {fileID: 21300000, guid: 55f1071ddbba05640b3001f521404a36, type: 3}

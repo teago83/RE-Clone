@@ -12,5 +12,6 @@ public class Weapon : ScriptableObject
     public float ShootingCooldown;
     public string FiringAnimation; // Used to reference either the "Shooting Handgun" or the "Shooting Shotgun" animations
     public float FiringAnimationCooldown;
-    public string AimingAnimation; 
+    public string AimingAnimation;
+    public Sprite Icon;
 }

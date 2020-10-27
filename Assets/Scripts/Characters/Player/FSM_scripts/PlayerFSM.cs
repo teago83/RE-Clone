@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class PlayerFSM : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class PlayerFSM : MonoBehaviour
                                                    // the aiming state, onto the PausedState, and then back
                                                    // to the IdleState, making the weapon they were aiming
                                                    // still visible
-   
+
     // Movement 
     public bool WalkingForward = false;
     public bool WalkingBack = false;
@@ -42,7 +43,7 @@ public class PlayerFSM : MonoBehaviour
     // The player's weaponry
 
     // Quick note on static variables:
-    // A static variable can be referenced by another script
+    // A static variable can be referenced by other scripts
 
     public Weapon[] Weapons;
     public GameObject[] EquippedWeapon;
@@ -51,9 +52,8 @@ public class PlayerFSM : MonoBehaviour
 
     // The weapon object is used to get the important values regarding the current weapon,
     // while the GameObject is used to activate/deactivate the currently equipped weapon's
-    // model while the player is using such weapon. 
+    // model while the player is (or isn't) using such weapon. 
 
-    //public GameObject[] Weapons;
     public static int CurrentWeapon;
     // WeaponBullets = used as reference for the Raycast to know where the shots will be fired from
     public GameObject[] WeaponBullets;
@@ -86,8 +86,11 @@ public class PlayerFSM : MonoBehaviour
         Health = MaxHealth;
         Anime = GetComponent<Animator>();
         TransitionToState(IdleState);
-        Weapons[0].CurrentAmmo = Weapons[0].MaxAmmo;
-        Weapons[1].CurrentAmmo = Weapons[1].MaxAmmo;
+        
+        for (int i=0; i<Weapons.Length; i++)
+        {
+            Weapons[i].CurrentAmmo = Weapons[i].MaxAmmo;
+        }
     }
 
     void Update()

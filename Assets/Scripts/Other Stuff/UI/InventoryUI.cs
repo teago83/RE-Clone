@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public GameObject IllHeartBeats;
+    public GameObject WeakHeartBeats;
     public GameObject StableHeartBeats;
     public Transform ItemsParent;
     Inventory Inventory;
@@ -24,12 +24,12 @@ public class InventoryUI : MonoBehaviour
     {
         if (PlayerFSM.Health >= 75)
         {
-            IllHeartBeats.SetActive(false);
+            WeakHeartBeats.SetActive(false);
             StableHeartBeats.SetActive(true);
         }
         else
         {
-            IllHeartBeats.SetActive(true);
+            WeakHeartBeats.SetActive(true);
             StableHeartBeats.SetActive(false);
         }
     }
