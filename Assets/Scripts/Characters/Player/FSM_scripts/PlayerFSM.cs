@@ -23,6 +23,9 @@ public class PlayerFSM : MonoBehaviour
                                                    // to the IdleState, making the weapon they were aiming
                                                    // still visible
 
+    [Space]
+    [Header("Player velocity stats")]
+
     // Movement 
     public bool WalkingForward = false;
     public bool WalkingBack = false;
@@ -34,7 +37,7 @@ public class PlayerFSM : MonoBehaviour
 
     // Health and damage
     public static int MaxHealth;
-    public static int Health;                      
+    public static int Health;
     public bool AttackFromTheFront;
     public bool AttackFromTheBack;
     public float TakingDamageWaitTime;
@@ -86,8 +89,8 @@ public class PlayerFSM : MonoBehaviour
         Health = MaxHealth;
         Anime = GetComponent<Animator>();
         TransitionToState(IdleState);
-        
-        for (int i=0; i<Weapons.Length; i++)
+
+        for (int i = 0; i < Weapons.Length; i++)
         {
             Weapons[i].CurrentAmmo = Weapons[i].MaxAmmo;
         }
@@ -108,7 +111,7 @@ public class PlayerFSM : MonoBehaviour
         /* These if statements are here so that their respective cooldown variables
          * are always being decreased if they're bigger than 0. It didn't work
          * as intended if they were put into the states themselves. */
-        
+
         if (DamageCooldown > 0)
         {
             DamageCooldown -= Time.deltaTime;
@@ -126,7 +129,7 @@ public class PlayerFSM : MonoBehaviour
 
         if (Health > MaxHealth)
             Health = MaxHealth;
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)

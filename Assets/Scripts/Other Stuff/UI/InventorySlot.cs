@@ -9,13 +9,14 @@ public class InventorySlot : MonoBehaviour
     public Image Icon;
     public Button RemoveButton;
 
+
     public void AddItem(Item NewItem)
     {
         Item = NewItem;
         Icon.sprite = Item.Icon;
         Icon.enabled = true;
 
-        if (Item.IsRemovable == true)
+        if (Item.type == Item.ItemTypes.Consumable)
             RemoveButton.interactable = true;
         else
             RemoveButton.interactable = false;
@@ -37,7 +38,7 @@ public class InventorySlot : MonoBehaviour
     {
         if (Item)
             Item.Use();
-            if (Item.IsRemovable)
-                Inventory.Instance.Remove(Item);
+        if (Item.type == Item.ItemTypes.Consumable)
+            if (Item.StatRecovery == 0) { Inventory.Instance.Remove(Item); }
     }
 }

@@ -4,11 +4,11 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "BandAid", menuName = "Inventory/BandAid")]
 public class BandAid : Item
-{ 
+{
     public override void Use()
     {
         base.Use();
-        PlayerFSM.Health += 50;
+        PlayerFSM.Health += StatRecovery;
         Debug.Log("Player's currently recovered health = " + PlayerFSM.Health);
         if (PlayerFSM.Health > PlayerFSM.MaxHealth)
         {

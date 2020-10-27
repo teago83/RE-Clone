@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d02463805ad5ab4bb703d2d1e451be4, type: 3}
   m_Name: BandAid
   m_EditorClassIdentifier: 
+  type: 1
   ItemName: BandAid
   Icon: {fileID: 21300000, guid: 0bfeba499fb135e448bcb4ef2f9192fd, type: 3}
-  Quantity: 1
-  IsRemovable: 1
-  HealthRecovery: 50
-  IsEquippable: 0
+  StatRecovery: 50
