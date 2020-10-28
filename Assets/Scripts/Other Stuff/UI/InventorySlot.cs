@@ -20,6 +20,7 @@ public class InventorySlot : MonoBehaviour
             RemoveButton.interactable = true;
         else
             RemoveButton.interactable = false;
+        Item.Awake();
     }
     public void ClearSlot()
     {
@@ -39,6 +40,7 @@ public class InventorySlot : MonoBehaviour
         if (Item)
             Item.Use();
         if (Item.type == Item.ItemTypes.Consumable)
-            if (Item.StatRecovery == 0) { Inventory.Instance.Remove(Item); }
+            if (Item.ToBeRemoved == true) 
+                Inventory.Instance.Remove(Item); 
     }
 }

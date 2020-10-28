@@ -11,13 +11,20 @@ public class Item : ScriptableObject
     public ItemTypes type;
     public string ItemName = "New Name";
     public Sprite Icon = null;
-    public int StatRecovery = 0;
+    public int MaxStatRecovery = 0;
+    public bool ToBeRemoved = false; // When an item's local stat recovery variable reaches 0, 
+                                     // this bool shall become true, triggering the item's removal.
 
 
 
     //public int Quantity = 0;
     //public bool IsRemovable = false;   // Bool made so that the player can't discard key items, such as literal keys, guns, etc.  
     //public bool IsEquippable = false;  // For weaponry. 
+
+    public virtual void Awake()
+    {
+        Debug.Log("Hmmm, rolou um awake aqui do " + ItemName);
+    }
 
     public virtual void Use()
     {

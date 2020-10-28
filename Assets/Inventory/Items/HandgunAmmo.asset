@@ -15,4 +15,7 @@ MonoBehaviour:
   type: 1
   ItemName: HandgunAmmo
   Icon: {fileID: 21300000, guid: 8cfa3a0f7556dab47b085a71bbd9593f, type: 3}
+  MaxStatRecovery: 15
+  ToBeRemoved: 1
   StatRecovery: 0
+  NumberOfAwakes: 0
