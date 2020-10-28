@@ -9,22 +9,22 @@ using UnityEngine.Rendering.PostProcessing;
 public class HandgunAmmo : Item
 {
     public int StatRecovery = 0;
-    private GameObject player;
     public int NumberOfAwakes = 0;
+    private GameObject player;
 
     public override void Awake()
     {
         int NumberOfAwakesNeo = 0;
-        
+
         base.Awake();
-        
+
         if (NumberOfAwakesNeo == 0 && NumberOfAwakes == 0)
         {
             ToBeRemoved = false;
             StatRecovery = MaxStatRecovery;
             Debug.Log("Starting with the ammo...");
         }
-        
+
         NumberOfAwakesNeo++;
 
         if (NumberOfAwakesNeo == 1 && NumberOfAwakes == 0)
@@ -57,13 +57,14 @@ public class HandgunAmmo : Item
         Debug.Log("Handgun ammo in pack after reloading: " + StatRecovery);
         Debug.Log("Ammo that the gun will receive: " + ammoToRecover);
 
+
         playerScript.Weapons[0].CurrentAmmo += ammoToRecover;
 
         Debug.Log("Handgun's current ammo after reloading: " + playerScript.Weapons[0].CurrentAmmo);
 
         if (StatRecovery == 0)
         {
-            NumberOfAwakes = 0;
+            NumberOfAwakes = 0; 
             ToBeRemoved = true;
         }
     }
