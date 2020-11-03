@@ -12814,7 +12814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsOpen: 0
   Door: {fileID: 2909611064837528387}
-  SceneTransitionDoor: {fileID: 8805535465725657752, guid: d29e05bd058384348ba0f96512c41d3f, type: 3}
+  SceneTransitionDoor: {fileID: 4987198140467398565, guid: d29e05bd058384348ba0f96512c41d3f, type: 3}
   IsLockedDoor: 1
   CanBeOpened: 1
   IsDoubleDoor: 1
