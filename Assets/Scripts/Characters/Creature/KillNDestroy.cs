@@ -21,7 +21,7 @@ public class KillNDestroy : MonoBehaviour
         {
             if (FollowTimer > -1)
             {
-                FollowTimer -= 0.0035;
+                FollowTimer -= Time.deltaTime;
             }
             else if (FollowTimer < 0)
             {
