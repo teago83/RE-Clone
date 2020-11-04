@@ -14,13 +14,15 @@ public class PlayerDeadState : PlayerBaseState
          * enter this state only once, making it possible for the Dying sound effect
          * to be played correctly. */
 
-        Player.Anime.Play("Death");
+        Player.animComp.Play("Death");
         Player.DyingSFX.Play();
-        
+
     }
+
+
     public override void OnCollisionEnter(PlayerFSM Player)
     {
-        
+
     }
     public override void Update(PlayerFSM Player)
     {

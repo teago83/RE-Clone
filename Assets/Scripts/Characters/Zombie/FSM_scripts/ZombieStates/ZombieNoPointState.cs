@@ -6,7 +6,7 @@ public class ZombieNoPointState : ZombieBaseState
 {
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
-        Zombie.Anime.Play("Idle");
+        Zombie.animatorComp.Play("Idle");
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)

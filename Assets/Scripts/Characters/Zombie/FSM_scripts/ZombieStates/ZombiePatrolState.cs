@@ -7,7 +7,7 @@ public class ZombiePatrolState : ZombieBaseState
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
         Zombie.RandomSpot = Random.Range(0, Zombie.MoveSpots.Length);
-        Zombie.Anime.Play("Walking");
+        Zombie.animatorComp.Play("Walking");
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)

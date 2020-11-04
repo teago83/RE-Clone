@@ -21,8 +21,13 @@ public class ZombieCombatState : ZombieBaseState
 
         if (Vector3.Distance(Zombie.transform.position, PlayerFSM.CurrentPosition) <= Zombie.AttackingDistance && Zombie.InFrontOfPlayer == true)
         {
+<<<<<<< Updated upstream
             Zombie.Anime.Play("Attacking");
             if (Zombie.PlayerCurrentHealth == PlayerFSM.Health && Zombie.AttackingSFXCooldown <= 6.1f)
+=======
+            Zombie.animatorComp.Play("Attacking");
+            if (Zombie.PlayerCurrentHealth == PlayerFSM.Health && Zombie.AttackingSFXCooldown <= 7f)
+>>>>>>> Stashed changes
             {
                 Zombie.TransitionToState(Zombie.FollowingState);
             }

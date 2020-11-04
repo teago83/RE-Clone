@@ -6,13 +6,18 @@ public class ZombieFollowingState : ZombieBaseState
 {
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
+<<<<<<< Updated upstream
         Zombie.Anime.Play("Walking");
         Zombie.AttackingDistance = 5.5f;
+=======
+        Zombie.animatorComp.SetTrigger("Walking");
+        Zombie.AttackingDistance = 5f;
+>>>>>>> Stashed changes
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)
     {
-        
+
     }
 
     public override void Update(ZombieBehaviourFSM Zombie)

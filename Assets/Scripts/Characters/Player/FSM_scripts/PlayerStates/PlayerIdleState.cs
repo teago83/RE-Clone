@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerIdleState : PlayerBaseState
 {
@@ -13,32 +11,38 @@ public class PlayerIdleState : PlayerBaseState
         Player.AttackFromTheFront = false;
         Player.AttackFromTheBack = false;
 
-        Player.Anime.Play("Idle");
     }
+
 
     public override void OnCollisionEnter(PlayerFSM Player)
     {
-        
+
     }
 
     public override void Update(PlayerFSM Player)
     {
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("Quickturn, son");
-            PlayerFSM.LastPlayerState = Player.IdleState;
-            Player.TransitionToState(Player.QuickturnState);
-        }
 
-        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
+        if (Player.fowardAxis != 0)
+        {
             Player.TransitionToState(Player.WalkingState);
         }
 
-        else if (Input.GetMouseButton(1))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
         {
-            Player.TransitionToState(Player.AimingState);
+            Player.animComp.SetTrigger("Quickturn");
+            Player.canReceiveInput = false;
+            PlayerFSM.LastPlayerState = Player.IdleState;
+
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+
+            Player.TransitionToState(Player.AimingState);
+
+        }
+
+<<<<<<< Updated upstream
         if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
         {
             Player.TransitionToState(Player.TakingDamageState);
@@ -55,5 +59,9 @@ public class PlayerIdleState : PlayerBaseState
             PlayerFSM.CurrentWeapon = 1;
         }
         
+=======
+        Player.CanTurn();
+
+>>>>>>> Stashed changes
     }
 }

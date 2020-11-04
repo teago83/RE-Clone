@@ -6,52 +6,27 @@ public class PlayerWalkingState : PlayerBaseState
 {
     public override void EnterState(PlayerFSM Player)
     {
-        
+
+
     }
 
     public override void OnCollisionEnter(PlayerFSM Player)
     {
-        
+
     }
 
     public override void Update(PlayerFSM Player)
     {
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+
+
+        if (Player.fowardAxis == 0)
         {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) 
-            {
-                Player.WalkingForward = true;
-                Player.Anime.Play("Walk"); 
 
-                if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
-                {
-                    Player.TransitionToState(Player.RunningState);
-                }
-
-            }
-
-            else if (Input.GetKey(KeyCode.S)) 
-            {
-                Player.WalkingForward = false;
-                Player.Anime.Play("WalkBack"); 
-            }
-
-            Player.ForwardMovement = Input.GetAxis("Vertical") * Time.deltaTime * 7f;
-            Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 130f;
-            Player.transform.Translate(0, 0, Player.ForwardMovement);
-            Player.transform.Rotate(0, Player.RotationalMovement, 0);
-        }
-        
-        else
-        {
             Player.TransitionToState(Player.IdleState);
+
         }
 
-        if (Input.GetMouseButton(1))
-        {
-            Player.TransitionToState(Player.AimingState);
-        }
-
+<<<<<<< Updated upstream
         if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
         {
             Player.TransitionToState(Player.TakingDamageState);
@@ -67,5 +42,10 @@ public class PlayerWalkingState : PlayerBaseState
         {
             PlayerFSM.CurrentWeapon = 1;
         }
+=======
+        Player.CanTurn();
+        Player.CanWalk();
+
+>>>>>>> Stashed changes
     }
 }
