@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerFSM : MonoBehaviour
 {
-    // States
+
+    #region States
     public readonly PlayerIdleState IdleState = new PlayerIdleState();
     public readonly PlayerAimingState AimingState = new PlayerAimingState();
-    public readonly PlayerRunningState RunningState = new PlayerRunningState();
     public readonly PlayerWalkingState WalkingState = new PlayerWalkingState();
     public readonly PlayerTakingDamageState TakingDamageState = new PlayerTakingDamageState();
     public readonly PlayerPausedState PausedState = new PlayerPausedState();
     public readonly PlayerDeadState DeadState = new PlayerDeadState();
     public readonly PlayerShootingState ShootingState = new PlayerShootingState();
-    public readonly PlayerQuickturnState QuickturnState = new PlayerQuickturnState();
 
     public PlayerBaseState CurrentPlayerState;
     public static PlayerBaseState LastPlayerState; // Used so that the player doesn't go from, for example,
@@ -23,17 +23,34 @@ public class PlayerFSM : MonoBehaviour
                                                    // to the IdleState, making the weapon they were aiming
                                                    // still visible
 
+    #endregion
+
     [Space]
     [Header("Player velocity stats")]
 
-    // Movement 
-    public bool WalkingForward = false;
-    public bool WalkingBack = false;
-    public float RotationalMovement;
-    public float ForwardMovement;
-    public Animator Anime;
+
+    #region Movement
+
+    [HideInInspector]
+    public float fowardAxis;
+    [HideInInspector]
+    public bool canReceiveInput;
+    [HideInInspector]
+    public float turnAxis;
+
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private float backwardSpeed;
+    [SerializeField]
+    private float runningSpeed;
+    [SerializeField]
+    private float turnSpeed;
+
+    public Animator animComp;
     public static Vector3 CurrentPosition; // Made so that other objects can reference the player's current position,
-                                           // mainly the zombie.
+
+    #endregion                                       // mainly the zombie.
 
     // Health and damage
     public static int MaxHealth;
@@ -52,6 +69,7 @@ public class PlayerFSM : MonoBehaviour
     public GameObject[] EquippedWeapon;
     public ParticleSystem PistolGunshot;
     public ParticleSystem ShotgunGunshot;
+    private Rigidbody rBody;
 
     // The weapon object is used to get the important values regarding the current weapon,
     // while the GameObject is used to activate/deactivate the currently equipped weapon's
@@ -81,20 +99,30 @@ public class PlayerFSM : MonoBehaviour
     // Animation Stuff
     public float FiringAnimationCooldown;
     public float QuickturnCooldown;
-    public bool AlreadyQuickturned;
+
+
+    //public bool AlreadyQuickturned;
 
     void Start()
     {
+
+        canReceiveInput = true; //Just for garantir
+
         MaxHealth = 125;
         Health = MaxHealth;
-        Anime = GetComponent<Animator>();
+        animComp = GetComponent<Animator>();
         TransitionToState(IdleState);
 
         for (int i = 0; i < Weapons.Length; i++)
         {
             Weapons[i].CurrentAmmo = Weapons[i].MaxAmmo;
         }
+
+        rBody = GetComponent<Rigidbody>();
+
     }
+
+
 
     void Update()
     {
@@ -130,6 +158,30 @@ public class PlayerFSM : MonoBehaviour
         if (Health > MaxHealth)
             Health = MaxHealth;
 
+        animComp.SetInteger("EquippedGun", CurrentWeapon);
+
+        if (CurrentWeapon == 0)
+        {
+
+            EquippedWeapon[0].SetActive(true);
+            EquippedWeapon[1].SetActive(false);
+
+        }
+        else
+        {
+
+            EquippedWeapon[0].SetActive(false);
+            EquippedWeapon[1].SetActive(true);
+
+
+        }
+
+        if (canReceiveInput)
+        {
+            fowardAxis = Input.GetAxisRaw("Vertical");
+            turnAxis = Input.GetAxisRaw("Horizontal");
+
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -152,5 +204,34 @@ public class PlayerFSM : MonoBehaviour
     {
         AttackFromTheBack = true;
         AttackFromTheFront = false;
+    }
+
+    public void Quickturn()
+    {
+
+        transform.Rotate(0, -180, 0);
+        TransitionToState(IdleState);
+        canReceiveInput = true;
+    }
+
+    public void CanWalk()
+    {
+
+
+        bool running = (Input.GetKey(KeyCode.LeftShift) ? true : false);
+
+        float fowardSpeed = (running) ? runningSpeed : speed;
+        float velocity = (fowardAxis < 0) ? backwardSpeed : fowardSpeed;
+
+        animComp.SetFloat("Velocity", fowardAxis);
+        animComp.SetBool("Running", running);
+        rBody.transform.Translate(Vector3.forward * fowardAxis * velocity * Time.deltaTime);
+
+    }
+    public void CanTurn()
+    {
+
+        rBody.transform.Rotate(Vector3.up * turnAxis * turnSpeed * Time.deltaTime);
+
     }
 }

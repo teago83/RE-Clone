@@ -7,7 +7,9 @@ public class ZombieIdleState : ZombieBaseState
 
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
-        Zombie.Anime.Play("Idle");
+        //Zombie.Anime.Play("Idle");
+        Zombie.animatorComp.SetTrigger("Idle");
+
     }
 
     public override void OnCollisionEnter(ZombieBehaviourFSM Zombie)
@@ -16,14 +18,14 @@ public class ZombieIdleState : ZombieBaseState
     }
 
     public override void Update(ZombieBehaviourFSM Zombie)
-    { 
+    {
         if (Zombie.WaitingTime > 0 && Zombie.HaveISeenThePlayer == false)
         {
             Zombie.WaitingTime -= Time.deltaTime;
         }
-        else if (Zombie.HaveISeenThePlayer == false) 
-        { 
-            Zombie.TransitionToState(Zombie.PatrolState); 
+        else if (Zombie.HaveISeenThePlayer == false)
+        {
+            Zombie.TransitionToState(Zombie.PatrolState);
         }
         else
         {

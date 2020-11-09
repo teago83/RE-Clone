@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && PauseMenu.GamePaused == false && PlayerFSM.IsReading == false && Player.CurrentPlayerState != Player.DeadState)
+        if (Input.GetKeyDown(KeyCode.F) && PauseMenu.GamePaused == false && PlayerFSM.IsReading == false && Player.CurrentPlayerState != Player.DeadState)
         {
             if (InventoryOpen == true)
             {

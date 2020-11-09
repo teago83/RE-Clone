@@ -8,51 +8,61 @@ public class PlayerAimingState : PlayerBaseState
     public override void EnterState(PlayerFSM Player)
     {
 
+        Player.animComp.SetBool("Aiming", true);
+
     }
+
 
     public override void OnCollisionEnter(PlayerFSM Player)
     {
-        
+
     }
 
     public override void Update(PlayerFSM Player)
     {
-        PlayerFSM.CurrentWeaponDamage = Player.Weapons[PlayerFSM.CurrentWeapon].Damage;
-        if (Input.GetMouseButton(1))
-        {
-            Player.EquippedWeapon[PlayerFSM.CurrentWeapon].SetActive(true);
-            Player.Anime.Play(Player.Weapons[PlayerFSM.CurrentWeapon].AimingAnimation);
-            
-            // the player rotates while they're aiming
-            if (Input.GetButton("Horizontal"))
-            {
-                Player.RotationalMovement = Input.GetAxis("Horizontal") * Time.deltaTime * 120f;
-                Player.transform.Rotate(0, Player.RotationalMovement, 0);
-            }
-            // or, the player shoots (if they have ammo)
-            else if (Input.GetMouseButtonDown(0) && Player.ShootingCooldown <= 0)
-            {
-                Player.TransitionToState(Player.ShootingState);
-            }
 
-            if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+
+            //fire
+            if (Player.ShootingCooldown <= 0f)
             {
-                Player.EquippedWeapon[PlayerFSM.CurrentWeapon].SetActive(false);
-                Player.TransitionToState(Player.TakingDamageState);
+                if (Player.Weapons[PlayerFSM.CurrentWeapon].CurrentAmmo > 0)
+                {
+                    if (Physics.Raycast(Player.WeaponBullets[PlayerFSM.CurrentWeapon].transform.position, Player.WeaponBullets[PlayerFSM.CurrentWeapon].transform.forward, out Player.HitInfo, Player.Weapons[PlayerFSM.CurrentWeapon].ShootingRange))
+                    {
+                        Debug.Log(Player.HitInfo.transform.name);
+                        ZombieBehaviourFSM Zombie = Player.HitInfo.transform.GetComponent<ZombieBehaviourFSM>();
+                        if (Zombie != null)
+                        {
+                            Zombie.ReallyHitByPlayer();
+                        }
+                    }
+                    Player.Weapons[PlayerFSM.CurrentWeapon].CurrentAmmo -= 1;
+                    Player.animComp.SetTrigger("Shoot");
+                    Player.ShootingCooldown = Player.Weapons[PlayerFSM.CurrentWeapon].ShootingCooldown;
+
+                    if (PlayerFSM.CurrentWeapon == 0)
+                    {
+                        Player.FiringPistolSFX.Play();
+                        Player.PistolGunshot.Play();
+                    }
+                    else if (PlayerFSM.CurrentWeapon == 1)
+                    {
+                        Player.FiringShotgunSFX.Play();
+                        Player.ShotgunGunshot.Play();
+                    }
+                    Debug.Log("Current " + Player.Weapons[PlayerFSM.CurrentWeapon].Name + " ammo: " + Player.Weapons[PlayerFSM.CurrentWeapon].CurrentAmmo);
+                }
             }
         }
-        else
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            //Deactivates the current weapon
-            Player.EquippedWeapon[PlayerFSM.CurrentWeapon].SetActive(false);
             Player.TransitionToState(Player.IdleState);
+            Player.animComp.SetBool("Aiming", false);
         }
 
-        if (Player.AttackFromTheFront == true || Player.AttackFromTheBack == true)
-        {
-            Player.EquippedWeapon[PlayerFSM.CurrentWeapon].SetActive(false);
-            Player.TransitionToState(Player.TakingDamageState);
-        }
-        
+        Player.CanTurn();
     }
 }

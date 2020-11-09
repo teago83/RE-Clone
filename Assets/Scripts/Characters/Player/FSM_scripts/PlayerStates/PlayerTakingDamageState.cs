@@ -8,6 +8,8 @@ public class PlayerTakingDamageState : PlayerBaseState
     {
         Player.TakingDamageWaitTime = .5f;
     }
+
+
     public override void OnCollisionEnter(PlayerFSM Player)
     {
 
@@ -21,13 +23,13 @@ public class PlayerTakingDamageState : PlayerBaseState
 
             if (Player.AttackFromTheFront == true)
             {
-                Player.Anime.Play("Damage1");
+                Player.animComp.Play("Damage1");
             }
             else if (Player.AttackFromTheBack == true)
             {
-                Player.Anime.Play("Damage2");
+                Player.animComp.Play("Damage2");
             }
-            
+
             Debug.Log("Player's current health: " + PlayerFSM.Health);
             Player.DamageCooldown = 1.3f;
         }
@@ -40,6 +42,6 @@ public class PlayerTakingDamageState : PlayerBaseState
         {
             Player.TakingDamageWaitTime -= Time.deltaTime;
         }
-        
+
     }
 }

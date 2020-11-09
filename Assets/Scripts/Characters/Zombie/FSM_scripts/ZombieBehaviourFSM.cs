@@ -54,7 +54,7 @@ public class ZombieBehaviourFSM : MonoBehaviour
     // latest attack. If they haven't, then the zombie shall go back to following 
     // the player, as its AttackingDistance is too high to even hit them in the first place.
 
-    public Animator Anime;
+    public Animator animatorComp;
 
     // Sound effects
     public AudioSource DyingSFX;
@@ -69,7 +69,7 @@ public class ZombieBehaviourFSM : MonoBehaviour
 
     private void Start()
     {
-        Anime = GetComponent<Animator>();
+        animatorComp = GetComponent<Animator>();
         TransitionToState(IdleState);
     }
 

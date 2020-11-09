@@ -7,7 +7,7 @@ public class ZombieTakingDamageState : ZombieBaseState
 
     public override void EnterState(ZombieBehaviourFSM Zombie)
     {
-        Zombie.Anime.Play("Walking");
+        Zombie.animatorComp.Play("Walking");
         Zombie.TakingDamageCooldown = Zombie.StartTakingDmgCooldown;
     }
 
