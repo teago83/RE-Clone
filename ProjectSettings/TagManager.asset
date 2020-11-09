@@ -11,6 +11,7 @@ TagManager:
   - PlayerInteractionFOV
   - TransitionCamera
   - Scene
+  - Lamp
   layers:
   - Default
   - TransparentFX

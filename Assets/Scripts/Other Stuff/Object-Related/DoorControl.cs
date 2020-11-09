@@ -26,11 +26,11 @@ public class DoorControl : MonoBehaviour
         if (IsLockedDoor)
         {
             IsInteracting = !IsInteracting;
-            
+
             // This is really interesting. If you pick up a variable and set it equal to
             // itself, but with an exclamation mark in front of its name, it will pick its last
             // value and reverse it. That's why the "LockedDoorSound" doesn't play twice
-            // when you interact with a locked door. Thank Dullker for that. 
+            // when you interact with a locked door. Thank Dullke for that. 
 
             if (CanBeOpened && PlayerFSM.MiniKeyCount > 0)
             {
@@ -56,7 +56,10 @@ public class DoorControl : MonoBehaviour
 
         if (IsOpen && !HaveIMadeTransitionYet)
         {
-            CameraSwitch.LastActiveCamera.SetActive(false);
+            if (CameraSwitch.LastActiveCamera != null)
+            {
+                CameraSwitch.LastActiveCamera.SetActive(false);
+            }
             Instantiate(SceneTransitionDoor, new Vector3(0f, Door.transform.position.y + 50f, 0f), Quaternion.identity);
             HaveIMadeTransitionYet = true;
         }

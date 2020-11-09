@@ -126,9 +126,7 @@ public class PlayerFSM : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Weapons[CurrentWeapon].Damage);
         CurrentPlayerState.Update(this);
-        Debug.Log(CurrentPlayerState);
         CurrentPosition = transform.position;
 
         if (Health <= 0 && Health > -9999)
