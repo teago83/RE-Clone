@@ -23,6 +23,7 @@ public class ZombieIdleState : ZombieBaseState
         {
             Zombie.WaitingTime -= Time.deltaTime;
         }
+
         else if (Zombie.HaveISeenThePlayer == false)
         {
             Zombie.TransitionToState(Zombie.PatrolState);
@@ -31,6 +32,8 @@ public class ZombieIdleState : ZombieBaseState
         {
             Zombie.TransitionToState(Zombie.FollowingState);
         }
+
+
         if (Zombie.HitByPlayer == true)
         {
             Zombie.TransitionToState(Zombie.TakingDamageState);

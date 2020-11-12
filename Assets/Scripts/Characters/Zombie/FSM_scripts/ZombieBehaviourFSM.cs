@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class ZombieBehaviourFSM : MonoBehaviour
 {
+
+    #region SoundEffects
+
+    // Sound effects
+    public AudioSource DyingSFX;
+    public AudioSource Idle1SFX;
+    public AudioSource FollowingSFX;
+    public AudioSource AttackingSFX;
+    public AudioSource TakingDamageSFX;
+
+    #endregion
+
     public static ZombieBaseState CurrentZombieState;
 
     public readonly ZombieIdleState IdleState = new ZombieIdleState();
@@ -56,12 +68,6 @@ public class ZombieBehaviourFSM : MonoBehaviour
 
     public Animator animatorComp;
 
-    // Sound effects
-    public AudioSource DyingSFX;
-    public AudioSource Idle1SFX;
-    public AudioSource FollowingSFX;
-    public AudioSource AttackingSFX;
-    public AudioSource TakingDamageSFX;
 
     public float IdleSFXCooldown = 20f;
     public float AttackingSFXCooldown = 9f;
