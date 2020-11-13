@@ -10,6 +10,9 @@ public class ZombieState_Biting : ZombieState_Base
 
     public override void OnEnterState(ZombieAIFSM zScript)
     {
+
+        Debug.Log("I'm biting nhom nhom");
+
     }
 
     public override void Update(ZombieAIFSM zScript)
