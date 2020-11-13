@@ -23,11 +23,17 @@ public class ZombieState_Patrolling : ZombieState_Base
         if (zScript.isSeeingPlayer)
         { /*Chase*/
 
-            Debug.Log(Vector3.Distance(zScript.playerLocation, zScript.transform.position));
+            //Debug.Log(Vector3.Distance(zScript.playerLocation, zScript.transform.position));
             zScript.aIController.SetDestination(zScript.playerLocation);
 
-        }
+            if (zScript.aIController.remainingDistance <= 7)
+            {
 
+                /*Stopped here*/ 
+                zScript.animatorComp.SetTrigger("strike");
+
+            }
+        }
     }
 
     public override void OnCollisionEnter(ZombieAIFSM zScript)

@@ -11,6 +11,7 @@ public class ZombieAIFSM : MonoBehaviour
     public ZombieState_Base currentState;
     public readonly ZombieState_Idle statesIdle = new ZombieState_Idle();
     public readonly ZombieState_Patrolling statesPatrol = new ZombieState_Patrolling();
+    public readonly ZombieState_Biting statesBiting = new ZombieState_Biting();
 
     #endregion
 
@@ -72,5 +73,12 @@ public class ZombieAIFSM : MonoBehaviour
 
     }
 
+
+    public void GrabPlayer()
+    {
+        /*This method is not working yet*/
+        ChangeState(statesBiting);
+
+    }
 
 }
