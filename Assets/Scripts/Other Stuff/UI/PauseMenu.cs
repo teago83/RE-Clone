@@ -5,16 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public PlayerFSM Player;
+    //public PlayerFSM Player;
     public GameObject PauseMenuKiddo;
     public static bool GamePaused = false;      // It's a static variable so that it can be
                                                 // referenced on other scripts
     public static bool LoadingMainMenu = false; // Used so that the player gets destroyed 
                                                 // if the MainMenu is loaded
+    private GameObject Player;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && Inventory.InventoryOpen == false && PlayerFSM.IsReading == false && Player.CurrentPlayerState != Player.DeadState)
+
+        Player = GameObject.FindGameObjectWithTag("Player");
+
+        if (Input.GetKeyDown(KeyCode.Escape) && Inventory.InventoryOpen == false && PlayerFSM.IsReading == false && Player.GetComponent<PlayerFSM>().CurrentPlayerState != Player.GetComponent<PlayerFSM>().DeadState)
         {
             if (GamePaused == true)
             {

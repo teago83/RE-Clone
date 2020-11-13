@@ -4823,11 +4823,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 402110003}
---- !u!1 &778033265 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8358855480867467900, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
-  m_PrefabInstance: {fileID: 8358855481635203597}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &784314270
 GameObject:
   m_ObjectHideFlags: 0
@@ -5790,7 +5785,7 @@ GameObject:
   - component: {fileID: 983296675}
   - component: {fileID: 983296674}
   m_Layer: 0
-  m_Name: -- Camera Triggers --   (2)
+  m_Name: '-- Camera Triggers -- '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23146,6 +23141,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2064126060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8358855480923899917, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
+  m_PrefabInstance: {fileID: 8358855481635203597}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2064126064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064126060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca8d80243c7df048a99988c5b645e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Handgun: {fileID: 11400000, guid: 18f305b8b51be944f8956311dfb8feed, type: 2}
+  Items: []
 --- !u!1001 &2129921037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23289,7 +23303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4719305050479553
 Transform:
   m_ObjectHideFlags: 0
@@ -23528,7 +23542,7 @@ MonoBehaviour:
   IsOpen: 0
   Door: {fileID: 2909611064837528387}
   SceneTransitionDoor: {fileID: 4987198140467398565, guid: d29e05bd058384348ba0f96512c41d3f, type: 3}
-  IsLockedDoor: 1
+  IsLockedDoor: 0
   CanBeOpened: 1
   IsDoubleDoor: 1
   HaveIMadeTransitionYet: 0
@@ -23717,7 +23731,7 @@ PrefabInstance:
     - target: {fileID: 478028234724525474, guid: d32a76849ecff0c40bfabd2a228949fa, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6364222111259452187}
     - target: {fileID: 478028234724525475, guid: d32a76849ecff0c40bfabd2a228949fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -26275,7 +26289,7 @@ Transform:
   - {fileID: 1837275297}
   - {fileID: 385881647}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &6021125188991137633
 Transform:
@@ -26454,7 +26468,6 @@ GameObject:
   - component: {fileID: 430584363940570072}
   - component: {fileID: 6364222111259452188}
   - component: {fileID: 6364222111259452187}
-  - component: {fileID: 6364222111259452186}
   - component: {fileID: 6364222111259452185}
   - component: {fileID: 6364222111259452189}
   m_Layer: 0
@@ -26476,22 +26489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326d0b829b87bb74fa15d095b9c735d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6364222111259452186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6364222111259452184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ca8d80243c7df048a99988c5b645e33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 6364222111259452187}
-  Handgun: {fileID: 11400000, guid: 18f305b8b51be944f8956311dfb8feed, type: 2}
-  TheInventory: {fileID: 778033265}
-  Items: []
 --- !u!114 &6364222111259452187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27209,6 +27206,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8358855480867467896, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358855480867467897, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358855480867467900, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
+      propertyPath: m_TagString
+      value: Inventory
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358855480867467900, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358855480867467902, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8358855480923899917, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
       propertyPath: m_Name
       value: '-- Inventory Canvas -- '
@@ -27243,7 +27260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8358855480923899919, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8358855480923899919, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -27312,7 +27329,7 @@ PrefabInstance:
     - target: {fileID: 8358855481222613514, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6364222111259452184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8669ec2f52910084fbcb40320754ee55, type: 3}
 --- !u!1001 &8540503950086378411

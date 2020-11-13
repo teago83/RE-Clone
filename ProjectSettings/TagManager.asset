@@ -12,6 +12,7 @@ TagManager:
   - TransitionCamera
   - Scene
   - Lamp
+  - Inventory
   layers:
   - Default
   - TransparentFX
