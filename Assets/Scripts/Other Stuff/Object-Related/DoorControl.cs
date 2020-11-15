@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class DoorControl : MonoBehaviour
 {
-    public bool IsOpen = false; // The door will start closed, so this needs to be false. 
+    public bool IsOpen = false; 
     public GameObject Door;
     public GameObject SceneTransitionDoor;   // Use the whole transition scene object that shall be ins-
                                              // tantiated, not the door object that's being interacted with.
-
-    public bool IsLockedDoor; // This is determined in the inspector panel, varying from
+    public bool IsLockedDoor; 
     private bool IsInteracting;
-    // door to door.
     public bool CanBeOpened;  // For doors that can't be unlocked.
-    public bool IsDoubleDoor; // Depending on the kind of door, the animation shall be different
-    public bool HaveIMadeTransitionYet = false;
-    // Variable so that the game doesn't instantiate multiple SceneTransition objects
-
+    public bool HaveIMadeTransitionYet = false; // Variable so that the game doesn't instantiate multiple SceneTransition objects
     public bool ReadyToOpen = false;
     public float OpeningCooldown = 2f;
     public AudioSource LockedDoorSound;
