@@ -7,10 +7,9 @@ using UnityEngine;
 public class Scene2LockedDoors : MonoBehaviour
 {
 
-    public static int NumberOfDoorsChecked = 0;
+    public static int NumberOfDoorsChecked;
     private bool CheckedAlready = false;
     public GameObject Text;
-
 
     public void Update()
     {
@@ -22,17 +21,17 @@ public class Scene2LockedDoors : MonoBehaviour
             Debug.Log("CheckedAlready == true");
         }
 
-        if (NumberOfDoorsChecked == 1)
+        else if (NumberOfDoorsChecked == 1)
         {
-            Text.GetComponent<TextMeshPro>().text = "aaa";
+            Text.GetComponent<TextMeshPro>().text.Replace("kkj", "ah nao olha la o");
         }
         else if (NumberOfDoorsChecked == 2)
         {
-            Text.GetComponent<TextMeshPro>().text = "bbb";
+            
         }
         else if (NumberOfDoorsChecked == 3)
         {
-            Text.GetComponent<TextMeshPro>().text = "ccc";
+            
         }
     }
 }

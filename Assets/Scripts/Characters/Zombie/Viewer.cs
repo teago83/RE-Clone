@@ -6,9 +6,6 @@ using UnityEngine.Events;
 public class Viewer : MonoBehaviour
 {
     public bool IsSeeing;
-    /* you'll need to find a way of making a condition for the zombie
-     * to be shot by the player, making the zombie start to follow
-     * the player while it can see the player */
     public UnityEvent NotSeeing;
 
     private void OnTriggerExit(Collider other)

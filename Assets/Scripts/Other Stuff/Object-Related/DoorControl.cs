@@ -12,7 +12,6 @@ public class DoorControl : MonoBehaviour
     private bool IsInteracting;
     public bool CanBeOpened;  // For doors that can't be unlocked.
     public bool HaveIMadeTransitionYet = false; // Variable so that the game doesn't instantiate multiple SceneTransition objects
-    public bool ReadyToOpen = false;
     public float OpeningCooldown = 2f;
     public AudioSource LockedDoorSound;
 
@@ -44,9 +43,10 @@ public class DoorControl : MonoBehaviour
 
         if (!IsOpen && !IsLockedDoor)
         {
+            PlayerFSM.IsReading = true;
+
             IsOpen = true;
             Debug.Log("The door is now open!");
-            ReadyToOpen = true;
         }
 
         if (IsOpen && !HaveIMadeTransitionYet)
