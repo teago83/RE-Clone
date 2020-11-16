@@ -106,5 +106,18 @@ public class ZombieAIFSM : MonoBehaviour
 
     }
 
+    private void OnParticleCollision(GameObject other)
+    {
+
+        if (other.CompareTag("ShotgunBullet"))
+        {
+
+            health -= 35;
+            Destroy(other);
+
+        }
+        else if (other.CompareTag("HandgunBullet")) { health -= 15; Destroy(other); }
+
+    }
 
 }

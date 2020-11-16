@@ -27,7 +27,7 @@ public class Interactable : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerInteractionFOV"))
         {
             IsInRange = true;
-            Debug.Log("The player is now in range.");
+
         }
     }
 
@@ -36,7 +36,6 @@ public class Interactable : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerInteractionFOV"))
         {
             IsInRange = false;
-            Debug.Log("The player isn't in range anymore.");
         }
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Item : ScriptableObject
 {
 
-    public enum ItemTypes {Equippable, Consumable, KeyItem }
+    public enum ItemTypes { Equippable, Consumable, KeyItem }
     public ItemTypes type;
     public string ItemName = "New Name";
     public Sprite Icon = null;
@@ -23,7 +23,7 @@ public class Item : ScriptableObject
 
     public virtual void Awake()
     {
-        Debug.Log("Hmmm, rolou um awake aqui do " + ItemName);
+
     }
 
     public virtual void Use()

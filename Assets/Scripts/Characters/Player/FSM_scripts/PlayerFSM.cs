@@ -63,8 +63,8 @@ public class PlayerFSM : MonoBehaviour
 
     public Weapon[] Weapons;
     public GameObject[] EquippedWeapon;
-    public ParticleSystem PistolGunshot;
-    public ParticleSystem ShotgunGunshot;
+    public GameObject PistolGunshot;
+    public GameObject ShotgunGunshot;
     private Rigidbody rBody;
     public Vector3 posBeforeHit;
 
@@ -211,13 +211,19 @@ public class PlayerFSM : MonoBehaviour
         rBody.transform.Rotate(Vector3.up * turnAxis * turnSpeed * Time.deltaTime);
 
     }
-
     public void BackToIdle()
     {
 
         TransitionToState(IdleState);
         transform.position = posBeforeHit;
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+
+    }
+
+    public void SpawnObj(GameObject objToSpawn)
+    {
+
+        Instantiate(objToSpawn, WeaponBullets[CurrentWeapon].transform.position, Quaternion.Euler(WeaponBullets[CurrentWeapon].transform.eulerAngles));
 
     }
 
