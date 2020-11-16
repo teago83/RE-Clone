@@ -13,7 +13,7 @@ public class PlayerAimingState : PlayerBaseState
     }
 
 
-    public override void OnCollisionEnter(PlayerFSM Player)
+    public override void OnCollisionEnter(PlayerFSM Player, Collision col)
     {
 
     }
@@ -31,11 +31,11 @@ public class PlayerAimingState : PlayerBaseState
                 {
                     if (Physics.Raycast(Player.WeaponBullets[PlayerFSM.CurrentWeapon].transform.position, Player.WeaponBullets[PlayerFSM.CurrentWeapon].transform.forward, out Player.HitInfo, Player.Weapons[PlayerFSM.CurrentWeapon].ShootingRange))
                     {
-                        Debug.Log(Player.HitInfo.transform.name);
-                        ZombieBehaviourFSM Zombie = Player.HitInfo.transform.GetComponent<ZombieBehaviourFSM>();
+                        ZombieAIFSM Zombie = Player.HitInfo.transform.GetComponent<ZombieAIFSM>();
                         if (Zombie != null)
                         {
-                            Zombie.ReallyHitByPlayer();
+                            if (PlayerFSM.CurrentWeapon == 1) { Zombie.health -= 35; }
+                            else { Zombie.health -= 15; }
                         }
                     }
                     Player.Weapons[PlayerFSM.CurrentWeapon].CurrentAmmo -= 1;
@@ -60,7 +60,6 @@ public class PlayerAimingState : PlayerBaseState
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             Player.TransitionToState(Player.IdleState);
-            Player.animComp.SetBool("Aiming", false);
         }
 
         Player.CanTurn();

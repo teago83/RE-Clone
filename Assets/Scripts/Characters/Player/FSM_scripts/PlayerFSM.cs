@@ -8,11 +8,11 @@ using UnityEngine.Video;
 public class PlayerFSM : MonoBehaviour
 {
 
+
     #region States
     public readonly PlayerIdleState IdleState = new PlayerIdleState();
     public readonly PlayerAimingState AimingState = new PlayerAimingState();
     public readonly PlayerWalkingState WalkingState = new PlayerWalkingState();
-    public readonly PlayerTakingDamageState TakingDamageState = new PlayerTakingDamageState();
     public readonly PlayerPausedState PausedState = new PlayerPausedState();
     public readonly PlayerDeadState DeadState = new PlayerDeadState();
     public readonly PlayerShootingState ShootingState = new PlayerShootingState();
@@ -55,10 +55,6 @@ public class PlayerFSM : MonoBehaviour
     // Health and damage
     public static int MaxHealth;
     public static int Health;
-    public bool AttackFromTheFront;
-    public bool AttackFromTheBack;
-    public float TakingDamageWaitTime;
-    public float DamageCooldown;
 
     // The player's weaponry
 
@@ -70,6 +66,7 @@ public class PlayerFSM : MonoBehaviour
     public ParticleSystem PistolGunshot;
     public ParticleSystem ShotgunGunshot;
     private Rigidbody rBody;
+    public Vector3 posBeforeHit;
 
     // The weapon object is used to get the important values regarding the current weapon,
     // while the GameObject is used to activate/deactivate the currently equipped weapon's
@@ -101,14 +98,13 @@ public class PlayerFSM : MonoBehaviour
     public float QuickturnCooldown;
 
 
-    //public bool AlreadyQuickturned;
 
     void Start()
     {
 
         canReceiveInput = true; //Just for garantir
 
-        MaxHealth = 125;
+        MaxHealth = 100;
         Health = MaxHealth;
         animComp = GetComponent<Animator>();
         TransitionToState(IdleState);
@@ -123,25 +119,15 @@ public class PlayerFSM : MonoBehaviour
     }
 
 
-
     void Update()
     {
         CurrentPlayerState.Update(this);
         CurrentPosition = transform.position;
 
-        if (Health <= 0 && Health > -9999)
-        {
-            TransitionToState(DeadState);
-        }
-
         /* These if statements are here so that their respective cooldown variables
          * are always being decreased if they're bigger than 0. It didn't work
          * as intended if they were put into the states themselves. */
 
-        if (DamageCooldown > 0)
-        {
-            DamageCooldown -= Time.deltaTime;
-        }
         if (ShootingCooldown > 0)
         {
             ShootingCooldown -= Time.deltaTime;
@@ -182,26 +168,20 @@ public class PlayerFSM : MonoBehaviour
         }
     }
 
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        CurrentPlayerState.OnCollisionEnter(this);
+
+        if (collision.collider.CompareTag("Zombie")) { TransitionToState(DeadState); }
+        CurrentPlayerState.OnCollisionEnter(this, collision);
+
     }
 
     public void TransitionToState(PlayerBaseState State)
     {
         CurrentPlayerState = State;
         CurrentPlayerState.EnterState(this);
-    }
-
-    public void AttackCameFromTheFront()
-    {
-        AttackFromTheBack = false;
-        AttackFromTheFront = true;
-    }
-    public void AttackCameFromTheBack()
-    {
-        AttackFromTheBack = true;
-        AttackFromTheFront = false;
     }
 
     public void Quickturn()
@@ -211,7 +191,6 @@ public class PlayerFSM : MonoBehaviour
         TransitionToState(IdleState);
         canReceiveInput = true;
     }
-
     public void CanWalk()
     {
 
@@ -232,4 +211,14 @@ public class PlayerFSM : MonoBehaviour
         rBody.transform.Rotate(Vector3.up * turnAxis * turnSpeed * Time.deltaTime);
 
     }
+
+    public void BackToIdle()
+    {
+
+        TransitionToState(IdleState);
+        transform.position = posBeforeHit;
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+
+    }
+
 }

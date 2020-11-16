@@ -29,15 +29,25 @@ public class ZombieAIFSM : MonoBehaviour
     public float stillTime;
     [HideInInspector]
     public float currentStillTime;
-    float Speed;
+    public float health;
 
     #endregion
+
+    [Space]
+    [Header("Audios")]
+
+    public AudioSource zombieMoans;
+    public AudioSource zombieAttack;
+
+
 
     [HideInInspector]
     public bool isSeeingPlayer;
 
     public Transform[] Waypoints;
     public Vector3 playerLocation;
+
+
 
     void Start()
     {
@@ -54,6 +64,13 @@ public class ZombieAIFSM : MonoBehaviour
     {
 
         currentState.Update(this);
+
+        if (health <= 0)
+        {
+
+            this.GetComponent<ZombieAIFSM>().enabled = false;
+
+        }
 
     }
 
@@ -73,12 +90,21 @@ public class ZombieAIFSM : MonoBehaviour
 
     }
 
-
-    public void GrabPlayer()
+    private void OnCollisionEnter(Collision collision)
     {
-        /*This method is not working yet*/
-        ChangeState(statesBiting);
+
+        currentState.OnCollisionEnter(this, collision);
 
     }
+
+
+    public void FinishBite()
+    {
+
+        animatorComp.SetBool("hitPlayer", false);
+        ChangeState(statesIdle);
+
+    }
+
 
 }

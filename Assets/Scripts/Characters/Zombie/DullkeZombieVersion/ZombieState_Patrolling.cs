@@ -26,18 +26,23 @@ public class ZombieState_Patrolling : ZombieState_Base
             //Debug.Log(Vector3.Distance(zScript.playerLocation, zScript.transform.position));
             zScript.aIController.SetDestination(zScript.playerLocation);
 
-            if (zScript.aIController.remainingDistance <= 7)
+            if (zScript.aIController.remainingDistance <= 6f)
             {
 
-                /*Stopped here*/ 
+                /*Stopped here*/
                 zScript.animatorComp.SetTrigger("strike");
+                zScript.aIController.speed = 5;
+
 
             }
         }
     }
 
-    public override void OnCollisionEnter(ZombieAIFSM zScript)
+    public override void OnCollisionEnter(ZombieAIFSM zScript, Collision col)
     {
+
+        if (col.collider.CompareTag("Player")) { zScript.ChangeState(zScript.statesBiting); }
+
     }
 
 }

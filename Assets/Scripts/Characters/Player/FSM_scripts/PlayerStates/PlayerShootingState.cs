@@ -10,7 +10,7 @@ public class PlayerShootingState : PlayerBaseState
     }
 
 
-    public override void OnCollisionEnter(PlayerFSM Player)
+    public override void OnCollisionEnter(PlayerFSM Player, Collision col)
     {
 
     }
