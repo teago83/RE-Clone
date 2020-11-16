@@ -9,29 +9,31 @@ public class Scene2LockedDoors : MonoBehaviour
 
     public static int NumberOfDoorsChecked;
     private bool CheckedAlready = false;
-    public GameObject Text;
+    public TMP_Text Text;
 
-    public void Update()
+    public void CheckDoor()
     {
-        if (CheckedAlready == false)
+
+        Debug.Log("Name of the door: " + this.name + "\nChecked Already? " + CheckedAlready);
+        Debug.Log("Number of doors that were checked: " + NumberOfDoorsChecked);
+
+        if (CheckedAlready == false && NumberOfDoorsChecked < 3)
         {
             NumberOfDoorsChecked++;
             CheckedAlready = true;
-            Debug.Log("NumberOfDoorsChecked == " + NumberOfDoorsChecked);
-            Debug.Log("CheckedAlready == true");
         }
 
-        else if (NumberOfDoorsChecked == 1)
+        if (NumberOfDoorsChecked == 1)
         {
-            Text.GetComponent<TextMeshPro>().text.Replace("kkj", "ah nao olha la o");
+            Text.text = "Trancada...";
         }
-        else if (NumberOfDoorsChecked == 2)
+        if (NumberOfDoorsChecked == 2)
         {
-            
+            Text.text = "Mais outra porta trancada...";
         }
-        else if (NumberOfDoorsChecked == 3)
+        if (NumberOfDoorsChecked == 3)
         {
-            
+            Text.text = "Não vou mais tentar abrir essas portas.";
         }
     }
 }
