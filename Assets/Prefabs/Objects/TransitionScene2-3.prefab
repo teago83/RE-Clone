@@ -5185,9 +5185,7 @@ MonoBehaviour:
   SceneTransitionDoor: {fileID: 8805535465725657752, guid: d29e05bd058384348ba0f96512c41d3f, type: 3}
   IsLockedDoor: 0
   CanBeOpened: 1
-  IsDoubleDoor: 0
   HaveIMadeTransitionYet: 0
-  ReadyToOpen: 1
   OpeningCooldown: 2
   LockedDoorSound: {fileID: 0}
 --- !u!95 &5972109879326113288
@@ -5234,13 +5232,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5972109879515592053}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 2.842171e-16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5972109879326113289}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &5972109879515592058
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5315,13 +5313,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5972109879589821655}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0.14, y: -0.06, z: -0.001}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 5972109879326113289}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &5972109879589821652
 MeshFilter:
   m_ObjectHideFlags: 0
