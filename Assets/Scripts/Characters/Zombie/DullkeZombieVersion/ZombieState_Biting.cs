@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class ZombieState_Biting : ZombieState_Base
 {
+
+    public static event Action Bite;
+
     public override void OnCollisionEnter(ZombieAIFSM zScript, Collision col)
     {
 
@@ -13,11 +15,7 @@ public class ZombieState_Biting : ZombieState_Base
     public override void OnEnterState(ZombieAIFSM zScript)
     {
 
-        zScript.animatorComp.SetBool("hitPlayer", true);
-        zScript.zombieAttack.Play();
-        zScript.aIController.ResetPath();
-        Debug.Log("I'm biting nhom nhom");
-
+        Bite?.Invoke();
     }
 
     public override void Update(ZombieAIFSM zScript)

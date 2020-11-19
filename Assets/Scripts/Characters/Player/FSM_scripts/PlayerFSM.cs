@@ -9,6 +9,7 @@ public class PlayerFSM : MonoBehaviour
 {
 
 
+
     #region States
     public readonly PlayerIdleState IdleState = new PlayerIdleState();
     public readonly PlayerAimingState AimingState = new PlayerAimingState();
@@ -89,7 +90,7 @@ public class PlayerFSM : MonoBehaviour
 
     // Interaction 
     public static bool IsReading;
-    public bool isAlive = true;
+    public static bool isAlive = true;
 
     // Item count
     public static int MiniKeyCount;
@@ -103,6 +104,7 @@ public class PlayerFSM : MonoBehaviour
     void Start()
     {
 
+        ZombieState_Biting.Bite += TakeDamageFromZombie;
         canReceiveInput = true; //Just for garantir
 
         Health = 100;
@@ -117,6 +119,7 @@ public class PlayerFSM : MonoBehaviour
         }
 
         rBody = GetComponent<Rigidbody>();
+
 
     }
 
@@ -150,10 +153,11 @@ public class PlayerFSM : MonoBehaviour
         {
 
             isAlive = false;
+            animComp.SetBool("IsDead", true);
+            rBody.freezeRotation = true;
 
         }
 
-        Debug.Log(isAlive);
         animComp.SetInteger("EquippedGun", CurrentWeapon);
 
         if (CurrentWeapon == 0)
@@ -185,7 +189,13 @@ public class PlayerFSM : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.collider.CompareTag("Zombie")) { Health -= 25; TransitionToState(DeadState); }
+        #region ZombieCode
+        //if (collision.collider.CompareTag("Zombie"))
+        //{
+        //    if (collision.collider.GetComponent<ZombieAIFSM>().isAttacking == true) { }
+        //} 
+        #endregion
+
         CurrentPlayerState.OnCollisionEnter(this, collision);
 
     }
@@ -231,12 +241,20 @@ public class PlayerFSM : MonoBehaviour
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
     }
-
     public void SpawnObj(GameObject objToSpawn)
     {
 
         Instantiate(objToSpawn, WeaponBullets[CurrentWeapon].transform.position, Quaternion.Euler(WeaponBullets[CurrentWeapon].transform.eulerAngles));
 
     }
+
+    public void TakeDamageFromZombie()
+    {
+
+        Health -= 25; TransitionToState(DeadState);
+
+
+    }
+
 
 }

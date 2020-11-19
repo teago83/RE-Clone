@@ -12,9 +12,9 @@ public class DropKey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Zombie.GetComponent<ZombieBehaviourFSM>().Health < 0 && DontDoThisTwiceDummy)
+        if (Zombie.GetComponent<ZombieAIFSM>().health < 0 && DontDoThisTwiceDummy)
         {
-            Instantiate(Key, new Vector3(Zombie.GetComponent<ZombieBehaviourFSM>().transform.position.x, Zombie.GetComponent<ZombieBehaviourFSM>().transform.position.y, Zombie.GetComponent<ZombieBehaviourFSM>().transform.position.z), Quaternion.identity);
+            Instantiate(Key, new Vector3(Zombie.GetComponent<ZombieAIFSM>().transform.position.x, Zombie.GetComponent<ZombieAIFSM>().transform.position.y, Zombie.GetComponent<ZombieAIFSM>().transform.position.z), Quaternion.identity);
             DontDoThisTwiceDummy = false;
         }
     }

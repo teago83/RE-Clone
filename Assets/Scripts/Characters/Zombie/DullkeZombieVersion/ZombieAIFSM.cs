@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ZombieAIFSM : MonoBehaviour
 {
+
 
     #region Zombie States
 
@@ -52,6 +52,8 @@ public class ZombieAIFSM : MonoBehaviour
     void Start()
     {
 
+
+        ZombieState_Biting.Bite += AttackPlayer;
         animatorComp = GetComponent<Animator>();
         aIController = GetComponent<NavMeshAgent>();
 
@@ -64,19 +66,19 @@ public class ZombieAIFSM : MonoBehaviour
     {
 
         currentState.Update(this);
-        Debug.Log(currentState);
 
         if (health <= 0)
         {
 
-            aIController.ResetPath();
             animatorComp.SetTrigger("die");
+            aIController.enabled = false;
             this.GetComponent<ZombieAIFSM>().enabled = false;
             this.GetComponent<CapsuleCollider>().enabled = false;
             zombieMoans.Stop();
             zombieAttack.Stop();
         }
 
+        if (PlayerFSM.isAlive == false) { animatorComp.SetBool("isPlayerDead", true); }
 
     }
 
@@ -105,14 +107,6 @@ public class ZombieAIFSM : MonoBehaviour
 
     }
 
-    public void FinishBite()
-    {
-
-        animatorComp.SetBool("hitPlayer", false);
-        ChangeState(statesIdle);
-
-    }
-
     private void OnParticleCollision(GameObject other)
     {
 
@@ -124,6 +118,31 @@ public class ZombieAIFSM : MonoBehaviour
 
         }
         else if (other.CompareTag("HandgunBullet")) { health -= 15; Destroy(other); }
+
+    }
+
+    public void FinishBite()
+    {
+
+        animatorComp.SetBool("hitPlayer", false);
+        ChangeState(statesIdle);
+
+    }
+
+
+    public void AttackPlayer()
+    {
+        transform.LookAt(FindObjectOfType<PlayerFSM>().transform);
+        animatorComp.SetBool("hitPlayer", true);
+        zombieAttack.Play();
+        aIController.ResetPath();
+        Debug.Log("I'm biting nhom nhom");
+    }
+
+    public void DisableCollider()
+    {
+
+        this.GetComponent<CapsuleCollider>().enabled = false;
 
     }
 

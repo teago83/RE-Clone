@@ -21,15 +21,6 @@ public class PlayerDeadState : PlayerBaseState
         #endregion
 
 
-        if (!Player.isAlive)
-        {
-
-            /*Create a dying animation*/
-            //Player.tag = "DeadPlayer";
-            Player.animComp.SetBool("IsDead", true);
-
-        }
-
     }
 
 
