@@ -36,7 +36,6 @@ public class PlayerAimingState : PlayerBaseState
 
                     if (PlayerFSM.CurrentWeapon == 0)
                     {
-
                         Player.FiringPistolSFX.Play();
                         Player.SpawnObj(Player.PistolGunshot);
                     }

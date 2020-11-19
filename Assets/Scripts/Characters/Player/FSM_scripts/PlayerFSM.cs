@@ -53,8 +53,8 @@ public class PlayerFSM : MonoBehaviour
     #endregion                                       // mainly the zombie.
 
     // Health and damage
-    public static int MaxHealth;
-    public static int Health;
+    //public static int MaxHealth;
+    public static int Health = 100;
 
     // The player's weaponry
 
@@ -89,6 +89,7 @@ public class PlayerFSM : MonoBehaviour
 
     // Interaction 
     public static bool IsReading;
+    public bool isAlive = true;
 
     // Item count
     public static int MiniKeyCount;
@@ -104,8 +105,9 @@ public class PlayerFSM : MonoBehaviour
 
         canReceiveInput = true; //Just for garantir
 
-        MaxHealth = 100;
-        Health = MaxHealth;
+        Health = 100;
+        isAlive = true;
+        //Health = MaxHealth;
         animComp = GetComponent<Animator>();
         TransitionToState(IdleState);
 
@@ -139,9 +141,19 @@ public class PlayerFSM : MonoBehaviour
             TransitionToState(PausedState);
         }
 
-        if (Health > MaxHealth)
-            Health = MaxHealth;
+        Debug.Log(Health);
 
+        //if (Health > MaxHealth)
+        //    Health = MaxHealth;
+
+        if (Health <= 0)
+        {
+
+            isAlive = false;
+
+        }
+
+        Debug.Log(isAlive);
         animComp.SetInteger("EquippedGun", CurrentWeapon);
 
         if (CurrentWeapon == 0)
@@ -173,7 +185,7 @@ public class PlayerFSM : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.collider.CompareTag("Zombie")) { TransitionToState(DeadState); }
+        if (collision.collider.CompareTag("Zombie")) { Health -= 25; TransitionToState(DeadState); }
         CurrentPlayerState.OnCollisionEnter(this, collision);
 
     }

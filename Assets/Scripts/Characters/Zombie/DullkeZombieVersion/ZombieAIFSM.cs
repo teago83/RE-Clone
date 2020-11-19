@@ -64,13 +64,19 @@ public class ZombieAIFSM : MonoBehaviour
     {
 
         currentState.Update(this);
+        Debug.Log(currentState);
 
         if (health <= 0)
         {
 
+            aIController.ResetPath();
+            animatorComp.SetTrigger("die");
             this.GetComponent<ZombieAIFSM>().enabled = false;
-
+            this.GetComponent<CapsuleCollider>().enabled = false;
+            zombieMoans.Stop();
+            zombieAttack.Stop();
         }
+
 
     }
 
@@ -79,14 +85,16 @@ public class ZombieAIFSM : MonoBehaviour
 
         currentState = state;
         state.OnEnterState(this);
-        Debug.Log("Current state is now " + currentState);
 
     }
 
     public void OnTriggerStay(Collider col)
     {
 
-        if (col.CompareTag("Player")) { isSeeingPlayer = true; playerLocation = col.transform.position; }
+        if (col.CompareTag("Player"))
+        {
+            isSeeingPlayer = true; playerLocation = col.transform.position;
+        }
 
     }
 
@@ -96,7 +104,6 @@ public class ZombieAIFSM : MonoBehaviour
         currentState.OnCollisionEnter(this, collision);
 
     }
-
 
     public void FinishBite()
     {

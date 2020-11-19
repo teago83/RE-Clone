@@ -16,10 +16,6 @@ public class BandAid : Item
         base.Use();
         PlayerFSM.Health += MaxStatRecovery;
         Debug.Log("Player's currently recovered health = " + PlayerFSM.Health);
-        if (PlayerFSM.Health > PlayerFSM.MaxHealth)
-        {
-            Debug.Log("Wait, something that's wrong isn't right, the player's health is too high. Let's fix this. \nPlayer's currently recovered health = " + PlayerFSM.MaxHealth);
-        }
         ToBeRemoved = true;
     }
 }

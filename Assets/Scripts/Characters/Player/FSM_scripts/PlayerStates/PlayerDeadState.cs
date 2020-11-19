@@ -20,13 +20,13 @@ public class PlayerDeadState : PlayerBaseState
 
         #endregion
 
-        PlayerFSM.Health -= 25;
 
-        if (PlayerFSM.Health <= 0)
+        if (!Player.isAlive)
         {
 
             /*Create a dying animation*/
-            Player.tag = "DeadPlayer";
+            //Player.tag = "DeadPlayer";
+            Player.animComp.SetBool("IsDead", true);
 
         }
 
@@ -36,20 +36,15 @@ public class PlayerDeadState : PlayerBaseState
     public override void OnCollisionEnter(PlayerFSM Player, Collision col)
     {
 
-        if (Player.tag != "DeadPlayer")
+        if (col.collider.CompareTag("Zombie"))
         {
 
-            if (col.collider.CompareTag("Zombie"))
-            {
-
-                Player.animComp.SetBool("wasGrabbed", true);
-                Player.posBeforeHit = Player.transform.position;
-                Player.transform.LookAt(col.transform.position);
-
-
-            }
+            Player.animComp.SetBool("wasGrabbed", true);
+            Player.posBeforeHit = Player.transform.position;
+            Player.transform.LookAt(col.transform.position);
 
         }
+
     }
     public override void Update(PlayerFSM Player)
     {
