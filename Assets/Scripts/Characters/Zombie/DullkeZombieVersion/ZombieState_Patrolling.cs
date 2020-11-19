@@ -1,15 +1,17 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ZombieState_Patrolling : ZombieState_Base
 {
 
+    public static event Action IKilledPlayer;
 
     public override void OnEnterState(ZombieAIFSM zScript)
     {
 
-        Vector3 nextDestination = zScript.Waypoints[Random.Range(0, zScript.Waypoints.Length)].position;
+        Vector3 nextDestination = zScript.Waypoints[UnityEngine.Random.Range(0, zScript.Waypoints.Length)].position;
         zScript.aIController.SetDestination(nextDestination);
         zScript.animatorComp.SetBool("hasPath", true);
 
@@ -32,7 +34,6 @@ public class ZombieState_Patrolling : ZombieState_Base
                 zScript.animatorComp.SetTrigger("strike");
                 zScript.aIController.speed = 6;
 
-
             }
             else
             {
@@ -49,20 +50,23 @@ public class ZombieState_Patrolling : ZombieState_Base
 
         if (col.collider.CompareTag("Player"))
         {
-            if (col.gameObject.GetComponent<PlayerFSM>().isAlive == false)
+
+            if (PlayerFSM.isAlive == false)
             {
 
-                zScript.animatorComp.SetBool("isPlayerDead", true);
-                zScript.aIController.enabled = false;
-                zScript.GetComponent<ZombieAIFSM>().enabled = false;
-                zScript.GetComponent<CapsuleCollider>().enabled = false;
-
+                Debug.Log("Player is now dead");
+                #region ZombieCode
+                //zScript.aIController.enabled = false;
+                //zScript.GetComponent<ZombieAIFSM>().enabled = false;
+                //zScript.GetComponent<CapsuleCollider>().enabled = false;
+                //zScript.GetComponent<Rigidbody>().freezeRotation = true; 
+                #endregion
 
             }
             else { zScript.ChangeState(zScript.statesBiting); }
-
         }
 
     }
+
 
 }

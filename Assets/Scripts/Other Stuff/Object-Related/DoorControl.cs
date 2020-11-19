@@ -55,7 +55,7 @@ public class DoorControl : MonoBehaviour
             {
                 CameraSwitch.LastActiveCamera.SetActive(false);
             }
-            Instantiate(SceneTransitionDoor, new Vector3(0f, Door.transform.position.y + 50f, 0f), Quaternion.identity);
+            Instantiate(SceneTransitionDoor, new Vector3(Door.transform.position.x, Door.transform.position.y + 50f, Door.transform.position.z), Quaternion.identity);
             HaveIMadeTransitionYet = true;
         }
     }
