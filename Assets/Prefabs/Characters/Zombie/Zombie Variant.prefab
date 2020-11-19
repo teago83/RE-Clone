@@ -2560,7 +2560,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7523706257375145888}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -47.07702, y: 2.4600058, z: 22.076895}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2605,7 +2605,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &5018767935641897274
 CapsuleCollider:
@@ -2617,10 +2617,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.93767834
+  m_Radius: 0.928813
   m_Height: 7.2654147
   m_Direction: 1
-  m_Center: {x: 0, y: 3.5575626, z: -0.06947994}
+  m_Center: {x: -0.09412575, y: 3.5575626, z: 0.16721249}
 --- !u!195 &5018767935641897278
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2650,12 +2650,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7523706257375145888}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e248e6c2b2207a4ab14ce81e3243927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie: {fileID: 0}
+  Zombie: {fileID: 7523706257375145888}
   Key: {fileID: 981490103356276369, guid: 7a171a46f1d9cbc4f9b047e31f5c1a2f, type: 3}
 --- !u!114 &5018767935641897272
 MonoBehaviour:
@@ -2673,7 +2673,7 @@ MonoBehaviour:
   animatorComp: {fileID: 0}
   stillTime: 3
   currentStillTime: 3
-  health: 100
+  health: 125
   zombieMoans: {fileID: 5018767934621699498}
   zombieAttack: {fileID: 5018767935296654156}
   isSeeingPlayer: 0
