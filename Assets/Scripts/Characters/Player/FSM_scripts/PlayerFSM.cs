@@ -144,7 +144,6 @@ public class PlayerFSM : MonoBehaviour
             TransitionToState(PausedState);
         }
 
-        Debug.Log(Health);
 
         //if (Health > MaxHealth)
         //    Health = MaxHealth;
