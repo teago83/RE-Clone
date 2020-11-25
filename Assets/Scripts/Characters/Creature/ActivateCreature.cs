@@ -6,13 +6,14 @@ public class ActivateCreature : MonoBehaviour
 {
 
     public GameObject Creature;
+    public GameObject Song;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             Creature.SetActive(true);
-            // Insert a "start creepy-creature song" piece of code here
+            Song.SetActive(true);
         }
     }
 }

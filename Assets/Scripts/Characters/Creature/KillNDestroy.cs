@@ -8,25 +8,25 @@ public class KillNDestroy : MonoBehaviour
     public GameObject Creature;
     private double FollowTimer;
     public bool CanFollow = false;
-    private float ForwardMovement = -45;
+    private float ForwardMovement = -5;
 
     private void Start()
     {
-        FollowTimer = 5;
+        FollowTimer = 1;
     }
 
     private void Update()
     {
         if (CanFollow && PlayerFSM.Health > 0)
         {
-            if (FollowTimer > -1)
+            if (FollowTimer >= -1)
             {
                 FollowTimer -= Time.deltaTime;
             }
-            else if (FollowTimer < 0)
+            if (FollowTimer < 0)
             {
                 Creature.transform.Translate(ForwardMovement, 0, 0);
-                FollowTimer = 5;
+                FollowTimer = 1;
             }
         }
     }
