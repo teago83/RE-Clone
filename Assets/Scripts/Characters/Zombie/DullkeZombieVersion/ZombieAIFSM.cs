@@ -125,6 +125,7 @@ public class ZombieAIFSM : MonoBehaviour
     {
 
         animatorComp.SetBool("hitPlayer", false);
+        ZombieState_Biting.Bite -= AttackPlayer;
         ChangeState(statesIdle);
 
     }

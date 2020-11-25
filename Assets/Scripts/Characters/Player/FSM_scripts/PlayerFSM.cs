@@ -6,7 +6,7 @@ using UnityEngine.Video;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerFSM : MonoBehaviour
-{ 
+{
     #region States
     public readonly PlayerIdleState IdleState = new PlayerIdleState();
     public readonly PlayerAimingState AimingState = new PlayerAimingState();
@@ -86,7 +86,7 @@ public class PlayerFSM : MonoBehaviour
     public AudioSource PlayerTakingDamageSFX;
 
     // Interaction 
-    
+
     [HideInInspector]
     public bool OnCutscene;
     public static bool IsReading;
