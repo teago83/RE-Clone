@@ -14,7 +14,6 @@ public class NextScene : MonoBehaviour
         {
             Debug.Log("Next scene, bruh!");
             CurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            PlayerFSM.IsReading = false;
             SceneManager.LoadScene(CurrentSceneIndex + 1);
         }
     }

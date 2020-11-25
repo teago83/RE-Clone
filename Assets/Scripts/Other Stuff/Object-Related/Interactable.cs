@@ -5,17 +5,21 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-
     public bool IsInRange;
     public KeyCode InteractKey;
     public UnityEvent Interaction;
+    private GameObject Player;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     void Update()
     {
         if (IsInRange)
         {
-            if (Input.GetKeyDown(InteractKey)) // If the player presses the interact key...
+            if (Input.GetKeyDown(InteractKey) && Player.GetComponent<PlayerFSM>().OnCutscene == false) // If the player presses the interact key while not on a cutscene...
             {
                 Interaction.Invoke(); // ...the event is triggered.
             }

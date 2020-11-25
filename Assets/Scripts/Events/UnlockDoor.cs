@@ -7,6 +7,7 @@ public class UnlockDoor : MonoBehaviour
     public GameObject Zombie;
     public GameObject Door;
     public GameObject Trigger;
+    public GameObject ReadInteraction;
     public GameObject CutsceneRectangles;
     private GameObject Player;
     public GameObject CurrentSong;
@@ -38,6 +39,7 @@ public class UnlockDoor : MonoBehaviour
         {
             if (CutsceneRectangles.activeSelf == false)
             {
+                ReadInteraction.SetActive(false);
                 CutsceneRectangles.SetActive(true);
                 CurrentSong.SetActive(false);
             }
