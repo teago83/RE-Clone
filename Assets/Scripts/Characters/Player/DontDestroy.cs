@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class DontDestroy : MonoBehaviour
 {
+
+    private Transform spawnPoint;
+
+    private void Start()
+    {
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
+        this.transform.root.position = spawnPoint.transform.position;
+    }
+
     void Update()
     {
         GameObject[] Objects = GameObject.FindGameObjectsWithTag("Player");
@@ -14,5 +23,6 @@ public class DontDestroy : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.transform.root.gameObject);
+
     }
 }

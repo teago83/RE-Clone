@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ReadInteraction : MonoBehaviour
 {
-    //public bool IsReading = false;
     public GameObject Text;
 
     public void ReadObjectText()

@@ -7,11 +7,13 @@ public class ZombieState_Patrolling : ZombieState_Base
 {
 
     public static event Action IKilledPlayer;
+    private Vector3 nextDestination;
+    /*Teago remember: Ctrl + R + R to rename a variable and its uses.*/
 
     public override void OnEnterState(ZombieAIFSM zScript)
     {
 
-        Vector3 nextDestination = zScript.Waypoints[UnityEngine.Random.Range(0, zScript.Waypoints.Length)].position;
+        nextDestination = zScript.Waypoints[UnityEngine.Random.Range(0, zScript.Waypoints.Length)].position;
         zScript.aIController.SetDestination(nextDestination);
         zScript.animatorComp.SetBool("hasPath", true);
 
