@@ -18,15 +18,27 @@ public class PlayerPausedState : PlayerBaseState
 
     public override void Update(PlayerFSM Player)
     {
-        if (!PlayerFSM.IsReading)
+
+        if (Player.OnCutscene)
+        {
+            Player.animComp.SetBool("Running", false);
+            Player.animComp.SetFloat("Velocity", 0f);
+        }
+
+        else if (!Player.OnCutscene)
         {
             Player.TransitionToState(PlayerFSM.LastPlayerState);
         }
-        if (!PauseMenu.GamePaused)
+
+        else if (!PlayerFSM.IsReading)
         {
             Player.TransitionToState(PlayerFSM.LastPlayerState);
         }
-        if (!Inventory.InventoryOpen)
+        else if (!PauseMenu.GamePaused)
+        {
+            Player.TransitionToState(PlayerFSM.LastPlayerState);
+        }
+        else if (!Inventory.InventoryOpen)
         {
             Player.TransitionToState(PlayerFSM.LastPlayerState);
         }

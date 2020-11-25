@@ -6,28 +6,55 @@ public class UnlockDoor : MonoBehaviour
 {
     public GameObject Zombie;
     public GameObject Door;
-    public AudioSource UnlockDoorSFX;
     public GameObject Trigger;
+    public GameObject CutsceneRectangles;
+    private GameObject Player;
+    public GameObject CurrentSong;
+    public GameObject NextSong;
 
-    private float UnlockingCooldown = 2;
-    public GameObject CutsceneRectangles; 
+    public AudioSource UnlockDoorSFX;
+
+    private float UnlockingCooldown = 2.5f;
+    private bool AlreadyUnlocked = false;
+    private bool AlreadyPlayedSound = false;
+
+    private void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Update()
     {
         if (UnlockingCooldown <= 0)
         {
             Door.GetComponent<DoorControl>().IsLockedDoor = false;
-            UnlockDoorSFX.Play();
             CutsceneRectangles.SetActive(false);
+            NextSong.SetActive(true);
+            Player.GetComponent<PlayerFSM>().OnCutscene = false;
             Trigger.SetActive(false);
         }
 
         else if (Zombie.GetComponent<ZombieAIFSM>().health <= 0)
         {
             if (CutsceneRectangles.activeSelf == false)
+            {
                 CutsceneRectangles.SetActive(true);
+                CurrentSong.SetActive(false);
+            }
 
             UnlockingCooldown -= Time.deltaTime;
+
+            if (!AlreadyUnlocked)
+            {
+                Player.GetComponent<PlayerFSM>().OnCutscene = true;
+                AlreadyUnlocked = true;
+            }
+
+            if (!AlreadyPlayedSound && UnlockingCooldown <= 1f)
+            {
+                UnlockDoorSFX.Play();
+                AlreadyPlayedSound = true;
+            }
         }
     }
 }

@@ -95,7 +95,7 @@ public class ZombieAIFSM : MonoBehaviour
 
         if (col.CompareTag("Player"))
         {
-            isSeeingPlayer = true; playerLocation = col.transform.position;
+            isSeeingPlayer = true; // playerLocation = col.transform.position;
         }
 
     }

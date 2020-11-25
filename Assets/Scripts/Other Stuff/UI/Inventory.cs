@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
     {
         PlayerNeo = GameObject.FindGameObjectWithTag("Player");
 
-        if (Input.GetKeyDown(KeyCode.F) && PauseMenu.GamePaused == false && PlayerFSM.IsReading == false && PlayerNeo.GetComponent<PlayerFSM>().CurrentPlayerState != PlayerNeo.GetComponent<PlayerFSM>().DeadState)
+        if (Input.GetKeyDown(KeyCode.F) && PauseMenu.GamePaused == false && PlayerFSM.IsReading == false && PlayerNeo.GetComponent<PlayerFSM>().CurrentPlayerState != PlayerNeo.GetComponent<PlayerFSM>().DeadState && PlayerNeo.GetComponent<PlayerFSM>().OnCutscene == false)
         {
             if (InventoryOpen)
                 CloseInventory();

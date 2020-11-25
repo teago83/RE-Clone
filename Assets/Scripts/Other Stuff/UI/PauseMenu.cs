@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
 
         Player = GameObject.FindGameObjectWithTag("Player");
 
-        if (Input.GetKeyDown(KeyCode.Escape) && Inventory.InventoryOpen == false && PlayerFSM.IsReading == false && Player.GetComponent<PlayerFSM>().CurrentPlayerState != Player.GetComponent<PlayerFSM>().DeadState)
+        if (Input.GetKeyDown(KeyCode.Escape) && Inventory.InventoryOpen == false && PlayerFSM.IsReading == false && Player.GetComponent<PlayerFSM>().CurrentPlayerState != Player.GetComponent<PlayerFSM>().DeadState && Player.GetComponent<PlayerFSM>().OnCutscene == false)
         {
             if (GamePaused == true)
             {

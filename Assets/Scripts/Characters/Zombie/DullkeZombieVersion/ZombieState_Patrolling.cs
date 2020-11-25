@@ -8,6 +8,7 @@ public class ZombieState_Patrolling : ZombieState_Base
 
     public static event Action IKilledPlayer;
     private Vector3 nextDestination;
+    private GameObject Player;
     /*Teago remember: Ctrl + R + R to rename a variable and its uses.*/
 
     public override void OnEnterState(ZombieAIFSM zScript)
@@ -22,12 +23,18 @@ public class ZombieState_Patrolling : ZombieState_Base
     public override void Update(ZombieAIFSM zScript)
     {
 
-        if (!zScript.aIController.hasPath) { zScript.ChangeState(zScript.statesIdle); }
+        Player = GameObject.FindGameObjectWithTag("Player");
+
+        if (!zScript.aIController.hasPath) 
+        {
+            zScript.isSeeingPlayer = false;
+            zScript.ChangeState(zScript.statesIdle); 
+        }
 
         if (zScript.isSeeingPlayer)
         { /*Chase*/
 
-            zScript.aIController.SetDestination(zScript.playerLocation);
+            zScript.aIController.SetDestination(Player.transform.position);
 
             if (zScript.aIController.remainingDistance <= 6f)
             {
@@ -37,11 +44,16 @@ public class ZombieState_Patrolling : ZombieState_Base
                 zScript.aIController.speed = 6;
 
             }
-            else
+            else if (zScript.aIController.remainingDistance <= 35f)
             {
 
                 zScript.aIController.speed = 3f;
 
+            }
+            else if (zScript.aIController.remainingDistance > 35f)
+            {
+                zScript.aIController.SetDestination(nextDestination);
+                zScript.isSeeingPlayer = false;
             }
         }
     }

@@ -6,10 +6,7 @@ using UnityEngine.Video;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerFSM : MonoBehaviour
-{
-
-
-
+{ 
     #region States
     public readonly PlayerIdleState IdleState = new PlayerIdleState();
     public readonly PlayerAimingState AimingState = new PlayerAimingState();
@@ -89,6 +86,9 @@ public class PlayerFSM : MonoBehaviour
     public AudioSource PlayerTakingDamageSFX;
 
     // Interaction 
+    
+    [HideInInspector]
+    public bool OnCutscene;
     public static bool IsReading;
     public static bool isAlive = true;
 
@@ -103,7 +103,7 @@ public class PlayerFSM : MonoBehaviour
 
     void Start()
     {
-
+        OnCutscene = false;
         ZombieState_Biting.Bite += TakeDamageFromZombie;
         canReceiveInput = true; //Just for garantir
 
@@ -138,9 +138,13 @@ public class PlayerFSM : MonoBehaviour
             ShootingCooldown -= Time.deltaTime;
         }
 
-        if (IsReading || PauseMenu.GamePaused || Inventory.InventoryOpen)
+        if (IsReading || PauseMenu.GamePaused || Inventory.InventoryOpen || OnCutscene)
         {
-            LastPlayerState = CurrentPlayerState;
+            if (OnCutscene)
+                LastPlayerState = IdleState;
+            else
+                LastPlayerState = CurrentPlayerState;
+
             TransitionToState(PausedState);
         }
 

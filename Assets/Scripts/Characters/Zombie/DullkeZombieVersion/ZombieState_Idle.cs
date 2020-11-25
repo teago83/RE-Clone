@@ -17,7 +17,7 @@ public class ZombieState_Idle : ZombieState_Base
     public override void Update(ZombieAIFSM zScript)
     {
 
-        if (zScript.currentStillTime <= 0 && zScript.Waypoints.Length > 1) { zScript.ChangeState(zScript.statesPatrol); zScript.zombieMoans.Play(); }
+        if (zScript.currentStillTime <= 0) { zScript.ChangeState(zScript.statesPatrol); zScript.zombieMoans.Play(); }
         else { zScript.currentStillTime -= Time.deltaTime; }
 
         if (zScript.isSeeingPlayer) { zScript.ChangeState(zScript.statesPatrol); }
