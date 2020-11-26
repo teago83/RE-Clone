@@ -7,29 +7,50 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject Title;
     public AudioSource TitleAudio;
-    public float WaitingTime;
+    private float WaitingTime;
+    private float WaitingTimeIntro;
+    private float CreditsCooldown;
     public bool UserPressedTheButton;
-
-    // delete later
-    public void TestAudio()
-    {
-        TitleAudio.Play();
-    }
+    public GameObject Intro;
+    public GameObject Menu;
+    public GameObject CreditsScreen;
+    private bool StartedIntro;
 
     private void Start()
     {
         UserPressedTheButton = false;
+        StartedIntro = false;
     }
 
     void Update()
     {
         if (WaitingTime > -1f)
-        {
             WaitingTime -= Time.deltaTime;
+
+        if (CreditsCooldown > -1f)
+            CreditsCooldown -= Time.deltaTime;
+
+        else if (CreditsCooldown <= 0)
+        {
+            Menu.SetActive(true);
+            CreditsScreen.SetActive(false);
         }
+
         if (WaitingTime <= 0 && UserPressedTheButton == true)
         {
-            StartGame();
+            if (!StartedIntro)
+            {
+                Intro.SetActive(true);
+                Menu.SetActive(false);
+                StartedIntro = true;
+            }
+
+            if (WaitingTimeIntro > -1f)
+                WaitingTimeIntro -= Time.deltaTime;
+            else if (WaitingTimeIntro <= 0)
+            {
+                StartGame();
+            }
         }
     }
 
@@ -39,11 +60,12 @@ public class MainMenu : MonoBehaviour
         {
             Title.GetComponent<Animator>().Play("StartGame");
             TitleAudio.Play();
-            WaitingTime = 3.5f;
+            WaitingTime = 4f;
+            WaitingTimeIntro = 45f;
             UserPressedTheButton = true;
         }
         
-        if (WaitingTime <= 0)
+        if (WaitingTimeIntro <= 0)
         {
             Debug.Log("First scene has been loaded, bruh.");
             PauseMenu.LoadingMainMenu = false; 
@@ -57,5 +79,12 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("QUITTING THE GAME ALREADY??????? I can't believe it.");
         Application.Quit();
+    }
+
+    public void Credits()
+    {
+        CreditsScreen.SetActive(true);
+        Menu.SetActive(false);
+        CreditsCooldown = 49f;
     }
 }

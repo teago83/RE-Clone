@@ -31,7 +31,6 @@ public class Interactable : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerInteractionFOV"))
         {
             IsInRange = true;
-
         }
     }
 

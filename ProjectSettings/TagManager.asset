@@ -19,6 +19,7 @@ TagManager:
   - HandgunBullet
   - FadingScreen
   - SpawnPoint
+  - CountedZombie
   layers:
   - Default
   - TransparentFX
