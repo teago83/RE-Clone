@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
     public GameObject Menu;
     public GameObject CreditsScreen;
     private bool StartedIntro;
+    private bool CreditsEnded;
 
     private void Start()
     {
@@ -30,16 +31,18 @@ public class MainMenu : MonoBehaviour
         if (CreditsCooldown > -1f)
             CreditsCooldown -= Time.deltaTime;
 
-        else if (CreditsCooldown <= 0)
+        else if (CreditsCooldown <= 0 && !CreditsEnded)
         {
             Menu.SetActive(true);
             CreditsScreen.SetActive(false);
+            CreditsEnded = true;
         }
 
         if (WaitingTime <= 0 && UserPressedTheButton == true)
         {
             if (!StartedIntro)
             {
+                Debug.Log("comeso a intro fei");
                 Intro.SetActive(true);
                 Menu.SetActive(false);
                 StartedIntro = true;
@@ -86,5 +89,6 @@ public class MainMenu : MonoBehaviour
         CreditsScreen.SetActive(true);
         Menu.SetActive(false);
         CreditsCooldown = 49f;
+        CreditsEnded = false;
     }
 }

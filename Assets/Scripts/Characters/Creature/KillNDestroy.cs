@@ -8,11 +8,13 @@ public class KillNDestroy : MonoBehaviour
     public GameObject Creature;
     private double FollowTimer;
     public bool CanFollow = false;
-    private float ForwardMovement = -5;
+    private float ForwardMovement = -40f;
+    private GameObject Player;
 
     private void Start()
     {
-        FollowTimer = 1;
+        FollowTimer = 10;
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
@@ -26,7 +28,7 @@ public class KillNDestroy : MonoBehaviour
             if (FollowTimer < 0)
             {
                 Creature.transform.Translate(ForwardMovement, 0, 0);
-                FollowTimer = 1;
+                FollowTimer = 10;
             }
         }
     }
@@ -41,6 +43,8 @@ public class KillNDestroy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerFSM.Health = 0;
+            Player.GetComponent<PlayerFSM>().OnCutscene = true;
+            Player.GetComponent<PlayerFSM>().animComp.Play("DyingForZombie");
         }
     }
 }

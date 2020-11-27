@@ -47,12 +47,12 @@ public class ZombieAIFSM : MonoBehaviour
     public Transform[] Waypoints;
     public Vector3 playerLocation;
 
-
+    private GameObject Player;
 
     void Start()
     {
 
-
+        Player = GameObject.FindGameObjectWithTag("Player");
         ZombieState_Biting.Bite += AttackPlayer;
         animatorComp = GetComponent<Animator>();
         aIController = GetComponent<NavMeshAgent>();
@@ -126,6 +126,7 @@ public class ZombieAIFSM : MonoBehaviour
 
         animatorComp.SetBool("hitPlayer", false);
         ZombieState_Biting.Bite -= AttackPlayer;
+        //Player.GetComponent<PlayerFSM>().animComp.SetBool("wasGrabbed", false);
         ChangeState(statesIdle);
 
     }
@@ -138,6 +139,7 @@ public class ZombieAIFSM : MonoBehaviour
         zombieAttack.Play();
         aIController.ResetPath();
         Debug.Log("I'm biting nhom nhom");
+        //Player.GetComponent<PlayerFSM>().animComp.SetBool("wasGrabbed", true);
     }
 
     public void DisableCollider()
