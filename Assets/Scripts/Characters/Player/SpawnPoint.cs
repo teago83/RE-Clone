@@ -12,5 +12,6 @@ public class SpawnPoint : MonoBehaviour
 
         Player.transform.root.position = this.transform.position;
         Player.transform.root.rotation = this.transform.rotation;
+        Player.GetComponent<PlayerFSM>().OnCutscene = false;
     }
 }

@@ -5,19 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class LastSceneProtag : MonoBehaviour
 {
-    public GameObject Spotlight, Collider;
+    private GameObject[] LastAreaItems;
+    private bool AlreadyActivated;
 
-    void Start()
+    private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Final_Area")
+        AlreadyActivated = false;
+    }
+
+    void Update()
+    {
+        Debug.Log("Already Activated? " + AlreadyActivated);
+        Debug.Log("Current scene's index = " + SceneManager.GetActiveScene().buildIndex);
+        LastAreaItems = GameObject.FindGameObjectsWithTag("FinalAreaProtag");
+
+        if (SceneManager.GetActiveScene().buildIndex == 4 && !AlreadyActivated)
         {
-            Spotlight.SetActive(true);
-            Collider.SetActive(true);
-        }
-        else
-        {
-            Spotlight.SetActive(false);
-            Collider.SetActive(false);
+            for (int i = 0; i < LastAreaItems.Length; i++)
+            {
+                LastAreaItems[i].SetActive(true);
+            }
+
+            AlreadyActivated = true;
         }
     }
 }

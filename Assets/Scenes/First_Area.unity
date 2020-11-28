@@ -6092,7 +6092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1063924536
 Transform:
   m_ObjectHideFlags: 0
@@ -7632,6 +7632,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 16049448, guid: 9122a5124b3a0484cbb400bb3697a6c9, type: 3}
+      propertyPath: m_TagString
+      value: FinalAreaProtag
+      objectReference: {fileID: 0}
+    - target: {fileID: 16049448, guid: 9122a5124b3a0484cbb400bb3697a6c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 749324926, guid: 9122a5124b3a0484cbb400bb3697a6c9, type: 3}
+      propertyPath: m_TagString
+      value: FinalAreaProtag
+      objectReference: {fileID: 0}
+    - target: {fileID: 749324926, guid: 9122a5124b3a0484cbb400bb3697a6c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4905309735463482164, guid: 9122a5124b3a0484cbb400bb3697a6c9, type: 3}
       propertyPath: m_Name
       value: Protagonist Variant
@@ -9950,7 +9966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2154962184132650228, guid: e2f1fe9d91ba7e54fafd7445e2df65f3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -93
+      value: -82.82
       objectReference: {fileID: 0}
     - target: {fileID: 2154962184132650228, guid: e2f1fe9d91ba7e54fafd7445e2df65f3, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -13257,6 +13273,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1042827573816321649, guid: fc5e9a7b7fc5ec445ae52b198eda24de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1042827573893569536, guid: fc5e9a7b7fc5ec445ae52b198eda24de, type: 3}
       propertyPath: m_Name
       value: '-- Inventory Canvas -- '
@@ -14234,6 +14254,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4746776131956917144, guid: d32a76849ecff0c40bfabd2a228949fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4746776133217121194, guid: d32a76849ecff0c40bfabd2a228949fa, type: 3}
       propertyPath: m_Name
       value: -- Pause Menu Canvas --

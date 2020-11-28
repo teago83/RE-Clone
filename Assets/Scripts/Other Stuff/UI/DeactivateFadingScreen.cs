@@ -19,8 +19,12 @@ public class DeactivateFadingScreen : MonoBehaviour
         }
         else
         {
-            GameObject fadingScreen = GameObject.FindGameObjectWithTag("FadingScreen");
-            fadingScreen.SetActive(false);
+            GameObject[] fadingScreen = GameObject.FindGameObjectsWithTag("FadingScreen");
+            
+            for (int i = 0; i < fadingScreen.Length; i++)
+            {
+                fadingScreen[i].SetActive(false);
+            }
         }
     }
 }

@@ -12,83 +12,89 @@ public class TheEnd : MonoBehaviour
     private bool AlreadyFading;
     private float OutroCooldown;
     private bool AlreadyOutro;
-    public GameObject Outro;
+    private GameObject Outro;
     private GameObject[] Zombies;
     private GameObject Player;
-    public GameObject FadingOutScreen;
-    public GameObject BGM;
+    private GameObject FadingOutScreen;
+    private GameObject BGM;
     private bool ShallNotLoadMainMenu;
     private SceneLoader Loader;
 
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        
         ShallNotLoadMainMenu = true;
     }
 
     private void Update()
     {
-        if (FadingCooldown > -1f)
+        if (SceneManager.GetActiveScene().buildIndex == 4)
         {
-            FadingCooldown -= Time.deltaTime;
-        }
-        if (OutroCooldown > -1f)
-        {
-            OutroCooldown -= Time.deltaTime;
-        }
-        
-        if (ZombieRecord >= 6)
-        {
-            Player.GetComponent<PlayerFSM>().OnCutscene = true;
+            BGM = GameObject.FindGameObjectWithTag("BGM");
 
-            if (!AlreadyFading)
+            if (FadingCooldown > -1f)
             {
-                FadingOutScreen.SetActive(true);
-                FadingCooldown = 1.3f;
-                AlreadyFading = true;
+                FadingCooldown -= Time.deltaTime;
+            }
+            if (OutroCooldown > -1f)
+            {
+                OutroCooldown -= Time.deltaTime;
             }
 
-            if (!AlreadyOutro && FadingCooldown <= 0)
+            if (ZombieRecord >= 6)
             {
-                Outro.SetActive(true);
-                OutroCooldown = 46f;
-                FadingOutScreen.SetActive(false);
-                BGM.SetActive(false);
-                ShallNotLoadMainMenu = false;
-                AlreadyOutro = true;
+                Player.GetComponent<PlayerFSM>().OnCutscene = true;
+
+                if (!AlreadyFading)
+                {
+                    FadingOutScreen.SetActive(true);
+                    FadingCooldown = 1.3f;
+                    AlreadyFading = true;
+                }
+
+                if (!AlreadyOutro && FadingCooldown <= 0)
+                {
+                    Outro.SetActive(true);
+                    OutroCooldown = 46f;
+                    FadingOutScreen.SetActive(false);
+                    BGM.SetActive(false);
+                    ShallNotLoadMainMenu = false;
+                    AlreadyOutro = true;
+                }
+
+                if (!ShallNotLoadMainMenu && OutroCooldown <= 0)
+                {
+                    PauseMenu.LoadingMainMenu = true;
+                    SceneManager.LoadScene("Main_Menu");
+                }
             }
 
-            if (!ShallNotLoadMainMenu && OutroCooldown <= 0)
+            if (Cooldown == 0f && CurrentAmmountOfZombies < 6)
             {
-                PauseMenu.LoadingMainMenu = true;
-                SceneManager.LoadScene("Main_Menu");
+                Zombies = GameObject.FindGameObjectsWithTag("CountedZombie");
+                for (int i = 0; i < Zombies.Length; i++)
+                {
+                    Zombies[i].tag = "Zombie";
+                }
+                CurrentAmmountOfZombies = 0;
             }
-        }
 
-        if (Cooldown == 0f && CurrentAmmountOfZombies < 6)
-        {
-            Zombies = GameObject.FindGameObjectsWithTag("CountedZombie");
-            for (int i = 0; i < Zombies.Length; i++)
+            else if (CurrentAmmountOfZombies >= 6)
             {
-                Zombies[i].tag = "Zombie";
+                Debug.Log("Deu certo, bicho");
+                ZombieRecord = CurrentAmmountOfZombies;
             }
-            CurrentAmmountOfZombies = 0;
-        }
 
-        else if (CurrentAmmountOfZombies >= 6)
-        {
-            Debug.Log("Deu certo, bicho");
-            ZombieRecord = CurrentAmmountOfZombies;
-        }
-
-        else if (Cooldown >= -1f)
-        {
-            Cooldown -= Time.deltaTime;
-            
-            if (Cooldown < 0f)
+            else if (Cooldown >= -1f)
             {
-                Cooldown = 0f;
-                return;
+                Cooldown -= Time.deltaTime;
+
+                if (Cooldown < 0f)
+                {
+                    Cooldown = 0f;
+                    return;
+                }
             }
         }
     }

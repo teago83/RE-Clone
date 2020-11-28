@@ -8,6 +8,7 @@ public class UnlockDoor : MonoBehaviour
     public GameObject Door;
     public GameObject Trigger;
     public GameObject ReadInteraction;
+    public GameObject DoorControl;
     public GameObject CutsceneRectangles;
     private GameObject Player;
     public GameObject CurrentSong;
@@ -28,7 +29,8 @@ public class UnlockDoor : MonoBehaviour
     {
         if (UnlockingCooldown <= 0)
         {
-            Door.GetComponent<DoorControl>().IsLockedDoor = false;
+            // Door.GetComponent<DoorControl>().IsLockedDoor = false;
+            Door.GetComponent<EndGame>().CanEnd = true;
             CutsceneRectangles.SetActive(false);
             NextSong.SetActive(true);
             Player.GetComponent<PlayerFSM>().OnCutscene = false;
@@ -40,6 +42,7 @@ public class UnlockDoor : MonoBehaviour
             if (CutsceneRectangles.activeSelf == false)
             {
                 ReadInteraction.SetActive(false);
+                DoorControl.SetActive(false);
                 CutsceneRectangles.SetActive(true);
                 CurrentSong.SetActive(false);
             }

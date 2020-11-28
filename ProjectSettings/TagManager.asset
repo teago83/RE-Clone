@@ -20,6 +20,10 @@ TagManager:
   - FadingScreen
   - SpawnPoint
   - CountedZombie
+  - FinalAreaProtag
+  - FOS
+  - Outro
+  - BGM
   layers:
   - Default
   - TransparentFX
